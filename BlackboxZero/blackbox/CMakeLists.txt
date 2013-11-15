@@ -72,9 +72,12 @@ set_target_properties(blackbox PROPERTIES ENABLE_EXPORTS ON)
 target_link_libraries(blackbox bblib)
 target_link_libraries(blackbox version comctl32)
 
-# old stuff from makefile
-#VPATH = Menu
-#INSTALL_FILES = $(BIN) -to docs Menu/menu-bullets.bmp nls-c.txt
 
-#include $(TOP)/build/makefile.inc
+install(TARGETS blackbox
+		RUNTIME DESTINATION .
+		LIBRARY DESTINATION lib
+		ARCHIVE DESTINATION lib/static)
+
+# old stuff from makefile
+#INSTALL_FILES = $(BIN) -to docs Menu/menu-bullets.bmp nls-c.txt
 

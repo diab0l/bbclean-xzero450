@@ -28,6 +28,8 @@
 */
 #include <windows.h>
 #include <shlobj.h>
+#include <stdio.h>
+#include <Menu/Menu.h>
 
 #define IS_SLASH(c) ((c) == '\\' || (c) == '/')
 #define array_count(ary) (sizeof(ary) / sizeof(ary[0]))

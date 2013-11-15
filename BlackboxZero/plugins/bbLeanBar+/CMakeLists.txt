@@ -11,6 +11,7 @@ set(bbLeanBar2_SOURCES
 )
 
 add_definitions(-D__LeanBarPlus__)
+add_definitions(-DNO_BBLIB)
 include_directories(${CMAKE_SOURCE_DIR}/blackbox)
 include_directories(${CMAKE_SOURCE_DIR}/lib)
 include_directories(${CMAKE_SOURCE_DIR}/plugins/bbPlugin)

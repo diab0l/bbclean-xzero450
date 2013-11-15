@@ -1,6 +1,3 @@
-#INSTALL_FILES = $(BIN) readme.txt
-#INSTALL_IF_NEW = bbLeanBar.rc
-
 include_directories(${CMAKE_SOURCE_DIR}/blackbox)
 include_directories(${CMAKE_SOURCE_DIR}/lib)
 include_directories(${CMAKE_SOURCE_DIR}/plugins/bbPlugin)
@@ -14,5 +11,4 @@ set(bbPlugin_SOURCES
 )
 
 add_library(bbPlugin STATIC ${bbPlugin_SOURCES})
-#target_link_libraries(bbLeanBar blackbox bblib)
 

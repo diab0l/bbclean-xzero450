@@ -2,6 +2,8 @@ cmake_minimum_required(VERSION 2.8.9)
 project(BlackboxZero)
 set(CMAKE_VERBOSE_MAKEFILE on)
 
+set(CMAKE_INSTALL_PREFIX "c:/bbLean_M")
+
 set(INSTALL_IF_NEW 
   menu.rc 
   blackbox.rc
@@ -40,7 +42,7 @@ add_subdirectory(plugins/bbKeys)
 add_subdirectory(plugins/bbPlugin)
 add_subdirectory(plugins/bbLeanBar)
 add_subdirectory(plugins/bbLeanSkin)
-#add_subdirectory(plugins/bbSlit)
+add_subdirectory(plugins/bbSlit)
 #add_subdirectory(plugins/bbAnalog)
 #add_subdirectory(plugins/bbIconBox)
 #add_subdirectory(plugins/bbColor3dc)
