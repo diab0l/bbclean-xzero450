@@ -56,9 +56,9 @@ int CreateRecentItemMenu(char *pszFileName, char *pszCommand, char *pszTitle, ch
 
 	// Newer Item
 	if (pszIcon && *pszIcon)
-		_sprintf(buf, "\t[exec] (%s) {%s} <%s>", pszTitle, pszCommand, pszIcon);
+		_snprintf(buf, MAX_PATH, "\t[exec] (%s) {%s} <%s>", pszTitle, pszCommand, pszIcon);
 	else
-		_sprintf(buf, "\t[exec] (%s) {%s}", pszTitle, pszCommand);
+		_snprintf(buf, MAX_PATH, "\t[exec] (%s) {%s}", pszTitle, pszCommand);
 	_strcpy(iln->szItem, buf);
 	iln->nFrequency = 1;
 	append_node(&KeepItemList, iln);
