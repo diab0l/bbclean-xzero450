@@ -1,5 +1,21 @@
 #IF(NOT ${CMAKE_SYSTEM_NAME} MATCHES "Linux")
 
+function(install_if_absent)
+	foreach(f ${ARGN})
+		if(NOT EXISTS \"${CMAKE_INSTALL_PREFIX}/plugins/bbLeanSkin/${f}\")
+			install(FILES ${f} DESTINATION plugins/bbLeanSkin)
+		endif()
+	endforeach()
+endfunction()
+function(installdir_if_absent arg1)
+	foreach(f ${ARGN})
+		if(NOT EXISTS \"${CMAKE_INSTALL_PREFIX}/plugins/bbLeanSkin/${f}\")
+			install(DIRECTORY ${f} DESTINATION plugins/bbLeanSkin)
+		endif()
+	endforeach()
+endfunction()
+
+
 #ifeq "$(PROG)" "dll"
 include_directories(${CMAKE_SOURCE_DIR}/blackbox)
 include_directories(${CMAKE_SOURCE_DIR}/lib)
@@ -7,6 +23,11 @@ include_directories(${CMAKE_SOURCE_DIR}/plugins/bbPlugin)
 add_library(bbLeanSkin SHARED bbLeanSkin.cpp)
 target_link_libraries(bbLeanSkin blackbox bblib bbPlugin)
 target_link_libraries(bbLeanSkin version comctl32)
+install(FILES readme.txt DESTINATION plugins/bbLeanSkin)
+install(TARGETS bbLeanSkin RUNTIME DESTINATION plugins/bbLeanSkin)
+install_if_absent(bbLeanSkin.rc bbLeanSkinMenu.rc exclusions.rc)
+installdir_if_absent(buttons)
+
   #INSTALL_FILES = $(BIN) readme.txt
   #INSTALL_IF_NEW = bbLeanSkin.rc bbLeanSkinMenu.rc exclusions.rc -subdir buttons buttons_11x11.bmp
 #endif

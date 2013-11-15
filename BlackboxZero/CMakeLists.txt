@@ -4,21 +4,6 @@ set(CMAKE_VERBOSE_MAKEFILE on)
 
 set(CMAKE_INSTALL_PREFIX "c:/bbLean_M")
 
-set(INSTALL_IF_NEW 
-  menu.rc 
-  blackbox.rc
-  extensions.rc
-  plugins.rc
-  shellfolders.rc
-  stickywindows.ini
-)
-
-#set (INSTALL_FILES = \
-#  -subdir fonts . \
-#  -subdir styles lean_blue \
-#  -subdir backgrounds .
-#)
-
 set (CLEAN_FILES
   bbnote.ini
   docs/bbnote.*
@@ -31,7 +16,7 @@ set (CLEAN_FILES
   *.exe *.dll
 )
 
-#add_subdirectory(build)
+add_subdirectory(build/bdf2fon)
 add_subdirectory(lib)
 add_subdirectory(blackbox)
 #add_subdirectory(blackbox/Hooks)
@@ -59,7 +44,40 @@ add_subdirectory(plugins/bbLeanBar+)
 #add_subdirectory(tools/bbnote)
 
 #add_subdirectory(build/bdf2fon)
-#add_subdirectory(fonts)
+add_subdirectory(fonts)
+function(install_if_absent)
+	foreach(f ${ARGN})
+		if(NOT EXISTS \"${CMAKE_INSTALL_PREFIX}/${f}\")
+			install(FILES ${f} DESTINATION .)
+		endif()
+	endforeach()
+endfunction()
+function(installdir_if_absent arg1)
+	foreach(f ${ARGN})
+		if(NOT EXISTS \"${CMAKE_INSTALL_PREFIX}/${f}\")
+			install(DIRECTORY ${f} DESTINATION .)
+		endif()
+	endforeach()
+endfunction()
+
+set(main_RESOURCES
+  menu.rc 
+  blackbox.rc
+  extensions.rc
+  plugins.rc
+  shellfolders.rc
+  stickywindows.ini
+)
+
+install_if_absent(${main_RESOURCES})
+installdir_if_absent(fonts styles backgrounds)
+#set (INSTALL_FILES = \
+#  -subdir fonts . \
+#  -subdir styles lean_blue \
+#  -subdir backgrounds .
+#)
+
+
 
 ###############################################################################
 # debug stuff
