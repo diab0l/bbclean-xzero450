@@ -68,14 +68,13 @@ add_executable(blackbox WIN32
 	${blackbox_RESOURCES}
 )
 
+set_target_properties(blackbox PROPERTIES ENABLE_EXPORTS ON)
 target_link_libraries(blackbox bblib)
-
 target_link_libraries(blackbox version comctl32)
 
+# old stuff from makefile
+#VPATH = Menu
+#INSTALL_FILES = $(BIN) -to docs Menu/menu-bullets.bmp nls-c.txt
 
-	#VPATH = Menu
-	#INSTALL_FILES = $(BIN) -to docs Menu/menu-bullets.bmp nls-c.txt
-	#IMPLIB = 1
-
-	#include $(TOP)/build/makefile.inc
+#include $(TOP)/build/makefile.inc
 

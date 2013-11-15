@@ -23,7 +23,6 @@ set(bblib_HEADERS
 	bbshell.h
 )
 
-#include_directories(${CMAKE_BINARY_DIR})
 include_directories(${CMAKE_SOURCE_DIR}/blackbox)
 add_definitions(-DBBLIB_COMPILING)
 #NO_BBLIB = 1

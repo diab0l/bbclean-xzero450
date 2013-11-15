@@ -29,50 +29,40 @@ set (CLEAN_FILES
   *.exe *.dll
 )
 
+#add_subdirectory(build)
 add_subdirectory(lib)
 add_subdirectory(blackbox)
+#add_subdirectory(blackbox/Hooks)
+#add_subdirectory(build/fuzzydoc)
+#add_subdirectory(docs)
 
+add_subdirectory(plugins/bbKeys)
+add_subdirectory(plugins/bbPlugin)
+add_subdirectory(plugins/bbLeanBar)
+#add_subdirectory(plugins/bbLeanSkin)
+#add_subdirectory(plugins/bbSlit)
+#add_subdirectory(plugins/bbAnalog)
+#add_subdirectory(plugins/bbIconBox)
+#add_subdirectory(plugins/bbColor3dc)
+#add_subdirectory(plugins/bbWorkspaceWheel)
+
+add_subdirectory(plugins/bbLeanBar+)
+#add_subdirectory(plugins/bbRecycleBin)
+#add_subdirectory(plugins/BBPager)
+#add_subdirectory(plugins/BBStyle)
+
+#add_subdirectory(tools/bsetshell)
+#add_subdirectory(tools/bsetroot)
+#add_subdirectory(tools/bbstylemaker)
+#add_subdirectory(tools/bbnote)
+
+#add_subdirectory(build/bdf2fon)
+#add_subdirectory(fonts)
+
+###############################################################################
+# debug stuff
 #message("Debug variable dump:")
 #get_cmake_property(_variableNames VARIABLES)
 #foreach (_variableName ${_variableNames})
 #   message(STATUS "${_variableName}=${${_variableName}}")
 #endforeach()
-
-#MAKE_CORE   = $(MAKE) $* -C $1 "$I"
-#MAKE_PLUGIN = $(MAKE) $* -C plugins/$1 "$I/plugins/$1"
-#MAKE_TOOL   = $(MAKE) $* -C tools/$1 "$I"
-#
-#include $(TOP)/build/makefile.inc
-#
-#all.progs clean.progs :
-#	#$(call MAKE_CORE,build)
-#
-#	$(call MAKE_CORE,lib)
-#	$(call MAKE_CORE,blackbox)
-#	$(call MAKE_CORE,blackbox/Hooks)
-#	$(call MAKE_CORE,build/fuzzydoc)
-#	$(call MAKE_CORE,docs)
-#
-#	$(call MAKE_PLUGIN,bbKeys)
-#	$(call MAKE_PLUGIN,bbLeanBar)
-#	$(call MAKE_PLUGIN,bbLeanSkin)
-#	$(call MAKE_PLUGIN,bbSlit)
-#	$(call MAKE_PLUGIN,bbAnalog)
-#	$(call MAKE_PLUGIN,bbIconBox)
-#	$(call MAKE_PLUGIN,bbColor3dc)
-#	$(call MAKE_PLUGIN,bbWorkspaceWheel)
-#
-#	$(call MAKE_PLUGIN,bbLeanBar+)
-#	$(call MAKE_PLUGIN,bbRecycleBin)
-#	$(call MAKE_PLUGIN,BBPager)
-#	$(call MAKE_PLUGIN,BBStyle)
-#
-#	$(call MAKE_TOOL,bsetshell)
-#	$(call MAKE_TOOL,bsetroot)
-#	$(call MAKE_TOOL,bbstylemaker)
-#	$(call MAKE_TOOL,bbnote)
-#
-#	$(call MAKE_CORE,build/bdf2fon)
-#	$(call MAKE_CORE,fonts)
-#
-## --------------------------------------------------------------------
