@@ -35,8 +35,6 @@ install(DIRECTORY ${FONTOUTDIR}
 	FILES_MATCHING PATTERN "*.fon"
 	PERMISSIONS OWNER_READ OWNER_WRITE GROUP_READ WORLD_READ)
 
-#add_dependencies(fonts bdf2fon)
-
 add_subdirectory(lib)
 add_subdirectory(blackbox)
 #add_subdirectory(blackbox/Hooks)
@@ -63,7 +61,6 @@ add_subdirectory(plugins/bbLeanBar+)
 #add_subdirectory(tools/bbstylemaker)
 #add_subdirectory(tools/bbnote)
 
-#add_subdirectory(build/bdf2fon)
 function(install_if_absent)
 	foreach(f ${ARGN})
 		if(NOT EXISTS \"${CMAKE_INSTALL_PREFIX}/${f}\")
@@ -89,13 +86,7 @@ set(main_RESOURCES
 )
 
 install_if_absent(${main_RESOURCES})
-installdir_if_absent(fonts styles backgrounds)
-#set (INSTALL_FILES = \
-#  -subdir fonts . \
-#  -subdir styles lean_blue \
-#  -subdir backgrounds .
-#)
-
+installdir_if_absent(styles backgrounds)
 
 
 ###############################################################################
