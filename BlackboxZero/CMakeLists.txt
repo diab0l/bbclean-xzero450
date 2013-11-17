@@ -17,6 +17,23 @@ set (CLEAN_FILES
 )
 
 add_subdirectory(build/bdf2fon)
+add_custom_target(fonts ALL)
+SET(FONTDIR "${CMAKE_SOURCE_DIR}/fonts/artwiz-latin1-1.0-src" CACHE STRING "font directory")
+SET(FONTOUTDIR "${CMAKE_BINARY_DIR}/fonts" CACHE STRING "font directory")
+set(BDF2FNT ${CMAKE_BINARY_DIR}/bdf2fnt.exe CACHE STRING "bdf2fnt path")
+set(FNT2FON ${CMAKE_BINARY_DIR}/fnt2fon.exe CACHE STRING "fnt2fon path")
+add_custom_command(TARGET fonts COMMAND ${CMAKE_COMMAND}
+         -DSOURCE_DIR=${CMAKE_CURRENT_SOURCE_DIR}
+		 -DFONTDIR="${FONTDIR}"
+		 -DBDF2FNT="${BDF2FNT}"
+		 -DFNT2FON="${FNT2FON}"
+		 -DFONTOUTDIR=${FONTOUTDIR}
+		 ARGS -P ${CMAKE_SOURCE_DIR}/fonts/fonts.cmake)
+
+install(FILES ${FONTOUTDIR}/*.fon DESTINATION fonts)
+
+#add_dependencies(fonts bdf2fon)
+
 add_subdirectory(lib)
 add_subdirectory(blackbox)
 #add_subdirectory(blackbox/Hooks)
@@ -44,7 +61,6 @@ add_subdirectory(plugins/bbLeanBar+)
 #add_subdirectory(tools/bbnote)
 
 #add_subdirectory(build/bdf2fon)
-add_subdirectory(fonts)
 function(install_if_absent)
 	foreach(f ${ARGN})
 		if(NOT EXISTS \"${CMAKE_INSTALL_PREFIX}/${f}\")

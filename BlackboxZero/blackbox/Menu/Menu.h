@@ -26,6 +26,7 @@
 #define _MENU_H_
 
 #include "bbshell.h"
+#include "../BBApi.h"
 #include "MenuMaker.h"
 
 struct MenuList { struct MenuList *next; class Menu *m; };
@@ -35,6 +36,8 @@ extern int g_menu_count;
 extern int g_menu_item_count;
 
 typedef bool (*MENUENUMPROC)(Menu *m, void *ud);
+
+class MenuItem;
 
 //=======================================
 class Menu

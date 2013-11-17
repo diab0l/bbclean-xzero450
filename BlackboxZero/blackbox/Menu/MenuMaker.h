@@ -24,6 +24,7 @@
 
 // This file defines the public menu interface.
 
+class Menu;
 //====================
 // MenuMaker.cpp
 
