@@ -56,7 +56,7 @@ add_subdirectory(plugins/bbLeanBar+)
 #add_subdirectory(plugins/BBPager)
 #add_subdirectory(plugins/BBStyle)
 
-#add_subdirectory(tools/bsetshell)
+add_subdirectory(tools/bsetshell)
 add_subdirectory(tools/bsetroot)
 add_subdirectory(tools/bbstylemaker)
 add_subdirectory(tools/bbnote)
