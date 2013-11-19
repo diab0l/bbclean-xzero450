@@ -1,3 +1,4 @@
+#pragma once
 /*
  ============================================================================
 
@@ -19,9 +20,9 @@
 
  ============================================================================
 */
-
-#ifndef BBDIALOG_H
-
+#include <cstdlib>
+#include "BBApi.h"
+#include "bblib.h"
 // ----------------------
 enum {
     BN_NULL,
@@ -201,7 +202,3 @@ void set_button_text (struct dlg *d, int msg, const char *text);
 struct button *getbutton (struct dlg *d, int msg);
 struct button * mousebutton(struct dlg* dlg, int mx, int my);
 void insert_first(struct dlg* dlg, struct button *cp);
-
-/*----------------------------------------------------------------------------*/
-#endif //ndef BBDIALOG_H
-/*----------------------------------------------------------------------------*/

@@ -58,8 +58,8 @@ add_subdirectory(plugins/bbLeanBar+)
 
 #add_subdirectory(tools/bsetshell)
 add_subdirectory(tools/bsetroot)
-#add_subdirectory(tools/bbstylemaker)
-#add_subdirectory(tools/bbnote)
+add_subdirectory(tools/bbstylemaker)
+add_subdirectory(tools/bbnote)
 
 function(install_if_absent)
 	foreach(f ${ARGN})

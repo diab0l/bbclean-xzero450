@@ -1,4 +1,5 @@
 project(bsetroot)
+#TODO: image_tiny.obj bsetroot.htm
 
 add_subdirectory(CXIMAGE)
 

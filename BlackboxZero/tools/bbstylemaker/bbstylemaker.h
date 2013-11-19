@@ -1,3 +1,4 @@
+#pragma once
 /*
  ============================================================================
 
@@ -23,8 +24,11 @@
 #define APPNAME "bbStyleMaker"
 #define APPNAME_VER "bbStyleMaker 1.31"
 
+#include "BBApi.h"
+#include "bblib.h"
 #include "bbroot.h"
 #include "bbrc.h"
+#include "Stylestruct.h"
 
 // ------------------------------------------------
 typedef struct NStyleItem

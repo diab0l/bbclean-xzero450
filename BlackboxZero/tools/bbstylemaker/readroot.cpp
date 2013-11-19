@@ -19,6 +19,7 @@
 
  ============================================================================
 */
+#include "bbstylemaker.h"
 
 int bsetroot_parse(NStyleStruct *pss, const char *command)
 {
