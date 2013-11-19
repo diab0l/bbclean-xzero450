@@ -52,9 +52,9 @@ add_subdirectory(plugins/bbSlit)
 #add_subdirectory(plugins/bbWorkspaceWheel)
 
 add_subdirectory(plugins/bbLeanBar+)
-#add_subdirectory(plugins/bbRecycleBin)
-#add_subdirectory(plugins/BBPager)
-#add_subdirectory(plugins/BBStyle)
+add_subdirectory(plugins/bbRecycleBin)
+add_subdirectory(plugins/BBPager)
+add_subdirectory(plugins/BBStyle)
 
 add_subdirectory(tools/bsetshell)
 add_subdirectory(tools/bsetroot)
