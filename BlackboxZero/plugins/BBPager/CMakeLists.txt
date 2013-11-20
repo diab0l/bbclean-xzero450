@@ -16,7 +16,7 @@ target_link_libraries(BBPager blackbox bblib bbPlugin)
 target_link_libraries(BBPager version comctl32)
 
 #install(FILES readme.txt DESTINATION plugins/BBPager)
-#install(TARGETS BBPager RUNTIME DESTINATION plugins/BBPager)
+install(TARGETS BBPager RUNTIME DESTINATION plugins/BBPager)
 #if(NOT EXISTS "${CMAKE_INSTALL_PREFIX}/plugins/BBPager/${BBPager_RESOURCES}")
 #	install(FILES ${BBPager_RESOURCES} DESTINATION plugins/BBPager)
 #endif()
