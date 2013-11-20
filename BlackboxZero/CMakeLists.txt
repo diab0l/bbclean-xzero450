@@ -68,13 +68,6 @@ function(install_if_absent)
 		endif()
 	endforeach()
 endfunction()
-function(installdir_if_absent arg1)
-	foreach(f ${ARGN})
-		if(NOT EXISTS \"${CMAKE_INSTALL_PREFIX}/${f}\")
-			install(DIRECTORY ${f} DESTINATION .)
-		endif()
-	endforeach()
-endfunction()
 
 set(main_RESOURCES
   menu.rc 
@@ -86,7 +79,9 @@ set(main_RESOURCES
 )
 
 install_if_absent(${main_RESOURCES})
-installdir_if_absent(styles backgrounds)
+
+install(DIRECTORY styles backgrounds DESTINATION .)
+
 
 
 ###############################################################################

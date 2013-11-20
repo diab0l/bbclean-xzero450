@@ -19,8 +19,8 @@ target_link_libraries(bbIconBox blackbox bblib bbPlugin)
 target_link_libraries(bbIconBox version comctl32)
 
 install(FILES readme.txt DESTINATION plugins/bbIconBox)
-#install(TARGETS bbIconBox RUNTIME DESTINATION plugins/bbIconBox)
-#if(NOT EXISTS "${CMAKE_INSTALL_PREFIX}/plugins/bbIconBox/${bbIconBox_RESOURCES}")
-#	install(FILES ${bbIconBox_RESOURCES} DESTINATION plugins/bbIconBox)
-#endif()
+install(TARGETS bbIconBox RUNTIME DESTINATION plugins/bbIconBox)
+if(NOT EXISTS "${CMAKE_INSTALL_PREFIX}/plugins/bbIconBox/${bbIconBox_RESOURCES}")
+	install(FILES ${bbIconBox_RESOURCES} DESTINATION plugins/bbIconBox)
+endif()
 
