@@ -37,8 +37,8 @@ install(DIRECTORY ${FONTOUTDIR}
 
 add_subdirectory(lib)
 add_subdirectory(blackbox)
-#add_subdirectory(blackbox/Hooks)
-#add_subdirectory(build/fuzzydoc)
+add_subdirectory(blackbox/Hooks)
+add_subdirectory(build/fuzzydoc)
 #add_subdirectory(docs)
 
 add_subdirectory(plugins/bbKeys)
