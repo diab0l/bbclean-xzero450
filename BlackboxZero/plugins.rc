@@ -17,6 +17,10 @@ plugins\bbLeanSkin\bbLeanSkin.dll
 # - The Slit - a common place for other plugins
 plugins\bbSlit\bbSlit.dll
 
+# - bb interface plugin(s)
+plugins\bbInterface\bbInterface.dll
+plugins\bbInterface_iTunes\bbInterface_iTunes.dll
+
 # - separator line for the plugin menu
 [sep]
 
@@ -28,5 +32,9 @@ plugins\bbColor3dc\bbColor3dc.dll
 # - submenu with more plugins
 [sep]
 [submenu] (other)
+! plugins\bbLeanBar+\bbLeanBar+.dll
+! plugins\BBPager\BBPager.dll
+! plugins\bbRecycleBin\bbRecycleBin.dll
 ! plugins\bbWorkspaceWheel\bbWorkspaceWheel.dll
 [end]
+

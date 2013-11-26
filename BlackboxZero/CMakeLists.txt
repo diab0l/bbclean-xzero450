@@ -35,6 +35,7 @@ install(DIRECTORY ${FONTOUTDIR}
 	FILES_MATCHING PATTERN "*.fon"
 	PERMISSIONS OWNER_READ OWNER_WRITE GROUP_READ WORLD_READ)
 
+add_subdirectory(3rd_party/iTunesCOMWindowsSDK)
 add_subdirectory(lib)
 add_subdirectory(blackbox)
 add_subdirectory(blackbox/Hooks)
@@ -51,10 +52,13 @@ add_subdirectory(plugins/bbIconBox)
 add_subdirectory(plugins/bbColor3dc)
 add_subdirectory(plugins/bbWorkspaceWheel)
 
+add_subdirectory(plugins/bbPlugin+)
 add_subdirectory(plugins/bbLeanBar+)
 add_subdirectory(plugins/bbRecycleBin)
 add_subdirectory(plugins/BBPager)
 add_subdirectory(plugins/BBStyle)
+add_subdirectory(plugins/bbInterface)
+add_subdirectory(plugins/bbInterface_iTunes)
 
 add_subdirectory(tools/bsetshell)
 add_subdirectory(tools/bsetroot)
