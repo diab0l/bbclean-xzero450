@@ -14,5 +14,5 @@ target_link_libraries(trayhook version comctl32)
 
 #install(FILES readme.txt DESTINATION plugins/bbAnalog)
 install(TARGETS deskhook RUNTIME DESTINATION .)
-install(TARGETS trayhook RUNTIME DESTINATION .)
+#install(TARGETS trayhook RUNTIME DESTINATION .)
 

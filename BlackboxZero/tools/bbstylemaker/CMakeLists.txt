@@ -35,7 +35,7 @@ install(TARGETS bbstylemaker
 		LIBRARY DESTINATION lib
 		ARCHIVE DESTINATION lib/static)
 
-install(FILES bbstylemaker.txt DESTINATION docs)
+	#install(FILES bbstylemaker.txt DESTINATION docs)
 install(FILES readme.txt bbstylemaker.ico DESTINATION .)
 
 #TODO: where is bbstylemaker.txt?

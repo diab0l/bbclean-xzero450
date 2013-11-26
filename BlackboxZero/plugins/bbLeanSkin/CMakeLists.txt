@@ -33,14 +33,17 @@ installdir_if_absent(buttons)
 #endif
 
 #ifeq "$(PROG)" "eng"
-#add_library(bbLeanSkinEng SHARED bbLeanSkin.cpp engine/hookctl.cpp engine/subclass.cpp)
-#target_link_libraries(bbLeanSkinEng blackbox bblib bbPlugin)
-#target_link_libraries(bbLeanSkinEng version comctl32)
-  #BIN = bbLeanSkinEng.dll
-  #NO_BBLIB = 1
-  #INSTALL_FILES = $(BIN)
-  #LFLAGS += $(EXTRA_LFLAGS)
-#endif
+add_library(bbLeanSkinEng
+	SHARED
+	engine/hookctl.cpp
+	engine/subclass.cpp
+	${CMAKE_SOURCE_DIR}/blackbox/BImage.cpp
+)
+target_link_libraries(bbLeanSkinEng blackbox bblib bbPlugin)
+target_link_libraries(bbLeanSkinEng version comctl32)
+install(TARGETS bbLeanSkinEng RUNTIME DESTINATION plugins/bbLeanSkin)
+
+
 
 #	ifeq "$(PROG)" "eng32"
 #	  BIN = bbLeanSkinEng32.dll
