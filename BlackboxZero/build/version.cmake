@@ -53,7 +53,7 @@ else(EXISTS ${CMAKE_SOURCE_DIR}/bbversion.h)
 		set(PROJECT_VERSION UNKNOWN)
 	endif()
 
-	if (WIN32 AND NOT MINGW)
+	if (WIN32)
 		find_program(GIT_EXECUTABLE
 			NAMES "git.exe"
 			HINTS "C:/Program Files (x86)/git/bin/"
@@ -67,7 +67,7 @@ else(EXISTS ${CMAKE_SOURCE_DIR}/bbversion.h)
 		endif (NOT GIT_FOUND)
 
 		message("git: ${GIT_EXECUTABLE}")
-	endif (WIN32 AND NOT MINGW)
+	endif (WIN32)
 
 
 	# Run describe: search for *signed* tags starting with v, from the HEAD and
