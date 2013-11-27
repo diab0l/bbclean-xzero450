@@ -173,8 +173,9 @@ int agenttype_systemmonitor_startup()
 		}
 
 
+		// @NOTE: this uses undocumented nt api.  GetSystemInfo is the way to go
 		//Get the number of processors
-		BOOL status;
+		/*BOOL status;
 		SYSTEM_BASIC_INFORMATION basicinformation;
 		status = agenttype_systemmonitor_ntquerysysteminformation(agenttype_systemmonitor_SystemBasicInformation, &basicinformation, sizeof(basicinformation), NULL);
 		if (status != NO_ERROR)
@@ -183,10 +184,13 @@ int agenttype_systemmonitor_startup()
 			FreeLibrary(agenttype_systemmonitor_ntdllmodule);
 			BBMessageBox(NULL, "failed on processor", "test", MB_OK);
 			return 1;
-		}
+		}*/
+
+		SYSTEM_INFO sysinfo;
+		GetSystemInfo( &sysinfo );
 
 		//Record the number of processors
-		agenttype_systemmonitor_number_processors = basicinformation.bKeNumberProcessors;
+		agenttype_systemmonitor_number_processors = sysinfo.dwNumberOfProcessors;
 
 		//If it is less than 1 or more than 64... assume an error (I don't think any super clusters are running BBI)
 		if (agenttype_systemmonitor_number_processors < 1 || agenttype_systemmonitor_number_processors > 64)
