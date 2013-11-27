@@ -885,6 +885,8 @@ void MakeOnBG(HWND hwnd)
         if (vwm_get_desk(hwnd) != currentScreen)
             setDesktop(hwnd, currentScreen, false);
         vwm_set_onbg(hwnd, true);
+
+        SetWindowLong(hwnd, GWL_EXSTYLE, WS_EX_TOOLWINDOW); // hide window from alt-tab tasklist
         send_bbls_command(hwnd, BBLS_SETONBG, 1);
         //dbg_window(hwnd, "[+app]");
     }
@@ -902,6 +904,12 @@ void RemoveOnBG(HWND hwnd)
         //dbg_window(hwnd, "[-%d]", listlen(onbg_list));
 
     } else if (vwm_set_onbg(hwnd, false)) {
+
+        LONG const flags = GetWindowLong(hwnd, GWL_EXSTYLE);
+        if (WS_EX_TOOLWINDOW & flags)
+        {
+            SetWindowLong(hwnd, GWL_EXSTYLE, WS_EX_APPWINDOW);
+        }
         send_bbls_command(hwnd, BBLS_SETONBG, 0);
         //dbg_window(hwnd, "[-app]");
     }

@@ -61,14 +61,12 @@ ST bool is_shadow(HWND hwnd, LONG ex_style, DWORD threadid);
 
 winlist* vwm_add_window(HWND hwnd)
 {
-    bool hidden;
-    winlist *wl;
-
     if (check_sticky_plugin(hwnd))
         return NULL;
 
-    hidden = FALSE == IsWindowVisible(hwnd);
-    wl = (winlist*)assoc(vwm_WL, hwnd);
+    bool const hidden = FALSE == IsWindowVisible(hwnd);
+    bool const onbg = CheckOnBG(hwnd);
+    winlist * wl = (winlist*)assoc(vwm_WL, hwnd);
 
     if (NULL == wl)
     {
