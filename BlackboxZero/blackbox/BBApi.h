@@ -230,12 +230,17 @@
   #define BBWS_ISSTICKY         16 /* lParam: hwnd or NULL for foregroundwindow */
   #define BBWS_TOGGLEONTOP      17 /* lParam: hwnd or NULL for foregroundwindow */
   #define BBWS_GETTOPWINDOW     18 /* lParam: hwnd or NULL for foregroundwindow */
+  #define BBWS_TOGGLEONBG       19 /* lParam: hwnd or NULL for foregroundwindow */
 
   #define BBWS_MINIMIZEALL      20
   #define BBWS_RESTOREALL       21
   #define BBWS_TILEVERTICAL     22
   #define BBWS_TILEHORIZONTAL   23
   #define BBWS_CASCADE          24
+
+  #define BBWS_MAKEONBG         25 /* lParam: hwnd or NULL for foregroundwindow */
+  #define BBWS_CLEARONBG        26 /* lParam: hwnd or NULL for foregroundwindow */
+  #define BBWS_ISONBG           27 /* lParam: hwnd or NULL for foregroundwindow */
 
 /*------------------------------------------ */
 #define BB_TASKSUPDATE          10506  /* For plugins: receive only */
@@ -357,6 +362,8 @@
 #define BBLS_REDRAW             1
 #define BBLS_SETSTICKY          2
 #define BBLS_GETSHADEHEIGHT     3
+#define BBLS_REFRESH            4
+#define BBLS_SETONBG            7
 
 /* =========================================================================== */
 /* StyleItem */
@@ -577,6 +584,10 @@ extern "C" {
     API_EXPORT void MakeSticky(HWND hwnd);
     API_EXPORT void RemoveSticky(HWND hwnd);
     API_EXPORT bool CheckSticky(HWND hwnd);
+
+    API_EXPORT void MakeOnBG(HWND hwnd);
+    API_EXPORT void RemoveOnBG(HWND hwnd);
+    API_EXPORT bool CheckOnBG(HWND hwnd);
 
     /* Note: Please make shure to call RemoveSticky before your
        plugin-window is destroyed */

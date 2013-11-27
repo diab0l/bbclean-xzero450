@@ -49,6 +49,7 @@ void vwm_gather(void);
 bool vwm_set_desk(HWND hwnd, int desk, bool switchto);
 bool vwm_set_location(HWND hwnd, struct taskinfo *t, unsigned flags);
 bool vwm_set_sticky(HWND hwnd, bool set);
+bool vwm_set_onbg(HWND hwnd, bool set);
 bool vwm_lower_window(HWND hwnd);
 
 // Workaround for BBPager:
@@ -62,10 +63,11 @@ bool vwm_get_location(HWND hwnd, struct taskinfo *t);
 
 bool vwm_get_status(HWND hwnd, int what);
 // values for "what":
-#define VWM_MOVED 1
+#define VWM_MOVED  1
 #define VWM_HIDDEN 2
 #define VWM_STICKY 3
 #define VWM_ICONIC 4
+#define VWM_ONBG   5
 
 //=========================================================
 // required variables/functions from elswhere:
@@ -82,6 +84,7 @@ extern bool Settings_altMethod, Settings_styleXPFix;
 
 // from workspaces.cpp
 extern bool check_sticky_name(HWND hwnd);
+extern bool check_onbg_name(HWND hwnd);
 extern bool check_sticky_plugin(HWND hwnd);
 extern void workspaces_set_desk(void);
 extern void send_desk_refresh(void);

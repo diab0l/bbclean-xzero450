@@ -59,6 +59,7 @@ extern "C" DLL_EXPORT int EntryFunc(int option);
 #define BBLS_REFRESH           4
 #define BBLS_LOAD              5
 #define BBLS_UNLOAD            6
+#define BBLS_SETONBG           7
 
 #pragma pack(push,4)
 

@@ -39,7 +39,7 @@ typedef struct winlist
     bool iconic;
     bool sticky_app;
     bool sticky;
-
+    bool onbg;
     bool istool;
     bool check;
 
@@ -100,6 +100,7 @@ winlist* vwm_add_window(HWND hwnd)
 
         // check whether its listed in 'StickyWindows.ini'
         wl->sticky_app = check_sticky_name(hwnd);
+        wl->onbg = check_onbg_name(hwnd);
     }
 
     wl->hidden = hidden;
@@ -146,9 +147,18 @@ void vwm_update_winlist(void)
     // check what windows belong to sticky apps
     dolist (app, vwm_WL)
         if (app->sticky_app)
+        {
             dolist (wl, vwm_WL)
                 if (belongs_to_app(wl, app))
                     wl->sticky = true;
+        }
+        else if (app->onbg)
+        {
+            dolist (wl, vwm_WL)
+                if (belongs_to_app(wl, app))
+                    wl->onbg = true;
+        }
+
 
 #if 0
     // debugging stuff
@@ -548,6 +558,18 @@ bool vwm_set_sticky(HWND hwnd, bool set)
     return true;
 }
 
+bool vwm_set_onbg(HWND hwnd, bool set)
+{
+    winlist *wl;
+    if (FALSE == IsWindow(hwnd))
+        return false;
+    wl = vwm_add_window(hwnd);
+    if (NULL == wl)
+        return false;
+    wl->onbg = set;
+    return true;
+}
+
 static void bottomize(HWND hwnd)
 {
     if (!is_frozen(hwnd))
@@ -608,10 +630,11 @@ bool vwm_get_status(HWND hwnd, int what)
     winlist *wl;
     wl = (winlist*)assoc(vwm_WL, hwnd);
     if (wl) switch (what) {
-        case VWM_MOVED: return wl->moved;
+        case VWM_MOVED:  return wl->moved;
         case VWM_STICKY: return wl->sticky_app;
         case VWM_HIDDEN: return wl->hidden;
         case VWM_ICONIC: return wl->iconic;
+        case VWM_ONBG:   return wl->onbg;
     } else switch (what) {
         case VWM_STICKY: return check_sticky_name(hwnd);
     }

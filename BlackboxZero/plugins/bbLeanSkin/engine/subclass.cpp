@@ -256,6 +256,14 @@ void exec_button_action(WinInfo *WI, int n)
                 );
             break;
 
+        case btn_OnBG:
+            WI->is_onbg = false == WI->is_onbg;
+            PostMessage(mSkin.BBhwnd, BB_WORKSPACE,
+                WI->is_onbg ? BBWS_MAKEONBG : BBWS_CLEARONBG,
+                (LPARAM)hwnd
+                );
+            break;
+
         case btn_OnTop:
             if (BBVERSION_LEAN == mSkin.BBVersion)
                 PostMessage(mSkin.BBhwnd, BB_WORKSPACE, BBWS_TOGGLEONTOP, (LPARAM)hwnd);
@@ -517,6 +525,11 @@ void PaintAll(struct WinInfo* WI)
                 if ((w_style & WS_CHILD) || 0 == WI->has_sticky)
                     continue;
                 state = WI->is_sticky;
+                break;
+            case btn_OnBG:
+                if (w_style & WS_CHILD)
+                    continue;
+                state = WI->is_onbg;
                 break;
             case btn_OnTop:
                 if (w_style & WS_CHILD)
@@ -1437,6 +1450,14 @@ LRESULT APIENTRY WindowSubclassProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM 
                 case BBLS_SETSTICKY:
                     WI->has_sticky = true;
                     WI->is_sticky = 0 != lParam;
+                    if (WI->apply_skin)
+                        goto paint_now;
+                    break;
+
+                // set onbg button state, sent from BB
+                case BBLS_SETONBG:
+                    WI->has_onbg = true;
+                    WI->is_onbg = 0 != lParam;
                     if (WI->apply_skin)
                         goto paint_now;
                     break;

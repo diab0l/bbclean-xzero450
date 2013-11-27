@@ -78,6 +78,13 @@ install(TARGETS blackbox
 		LIBRARY DESTINATION lib
 		ARCHIVE DESTINATION lib/static)
 
+if(MSVC)
+  install(FILES ${CMAKE_CURRENT_BINARY_DIR}/Debug/blackbox.pdb
+	DESTINATION .
+#    CONFIGURATIONS Debug
+    )
+endif(MSVC)
+
 # old stuff from makefile
 #INSTALL_FILES = $(BIN) -to docs Menu/menu-bullets.bmp nls-c.txt
 

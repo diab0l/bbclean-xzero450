@@ -280,6 +280,7 @@ static const struct cfgmenu cfg_sub_misc[] = {
     { "", NULL, NULL },
     { NLS0("Blackbox Editor"),      "preferredEditor",      &Settings_preferredEditor },
     { NLS0("Edit StickyWindows"),	"@BBCore.Edit stickywindows.ini", NULL },     
+    { NLS0("Edit BgWindows"),		"@BBCore.Edit bgwindows.ini", NULL },     
     { NLS0("Show Appnames"),        "@BBCore.showAppnames", NULL },
     { NULL,NULL,NULL }
 };

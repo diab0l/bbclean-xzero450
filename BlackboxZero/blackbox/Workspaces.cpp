@@ -48,31 +48,41 @@ struct sticky_list {
     HWND hwnd;
 };
 
+struct onbg_node {
+    onbg_node * next;
+    HWND hwnd;
+};
+
 // workspace names
-ST struct string_node *deskNames;
+ST struct string_node *deskNames = 0;
 
 // application listed in StickyWindows.ini
-ST struct string_node * stickyNamesList;
+ST struct string_node * stickyNamesList = 0;
+
+// application listed in BGWindows.ini
+ST struct string_node * onBGNamesList = 0;
 
 // the list of tasks, in order as they were added
-ST struct tasklist  * taskList;
+ST struct tasklist  * taskList = 0;
 
 // the list of tasks, in order as they were recently active
-ST struct toptask   * pTopTask;
+ST struct toptask   * pTopTask = 0;
 
 // the current active taskwindow or NULL
-ST HWND activeTaskWindow;
+ST HWND activeTaskWindow = 0;
 
 // minimized windows by 'MinimizeAllWindows'
-ST list_node *toggled_windows;
+ST list_node *toggled_windows = 0;
 
 // Sticky plugins & apps
-ST struct sticky_list* sticky_list;
+ST struct sticky_list* sticky_list = 0;
+onbg_node * onbg_list = 0;
 
 //====================
 // local functions
 
 ST void WS_LoadStickyNamesList(void);
+ST void WS_LoadOnBGNamesList(void);
 
 ST int next_desk (int d);
 ST void MoveWindowToWkspc(HWND, int desk, bool switchto);
@@ -118,9 +128,11 @@ void Workspaces_Init(int nostartup)
     lastScreen      = 0;
     deskNames       = NULL;
     stickyNamesList = NULL;
+    onBGNamesList   = NULL;
 
     SetNames();
     WS_LoadStickyNamesList();
+    WS_LoadOnBGNamesList();
     Workspaces_GetScreenMetrics();
     vwm_init();
     if (nostartup)
@@ -132,6 +144,8 @@ void Workspaces_Exit(void)
     exit_tasks();
     vwm_exit();
     freeall(&deskNames);
+    freeall(&onBGNamesList);
+    freeall(&onbg_list);
     freeall(&stickyNamesList);
     // not neccesary if all plugins properly call 'RemoveSticky':
     freeall(&sticky_list);
@@ -142,6 +156,7 @@ void Workspaces_Reconfigure(void)
     bool changed;
     SetNames();
     WS_LoadStickyNamesList();
+    WS_LoadOnBGNamesList();
     // force reorder on resolution changes
     changed = Workspaces_GetScreenMetrics();
     vwm_reconfig(changed);
@@ -362,6 +377,9 @@ LRESULT Workspaces_Command(UINT msg, WPARAM wParam, LPARAM lParam)
                     break;
 
                 // ---------------------------------
+                case BBWS_ISSTICKY:
+                    return CheckSticky(hwnd);
+
                 case BBWS_MAKESTICKY:
                     hwnd = get_default_window(hwnd);
                     if (NULL == hwnd)
@@ -399,11 +417,36 @@ LRESULT Workspaces_Command(UINT msg, WPARAM wParam, LPARAM lParam)
                     send_bbls_command(hwnd, BBLS_REDRAW, 0);
                     break;
 
-                case BBWS_ISSTICKY:
-                    return CheckSticky(hwnd);
-
                 case BBWS_GETTOPWINDOW:
                     return (LRESULT)get_default_window(hwnd);
+
+                // ---------------------------------
+                case BBWS_MAKEONBG:
+                    hwnd = get_default_window(hwnd);
+                    if (NULL == hwnd)
+                        break;
+                    MakeOnBG(hwnd);
+                    break;
+
+                case BBWS_CLEARONBG:
+                    hwnd = get_default_window(hwnd);
+                    if (NULL == hwnd)
+                        break;
+                    RemoveOnBG(hwnd);
+                    break;
+
+                case BBWS_TOGGLEONBG:
+                    hwnd = get_default_window(hwnd);
+                    if (NULL == hwnd)
+                        break;
+                    if (CheckOnBG(hwnd))
+                        RemoveOnBG(hwnd);
+                    else
+                        MakeOnBG(hwnd);
+                    break;
+
+                case BBWS_ISONBG:
+                    return CheckOnBG(hwnd);
 
                 // ---------------------------------
                 case BBWS_EDITNAME:
@@ -775,6 +818,19 @@ void RemoveSticky(HWND hwnd)
         //dbg_window(hwnd, "[-app]");
     }
 }
+// export to BBVWM.cpp
+bool check_sticky_name(HWND hwnd)
+{
+    struct string_node * sl;
+    char appName[MAX_PATH];
+    if (NULL == stickyNamesList || 0 == GetAppByWindow(hwnd, appName))
+        return false;
+    strlwr(appName);
+    dolist (sl, stickyNamesList)
+        if (0==strcmp(appName, sl->str))
+            return true;
+    return false;
+}
 
 // export to BBVWM.cpp
 bool check_sticky_plugin(HWND hwnd)
@@ -809,15 +865,83 @@ ST void WS_LoadStickyNamesList(void)
     }
 }
 
+//===========================================================================
+// API: MakeOnBG
+// API: RemoveOnBG
+// API: CheckOnBG
+// Purpose: make a plugin/app window appear on all workspaces
+//===========================================================================
+
+// This is now one API for both plugins and application windows,
+// still internally uses different methods
+
+void MakeOnBG(HWND hwnd)
+{
+    if (FALSE == IsWindow(hwnd))
+        return;
+
+    if (!is_bbwindow(hwnd))
+    {
+        if (vwm_get_desk(hwnd) != currentScreen)
+            setDesktop(hwnd, currentScreen, false);
+        vwm_set_onbg(hwnd, true);
+        send_bbls_command(hwnd, BBLS_SETONBG, 1);
+        //dbg_window(hwnd, "[+app]");
+    }
+}
+
+void RemoveOnBG(HWND hwnd)
+{
+    onbg_node **pp = 0, *p = 0;
+
+    pp = (onbg_node**)assoc_ptr(&onbg_list, hwnd);
+    if (pp)
+    {
+        *pp = (p = *pp)->next;
+        m_free(p);
+        //dbg_window(hwnd, "[-%d]", listlen(onbg_list));
+
+    } else if (vwm_set_onbg(hwnd, false)) {
+        send_bbls_command(hwnd, BBLS_SETONBG, 0);
+        //dbg_window(hwnd, "[-app]");
+    }
+}
+
 // export to BBVWM.cpp
-bool check_sticky_name(HWND hwnd)
+bool check_onbg_plugin(HWND hwnd)
+{
+    return assoc(onbg_list, hwnd);
+}
+
+bool CheckOnBG(HWND hwnd)
+{
+    return check_onbg_plugin(hwnd) || vwm_get_status(hwnd, VWM_ONBG);
+}
+
+ST void WS_LoadOnBGNamesList(void)
+{
+    char path[MAX_PATH];
+    char buffer[MAX_PATH];
+    FILE* fp;
+
+    freeall(&onBGNamesList);
+    FindRCFile(path, "BGWindows.ini", NULL);
+    fp = FileOpen(path);
+    if (fp) {
+        while (ReadNextCommand(fp, buffer, sizeof (buffer)))
+            append_string_node(&onBGNamesList, strlwr(buffer));
+        FileClose(fp);
+    }
+}
+
+bool check_onbg_name(HWND hwnd)
 {
     struct string_node * sl;
     char appName[MAX_PATH];
-    if (NULL == stickyNamesList || 0 == GetAppByWindow(hwnd, appName))
+    if (NULL == onBGNamesList || 0 == GetAppByWindow(hwnd, appName))
         return false;
     strlwr(appName);
-    dolist (sl, stickyNamesList)
+    dolist (sl, onBGNamesList)
         if (0==strcmp(appName, sl->str))
             return true;
     return false;
@@ -1023,12 +1147,12 @@ ST void MoveWindowToWkspc(HWND hwnd, int desk, bool switchto)
 
 ST void NextWindow(bool allDesktops, int dir)
 {
-    int s,i,j; struct tasklist *tl;
-    s = GetTaskListSize();
+    struct tasklist *tl;
+    int const s = GetTaskListSize();
     if (0==s) return;
-    i = FindTask(pTopTask->task->hwnd);
+    int i = FindTask(pTopTask->task->hwnd);
     if (-1==i) i=0;
-    j = i;
+    int const j = i;
     do {
         if (dir>0) {
             i++;
@@ -1039,7 +1163,7 @@ ST void NextWindow(bool allDesktops, int dir)
         }
         tl = (struct tasklist *)nth_node(taskList, i);
         if (tl && (allDesktops || currentScreen == tl->wkspc)
-            && FALSE == IsIconic(tl->hwnd)) {
+            && FALSE == IsIconic(tl->hwnd) && FALSE == CheckOnBG(tl->hwnd)) {
             PostMessage(BBhwnd, BB_BRINGTOFRONT, 0, (LPARAM)tl->hwnd);
             return;
         }

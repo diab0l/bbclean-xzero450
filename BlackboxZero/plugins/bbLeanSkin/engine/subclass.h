@@ -80,6 +80,9 @@ struct WinInfo
     bool is_sticky;
     bool has_sticky;
 
+    bool is_onbg;
+    bool has_onbg;
+
     bool dblclk_timer_set;
 
     char capture_button;
@@ -98,6 +101,7 @@ enum button_types {
     btn_OnTop     = 5,
     btn_Sticky    = 6,
     btn_Icon      = 7,
+	btn_OnBG      = 8,
 
     btn_Lower     ,
     btn_TMin      ,
