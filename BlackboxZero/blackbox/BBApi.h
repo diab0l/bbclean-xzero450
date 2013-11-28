@@ -1009,11 +1009,6 @@ extern "C" {
     #define PLUGIN_BROAMS       7   /* xoblite */
     #define PLUGIN_UPDATE_URL   8   /* Kaloth's BBPlugManager */
 
-	#define BBVERSION_CLEAN 0
-	#define BBVERSION_LEAN 1
-	#define BBVERSION_XOB 1
-	#define BBVERSION_09X 0
-
 #ifdef __cplusplus
 }
 #endif
