@@ -15,9 +15,13 @@
 */
 
 #include "bbrecyclebin.h"
+#include <commctrl.h>
 
 //#define TTM_SETMAXTIPWIDTH	 (WM_USER+24)
-#define StrFormatByte64 StrFormatByte64A
+#if defined __MINGW32__ && !defined __MINGW64__
+#	define StrFormatByte64 StrFormatByte64A
+#	define StrFormatByteSize64 StrFormatByteSize64A
+#endif
 
 char *plugin_info[] =
 {
