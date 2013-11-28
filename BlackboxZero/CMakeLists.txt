@@ -72,6 +72,7 @@ add_subdirectory(plugins/BBPager)
 add_subdirectory(plugins/BBStyle)
 add_subdirectory(plugins/bbRecycleBin)
 add_subdirectory(plugins/bbInterface)
+add_subdirectory(plugins/SystemBarEx)
 
 # tools
 add_subdirectory(tools/bsetshell)
