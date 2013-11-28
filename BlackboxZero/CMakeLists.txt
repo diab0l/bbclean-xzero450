@@ -61,12 +61,12 @@ add_subdirectory(plugins/bbLeanBar+)
 
 # NOTE: following plugins are not yet mingw compatible
 if (NOT MINGW)
-	add_subdirectory(plugins/bbRecycleBin)
 	add_subdirectory(plugins/BBPager)
 	add_subdirectory(plugins/BBStyle)
 	add_subdirectory(plugins/bbInterface_iTunes)
 endif (NOT MINGW)
 
+add_subdirectory(plugins/bbRecycleBin)
 add_subdirectory(plugins/bbInterface)
 
 # tools
