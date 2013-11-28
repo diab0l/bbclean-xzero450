@@ -16,6 +16,10 @@ set (CLEAN_FILES
   *.exe *.dll
 )
 
+if (MINGW)
+	set(CMAKE_SHARED_LIBRARY_PREFIX "")
+endif (MINGW)
+
 # font tools and conversion
 add_subdirectory(build/bdf2fon)
 add_custom_target(fonts ALL)
