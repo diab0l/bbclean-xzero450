@@ -407,7 +407,7 @@ LRESULT CALLBACK window_event(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 			// ---------------------------------------------------
 			// bind the window to the control structure
 			controlpointer = (control*)((CREATESTRUCT*)lParam)->lpCreateParams;
-			SetWindowLong(hwnd, 0, (LONG) controlpointer);
+			SetWindowLong(hwnd, 0, (LONG_PTR) controlpointer);
 			controlpointer->windowptr->hwnd = hwnd;
 		}
 		return DefWindowProc(hwnd, msg, wParam, lParam);
@@ -1078,7 +1078,7 @@ void window_make_child(window *w, window *pw)
 // (old)Out: LPCSTR = literal hex value
 //===========================================================================
 
-static struct litcolor1 { char *cname; COLORREF cref; } litcolor1_ary[] = {
+static struct litcolor1 { char const *cname; COLORREF cref; } litcolor1_ary[] = {
 
     { "ghostwhite", RGB(248,248,255) },
     { "whitesmoke", RGB(245,245,245) },
@@ -1218,7 +1218,7 @@ static struct litcolor1 { char *cname; COLORREF cref; } litcolor1_ary[] = {
     { "lightgreen", RGB(144,238,144) }
     };
 
-static struct litcolor4 { char *cname; COLORREF cref[4]; } litcolor4_ary[] = {
+static struct litcolor4 { char const *cname; COLORREF cref[4]; } litcolor4_ary[] = {
 
     { "snow", { RGB(255,250,250), RGB(238,233,233), RGB(205,201,201), RGB(139,137,137) }},
     { "seashell", { RGB(255,245,238), RGB(238,229,222), RGB(205,197,191), RGB(139,134,130) }},

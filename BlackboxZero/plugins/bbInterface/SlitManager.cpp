@@ -263,7 +263,7 @@ int SlitWndProc(control *c, HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 				SetParent(p->hwnd, hwnd);
 				SetWindowLong(p->hwnd, GWL_STYLE, (GetWindowLong(p->hwnd, GWL_STYLE) & ~WS_POPUP) | WS_CHILD);
 				//p->wp = (WNDPROC)SetWindowLong(p->hwnd, GWL_WNDPROC, (LONG)subclass_WndProc);
-				p->wp = (WNDPROC)SetWindowLongPtr(p->hwnd, -4, (LONG)subclass_WndProc);
+				p->wp = (WNDPROC)SetWindowLongPtr(p->hwnd, -4, (LONG_PTR)(subclass_WndProc));
 
 				get_sizes(pp, (HWND)lParam);
 				set_plugin_position(p);
@@ -281,7 +281,7 @@ int SlitWndProc(control *c, HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 					if (IsWindow(p->hwnd))
 					{
 						//SetWindowLong(p->hwnd, GWL_WNDPROC, (LONG)p->wp);
-						SetWindowLongPtr(p->hwnd, -4, (LONG)p->wp);
+						SetWindowLongPtr(p->hwnd, -4, (LONG_PTR)p->wp);
 						SetParent(p->hwnd, NULL);
 						SetWindowLongPtr(p->hwnd, -16, (GetWindowLongPtr(p->hwnd, -16) & ~WS_CHILD) | WS_POPUP);
 					}

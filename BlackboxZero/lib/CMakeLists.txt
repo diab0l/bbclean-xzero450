@@ -38,3 +38,4 @@ elseif (NOT BBLIB_STATIC)
 endif (BBLIB_STATIC)
 
 
+target_link_libraries(bblib version comctl32)
