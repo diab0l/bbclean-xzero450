@@ -11,4 +11,5 @@ set(bbPlugin+_SOURCES
 )
 
 add_library(bbPlugin+ STATIC ${bbPlugin+_SOURCES})
+target_link_libraries(bbPlugin+ blackbox bblib)
 

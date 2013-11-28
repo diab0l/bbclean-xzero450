@@ -57,7 +57,7 @@ set (blackbox_HEADERS
 	Menu/RecentItem.h
 )
 
-set(blackbox_RESOURCES resource.res)
+#set(blackbox_RESOURCES resource.res)
 
 add_definitions(-D__BBCORE__)
 include_directories(${CMAKE_SOURCE_DIR}/lib)
@@ -65,7 +65,7 @@ include_directories(${CMAKE_SOURCE_DIR}/lib)
 add_executable(blackbox WIN32
 	${blackbox_SOURCES}
 	${blackbox_HEADERS}
-	${blackbox_RESOURCES}
+	#${blackbox_RESOURCES}
 )
 
 set_target_properties(blackbox PROPERTIES ENABLE_EXPORTS ON)

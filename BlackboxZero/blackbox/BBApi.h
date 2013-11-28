@@ -548,6 +548,7 @@ extern "C" {
        If not, 'pszOut' is set to the default location (plugin directory)
     */
     API_EXPORT bool FindRCFile(char* pszOut, const char* fileName, HINSTANCE pluginInstance);
+	API_EXPORT const char* ConfigFileExists(const char* filename, const char* pluginDir);
 
     /* Get configuration filepaths */
     API_EXPORT const char* bbrcPath(const char* bbrcFileName ISNULL);

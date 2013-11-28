@@ -32,16 +32,24 @@ installdir_if_absent(buttons)
   #INSTALL_IF_NEW = bbLeanSkin.rc bbLeanSkinMenu.rc exclusions.rc -subdir buttons buttons_11x11.bmp
 #endif
 
+if( CMAKE_SIZEOF_VOID_P EQUAL 8 )
+	set(buildbits 64)
+	set(target_name "bbLeanSkinEng")
+else( CMAKE_SIZEOF_VOID_P EQUAL 8 )
+	set(buildbits 32)
+	set(target_name "bbLeanSkinEng32")
+endif( CMAKE_SIZEOF_VOID_P EQUAL 8 )
+
 #ifeq "$(PROG)" "eng"
-add_library(bbLeanSkinEng
+add_library(${target_name}
 	SHARED
 	engine/hookctl.cpp
 	engine/subclass.cpp
 	${CMAKE_SOURCE_DIR}/blackbox/BImage.cpp
 )
-target_link_libraries(bbLeanSkinEng blackbox bblib bbPlugin)
-target_link_libraries(bbLeanSkinEng version comctl32)
-install(TARGETS bbLeanSkinEng RUNTIME DESTINATION plugins/bbLeanSkin)
+target_link_libraries(${target_name} blackbox bblib bbPlugin)
+target_link_libraries(${target_name} version comctl32)
+install(TARGETS ${target_name} RUNTIME DESTINATION plugins/bbLeanSkin)
 
 
 
