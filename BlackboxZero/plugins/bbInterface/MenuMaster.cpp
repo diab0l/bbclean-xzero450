@@ -6,6 +6,7 @@
 
 // Global Include
 #include "BBApi.h"
+#include "bbPlugin.h"
 
 //Includes
 #include "AgentMaster.h"

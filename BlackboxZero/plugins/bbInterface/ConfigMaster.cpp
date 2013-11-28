@@ -304,7 +304,7 @@ bool check_mainscript_version(void)
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 // Couldn't find a round() function in these include files...
-int round(double d)
+int roundtoint(double d)
 {
 	if (d >= 0.0) return ceil(d - 0.5);
 	else return floor(d + 0.5);
@@ -386,20 +386,20 @@ double Calculator::value(bool get)
 			}
 		case AND:
             {
-            int il = round(left);
-            int ir = round(expr(true));
+            int il = roundtoint(left);
+            int ir = roundtoint(expr(true));
             return il & ir;
             }
         case OR:
             {
-            int il = round(left);
-            int ir = round(expr(true));
+            int il = roundtoint(left);
+            int ir = roundtoint(expr(true));
             return il | ir;
             }
         case XOR:
             {
-            int il = round(left);
-            int ir = round(expr(true));
+            int il = roundtoint(left);
+            int ir = roundtoint(expr(true));
             return il ^ ir;
             }
                 

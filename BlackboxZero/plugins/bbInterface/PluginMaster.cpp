@@ -5,6 +5,7 @@
 ===================================================*/
 // Global Include
 #include "BBApi2.h"
+#include "bbPlugin.h"
 
 //Define the ALPHA SOFTWARE flag
 //This will cause an annoying message box to pop up and confirm

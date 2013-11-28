@@ -37,7 +37,6 @@ void drawIcon (int px, int py, int size, HICON IconHop, HDC hDC, bool f);
 const char *image_haligns[] = {"Center", "Left", "Right", NULL};
 const char *image_valigns[] = {"Center", "Top", "Bottom", NULL};
 
-
 //GDI+ structs
 Gdiplus::GdiplusStartupInput gdiplusStartupInput;
 ULONG_PTR gdiplusToken;
@@ -201,7 +200,7 @@ void agenttype_bitmap_notify(agent *a, int notifytype, void *messagedata)
 				HICON load_sysicon(char *filepath, int size);
 				HICON hIcon = (HICON)LoadImage(plugin_instance_plugin, details->absolute_path, IMAGE_ICON, details->width, details->height, LR_LOADFROMFILE);
 				// this one can retrieve the standard system icons also:
-				if (NULL == hIcon) hIcon = load_sysicon(details->absolute_path, details->width);
+				if (NULL == hIcon) hIcon = load_sysicon(details->absolute_path, 32);
 
 				if (NULL != hIcon)
 				{
@@ -238,9 +237,7 @@ void agenttype_bitmap_notify(agent *a, int notifytype, void *messagedata)
 			else
 			{
 			  	WCHAR wTitle[256];
-				if(!locale)
-					locale = _create_locale(LC_CTYPE,"");
-			  	_mbstowcs_l(wTitle, details->absolute_path, strlen(details->absolute_path) + 1,locale);
+			  	mbstowcs(wTitle, details->absolute_path, strlen(details->absolute_path) + 1);
 			  	pImage = new Gdiplus::Image(wTitle);
 
 				if (NULL != pImage)

@@ -5,6 +5,7 @@
 ===================================================*/
 // Global Include
 #include "BBApi.h"
+#include "bbPlugin.h"
 
 //Define the ALPHA SOFTWARE flag
 //This will cause an annoying message box to pop up and confirm
@@ -271,8 +272,9 @@ int beginPlugin(HINSTANCE hMainInstance)
 
 	const char *bbv = GetBBVersion();
 	
-	if (NULL != strstr(bbv, "Clean")) BBVersion = BBVERSION_CLEAN;
-	else
+	// Mojmir: do not know how to define _CLEAN
+	/*if (NULL != strstr(bbv, "Clean")) BBVersion = BBVERSION_CLEAN;
+	else*/
 	if (0 == memicmp(bbv, "bblean", 6)) BBVersion = BBVERSION_LEAN;
 	else
 	if (0 == memicmp(bbv, "bb", 2)) BBVersion = BBVERSION_XOB;

@@ -126,7 +126,7 @@ void control_registertype(
 void control_unregistertype(controltype *ct);
 
 
-struct token_check { const char *key; unsigned int id; int args; };
+struct token_check { const char *key; size_t id; int args; };
 int token_check(struct token_check *t, int *curtok, int tokencount, char *tokens[]);
 int get_string_index (const char *key, const char **string_list);
 char *new_string(const char *);
@@ -143,6 +143,7 @@ void variables_set(bool is_static, const char *key, int val, module* defmodule =
 char *get_dragged_file(char *buffer, WPARAM wParam);
 
 void controls_clickraise(void);
+void controls_updatetasks(void);
 list* control_getcontrollist(void);
 
 #endif

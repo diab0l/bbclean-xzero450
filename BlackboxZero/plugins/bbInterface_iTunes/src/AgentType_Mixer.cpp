@@ -150,7 +150,7 @@ int agenttype_mixer_create(agent *a, char *parameterstring)
 	if (!errorflag)
 	{
 		//Initialize the mixer values
-		if (MMSYSERR_NOERROR != mixerOpen(&details->mixer_handle, details->device, (DWORD) details->hwnd_reciever, 0, CALLBACK_WINDOW)) errorflag = true;
+		if (MMSYSERR_NOERROR != mixerOpen(&details->mixer_handle, details->device, (DWORD_PTR) details->hwnd_reciever, 0, CALLBACK_WINDOW)) errorflag = true;
 	}
 
 	if (!errorflag)

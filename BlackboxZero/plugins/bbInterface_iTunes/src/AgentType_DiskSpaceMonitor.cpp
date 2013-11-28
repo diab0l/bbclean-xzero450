@@ -400,7 +400,7 @@ void agenttype_diskspacemonitor_updatevalue(agenttype_diskspacemonitor_details *
 	if (d->value != -1) return;
 
 	static ULONGLONG diskfree,disktotal;	
-	char *path= d->path?d->path:"C:\\";
+	char const *path= d->path?d->path:"C:\\";
 	GetDiskFreeSpaceEx(path,NULL,(ULARGE_INTEGER *)&disktotal,(ULARGE_INTEGER *)&diskfree);
 	//Otherwise, figure it out
 	switch(monitor_type)

@@ -409,14 +409,14 @@ int controltype_label_message(control *c, int tokencount, char *tokens[])
 		{ "Load",               T_PLUGINLOAD    , 1 },
 		{ "Unload",             T_PLUGINUNLOAD  , 1 },
 		{ "About",              T_PLUGINABOUT   , 0 },
-		{ szBActionPluginSetProperty, (int)controltype_label_plugin_property_tokens  , 2 },
+		{ szBActionPluginSetProperty, (size_t)controltype_label_plugin_property_tokens  , 2 },
 		{ NULL }
 	};
 
 	static struct token_check controltype_label_message_tokens[] =
 	{
-		{ szBActionSetControlProperty, (int)controltype_label_property_tokens, 2 },
-		{ szBActionPlugin, (int)controltype_label_plugin_tokens, 2 },
+		{ szBActionSetControlProperty, (size_t)controltype_label_property_tokens, 2 },
+		{ szBActionPlugin, (size_t)controltype_label_plugin_tokens, 2 },
 		{ NULL }
 	};
 

@@ -290,7 +290,7 @@ bool check_mainscript_version(void)
 	{	
 		if (	fgets(config_line, sizeof config_line, config_file_in)
 			&&	config_line[0] == '!'
-			&&	( strstr(config_line, "0.9.9") )
+			&&	strstr(config_line, "0.9.9")
 			) { fclose(config_file_in); return true; }
 
 		fclose(config_file_in);
@@ -304,7 +304,7 @@ bool check_mainscript_version(void)
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 // Couldn't find a round() function in these include files...
-int round(double d)
+int roundtoint(double d)
 {
 	if (d >= 0.0) return ceil(d - 0.5);
 	else return floor(d + 0.5);
@@ -345,7 +345,6 @@ class Calculator
     double term(bool get);
     double prim(bool get);
 	double value(bool get);
-	double truthvalue(bool get);
     Token_type get_token();
 
 public:
@@ -354,34 +353,13 @@ public:
 };
 
 /*
-A value is the result of evaluating the ternary operators properly.
-A truthvalue is a comparison between expressions.
+A value is a comparison between expressions.
 An expression is a sum of terms.
 A term is a product of primaries.
 Primaries are numbers or parenthesised expressions.
 */
 
 double Calculator::value(bool get)
-{
-    double left = truthvalue(get);
-    
-    switch(cur_tok)
-    {
-		case TER1:
-			{
-			double mid = truthvalue(true);
-			if (cur_tok != TER2) throw "Ternary operator not closed.";
-			double right = truthvalue(true);
-			return left ? mid : right;
-			}
-        default:
-            return left;
-    }
-}
-
-
-
-double Calculator::truthvalue(bool get)
 {
     double left = expr(get);
     
@@ -399,22 +377,29 @@ double Calculator::truthvalue(bool get)
             return left >= expr(true);
         case NEQ:
             return left != expr(true);
+		case TER1:
+			{
+			double mid = expr(true);
+			if (cur_tok != TER2) throw "Ternary operator not closed.";
+			double right = expr(true);
+			return left ? mid : right;
+			}
 		case AND:
             {
-            int il = round(left);
-            int ir = round(expr(true));
+            int il = roundtoint(left);
+            int ir = roundtoint(expr(true));
             return il & ir;
             }
         case OR:
             {
-            int il = round(left);
-            int ir = round(expr(true));
+            int il = roundtoint(left);
+            int ir = roundtoint(expr(true));
             return il | ir;
             }
         case XOR:
             {
-            int il = round(left);
-            int ir = round(expr(true));
+            int il = roundtoint(left);
+            int ir = roundtoint(expr(true));
             return il ^ ir;
             }
                 

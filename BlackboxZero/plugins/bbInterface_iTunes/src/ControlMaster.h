@@ -126,7 +126,7 @@ void control_registertype(
 void control_unregistertype(controltype *ct);
 
 
-struct token_check { const char *key; unsigned int id; int args; };
+struct token_check { const char *key; size_t id; int args; };
 int token_check(struct token_check *t, int *curtok, int tokencount, char *tokens[]);
 int get_string_index (const char *key, const char **string_list);
 char *new_string(const char *);
