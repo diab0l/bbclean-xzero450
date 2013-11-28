@@ -4,3 +4,7 @@
 *.dll
 *.a
 resource.res
+# projects usually go here:
+_projects*
+# bbversion is generated:
+BlackboxZero/blackbox/bbversion.h
