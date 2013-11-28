@@ -2450,6 +2450,9 @@ void TrackMouse()
 
 	TRACKMOUSEEVENT tme1;
 	tme1.cbSize = sizeof(TRACKMOUSEEVENT);
+#if defined __MINGW32__ and !defined __MINGW64__
+	int const TME_NONCLIENT = 0x00000010; // missing in mingw32
+#endif
 	tme1.dwFlags = TME_LEAVE | TME_NONCLIENT;
 	tme1.hwndTrack = hwndBBPager;
 	tme1.dwHoverTime = 0;
