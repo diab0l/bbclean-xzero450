@@ -1,5 +1,5 @@
-cmake_minimum_required(VERSION 2.8.9)
 project(BlackboxZero)
+cmake_minimum_required(VERSION 2.8.9)
 set(CMAKE_VERBOSE_MAKEFILE on)
 
 set(CMAKE_INSTALL_PREFIX "c:/bbLean_M")
@@ -16,10 +16,11 @@ set (CLEAN_FILES
   *.exe *.dll
 )
 
+# font tools and conversion
 add_subdirectory(build/bdf2fon)
 add_custom_target(fonts ALL)
-SET(FONTDIR "${CMAKE_SOURCE_DIR}/fonts/artwiz-latin1-1.0-src" CACHE STRING "font directory")
-SET(FONTOUTDIR "${CMAKE_BINARY_DIR}/converted_fonts" CACHE STRING "font directory")
+set(FONTDIR "${CMAKE_SOURCE_DIR}/fonts/artwiz-latin1-1.0-src" CACHE STRING "font directory")
+set(FONTOUTDIR "${CMAKE_BINARY_DIR}/converted_fonts" CACHE STRING "font directory")
 set(BDF2FNT ${CMAKE_BINARY_DIR}/bdf2fnt.exe CACHE STRING "bdf2fnt path")
 set(FNT2FON ${CMAKE_BINARY_DIR}/fnt2fon.exe CACHE STRING "fnt2fon path")
 add_custom_command(TARGET fonts COMMAND ${CMAKE_COMMAND}
@@ -29,19 +30,22 @@ add_custom_command(TARGET fonts COMMAND ${CMAKE_COMMAND}
 	 -DFNT2FON="${FNT2FON}"
 	 -DFONTOUTDIR=${FONTOUTDIR}
 	 ARGS -P ${CMAKE_SOURCE_DIR}/fonts/fonts.cmake)
-
 install(DIRECTORY ${FONTOUTDIR} 
 	DESTINATION .
 	FILES_MATCHING PATTERN "*.fon"
 	PERMISSIONS OWNER_READ OWNER_WRITE GROUP_READ WORLD_READ)
 
-add_subdirectory(3rd_party/iTunesCOMWindowsSDK)
+# core modules
 add_subdirectory(lib)
 add_subdirectory(blackbox)
 add_subdirectory(blackbox/Hooks)
+
+# documentation
 add_subdirectory(build/fuzzydoc)
 #add_subdirectory(docs)
 
+# plugins
+add_subdirectory(3rd_party/iTunesCOMWindowsSDK)
 add_subdirectory(plugins/bbKeys)
 add_subdirectory(plugins/bbPlugin)
 add_subdirectory(plugins/bbLeanBar)
@@ -52,23 +56,26 @@ add_subdirectory(plugins/bbAnalog)
 add_subdirectory(plugins/bbIconBox)
 add_subdirectory(plugins/bbColor3dc)
 add_subdirectory(plugins/bbWorkspaceWheel)
-
 add_subdirectory(plugins/bbPlugin+)
 add_subdirectory(plugins/bbLeanBar+)
 
+# NOTE: following plugins are not yet mingw compatible
 if (NOT MINGW)
 	add_subdirectory(plugins/bbRecycleBin)
 	add_subdirectory(plugins/BBPager)
 	add_subdirectory(plugins/BBStyle)
 	add_subdirectory(plugins/bbInterface_iTunes)
 endif (NOT MINGW)
+
 add_subdirectory(plugins/bbInterface)
 
+# tools
 add_subdirectory(tools/bsetshell)
 add_subdirectory(tools/bsetroot)
 add_subdirectory(tools/bbstylemaker)
 add_subdirectory(tools/bbnote)
 
+# installation
 function(install_if_absent)
 	foreach(f ${ARGN})
 		if(NOT EXISTS \"${CMAKE_INSTALL_PREFIX}/${f}\")
@@ -87,7 +94,6 @@ set(main_RESOURCES
 )
 
 install_if_absent(${main_RESOURCES})
-
 install(DIRECTORY styles backgrounds DESTINATION .)
 
 
