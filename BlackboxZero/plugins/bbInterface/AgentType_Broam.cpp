@@ -154,7 +154,7 @@ void agenttype_broam_notify(agent *a, int notifytype, void *messagedata)
 				buffer = new_string(stage);				
 
 				//Delete the stage
-				delete stage;
+				delete stage[];
 			}
 			else
 			{

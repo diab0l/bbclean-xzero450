@@ -180,7 +180,7 @@ void ClearToolTips(HWND hwnd)
 
 //===========================================================================
 
-struct plugin_info *g_bbb;
+struct plugin_info *g_bbb = 0;
 
 void exit_bb_balloon(void)
 {

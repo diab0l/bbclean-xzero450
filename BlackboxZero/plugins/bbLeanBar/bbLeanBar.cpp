@@ -104,7 +104,7 @@ ST int styleBevelWidth;
 ST int styleBorderWidth;
 ST COLORREF styleBorderColor;
 
-struct plugin_info *g_PI;
+struct plugin_info *g_PI = 0;
 
 //====================
 #define NIF_INFO 0x00000010
