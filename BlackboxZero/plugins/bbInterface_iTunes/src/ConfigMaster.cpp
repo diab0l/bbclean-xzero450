@@ -932,7 +932,7 @@ void config_paths_startup()
 	}
 
 	//Delete the temporary string
-	delete temp;
+	delete[] temp;
 }
 
 //##################################################

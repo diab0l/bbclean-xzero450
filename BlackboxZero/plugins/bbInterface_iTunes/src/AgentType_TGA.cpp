@@ -110,7 +110,7 @@ int agenttype_tga_create(agent *a, char *parameterstring)
 		strcpy(temp, config_path_plugin);
 		strcat(temp, parameterstring);
 		image = agenttype_tga_loadtga(temp);
-		delete temp;
+		delete[] temp;
 		if (!image)
 		{
 			return 1;
