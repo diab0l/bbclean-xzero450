@@ -1081,7 +1081,7 @@ static const struct rccfg bbrc_cfg[] = {
 	{ ".menu.icon.hue",				C_INT, (void*)0,		&Settings_menu.iconHue },
 
 
-    { "#workspaces_wraparound",    C_BOL, (void*)false,     &Settings_workspaces_wraparound },
+    { "#workspaces_wraparound",    C_BOL, (void*)true,      &Settings_workspaces_wraparound },
     { "#workspaces",               C_INT, (void*)3,         &Settings_workspaces },
     { "#workspacesX",              C_INT, (void*)3,         &Settings_workspacesX },
     { "#workspacesY",              C_INT, (void*)1,         &Settings_workspacesY },

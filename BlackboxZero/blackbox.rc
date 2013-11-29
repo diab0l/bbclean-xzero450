@@ -39,8 +39,11 @@ session.screen0.slit.ontop: true
 session.screen0.slit.toggle: false
 
 # - other options -
+session.screen0.workspaces_wraparound: true
 session.screen0.workspaces: 3
-session.screen0.workspacenames: alpha,beta,gamma,delta
+session.screen0.workspacesX: 3
+session.screen0.workspacesY: 1
+session.screen0.workspacenames: alpha,beta,gammaaaa
 session.screen0.focusModel: ClickToFocus
 session.screen0.fullMaximization: false
 session.screen0.strftimeformat: %H:%M %a %d %b
