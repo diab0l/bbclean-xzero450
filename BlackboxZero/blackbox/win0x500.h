@@ -214,10 +214,10 @@ EXTERN_C BOOL WINAPI AllowSetForegroundWindow(DWORD dwProcessId);
 #endif
 
 #if defined _MSC_VER || defined __GNUC__
-  #define _stricmp _stricmp
+  //#define _stricmp _stricmp
   #define strnicmp _strnicmp
-  #define _memicmp _memicmp
-  #define _strlwr _strlwr
+  //#define _memicmp _memicmp
+  //#define _strlwr _strlwr
   #define strupr _strupr
   #define itoa _itoa
 #endif
