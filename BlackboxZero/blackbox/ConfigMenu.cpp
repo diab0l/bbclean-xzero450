@@ -47,7 +47,9 @@ static const struct int_item {
     { &Settings_toolbar.widthPercent        ,  10,   100, -2  },
     { &Settings_toolbar.alphaValue          ,   0,   255, 255 },
     { &Settings_autoRaiseDelay              ,   0, 10000, -1  },
-    { &Settings_workspaces                  ,   1,    24, -1  },
+    { &Settings_workspaces                  ,   1,    25, -1  },
+    { &Settings_workspacesX                 ,   1,     5, -1  },
+    { &Settings_workspacesY                 ,   1,     5, -1  },
 	{ &Settings_menu.iconSize				,	0,	  32,  0  }, /* BlackboxZero 1.5.2012 */
 	{ &Settings_menu.iconSaturation			,	0,	 255, 255 }, /* BlackboxZero 1.5.2012 */
 	{ &Settings_menu.iconHue				,	0,	 255,  0  }, /* BlackboxZero 1.5.2012 */

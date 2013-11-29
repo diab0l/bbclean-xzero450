@@ -1307,6 +1307,8 @@ static const struct corebroam_table {
     // workspaces
     { "LeftWorkspace",          BB_WORKSPACE,       0, BBWS_DESKLEFT },
     { "PrevWorkspace",          BB_WORKSPACE,       0, BBWS_DESKLEFT },
+    { "UpWorkspace",            BB_WORKSPACE,       0, BBWS_DESKUP },
+    { "DownWorkspace",          BB_WORKSPACE,       0, BBWS_DESKDOWN },
     { "RightWorkspace",         BB_WORKSPACE,       0, BBWS_DESKRIGHT },
     { "NextWorkspace",          BB_WORKSPACE,       0, BBWS_DESKRIGHT },
     { "LastWorkspace",          BB_WORKSPACE,       0, BBWS_LASTDESK },

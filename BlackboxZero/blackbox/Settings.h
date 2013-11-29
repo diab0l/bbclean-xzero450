@@ -97,7 +97,10 @@ BBSETTING struct menu_setting {
 BBSETTING bool Settings_styleXPFix;
 BBSETTING bool Settings_followActive;
 BBSETTING bool Settings_altMethod;
+BBSETTING bool Settings_workspaces_wraparound;
 BBSETTING int  Settings_workspaces;
+BBSETTING int  Settings_workspacesX;
+BBSETTING int  Settings_workspacesY;
 BBSETTING char Settings_workspaceNames[200];
 
 //====================

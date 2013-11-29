@@ -31,9 +31,10 @@
 //====================
 // public variables
 
-int VScreenX, VScreenY, VScreenWidth, VScreenHeight;
-int currentScreen, lastScreen;
-int nScreens;
+int VScreenX = 0, VScreenY = 0, VScreenWidth = 0, VScreenHeight = 0;
+int currentScreen = 0, lastScreen = 0;
+int nScreens = 1;
+int nScreensX = 1, nScreensY = 1;
 
 //====================
 // private variables
@@ -165,7 +166,6 @@ void Workspaces_Reconfigure(void)
 bool Workspaces_GetScreenMetrics(void)
 {
     int x, y, w, h;
-    bool changed;
     if (multimon) {
         x = GetSystemMetrics(SM_XVIRTUALSCREEN);
         y = GetSystemMetrics(SM_YVIRTUALSCREEN);
@@ -176,12 +176,15 @@ bool Workspaces_GetScreenMetrics(void)
         w = GetSystemMetrics(SM_CXSCREEN);
         h = GetSystemMetrics(SM_CYSCREEN);
     }
-    changed = w != VScreenWidth || h != VScreenHeight;
+    bool const changed = w != VScreenWidth || h != VScreenHeight;
     VScreenWidth = w;
     VScreenHeight = h;
     VScreenX = x;
     VScreenY = y;
     nScreens = Settings_disableVWM ? 1 : Settings_workspaces;
+	nScreensX = Settings_workspacesX;
+	nScreensY = Settings_workspacesY;
+
     //dbg_printf("Screen: %d/%d %d/%d", x, y, w, h);
     return changed;
 }
@@ -336,6 +339,13 @@ LRESULT Workspaces_Command(UINT msg, WPARAM wParam, LPARAM lParam)
                 case BBWS_DESKRIGHT:
                     Workspaces_DeskSwitch(next_desk(1));
                     break;
+                case BBWS_DESKDOWN:
+                    Workspaces_DeskSwitch(next_desk(-nScreensX));
+                    break;
+                case BBWS_DESKUP:
+                    Workspaces_DeskSwitch(next_desk(+nScreensX));
+                    break;
+
 
                 // ---------------------------------
                 case BBWS_ADDDESKTOP:
@@ -1100,8 +1110,17 @@ ST int next_desk (int d)
 {
     int n = currentScreen + d;
     int m = nScreens - 1;
-    if (n > m) return 0;
-    if (n < 0) return m;
+
+	if (Settings_workspaces_wraparound)
+	{
+		if (n > m) return 0;
+		if (n < 0) return m;
+	}
+	else
+	{
+		if (n > m) return currentScreen;
+		if (n < 0) return currentScreen;
+	}
     return n;
 }
 
@@ -1109,6 +1128,8 @@ ST void AddDesktop(int d)
 {
     Settings_workspaces = imax(1, Settings_workspaces + d);
     Settings_WriteRCSetting(&Settings_workspaces);
+    Settings_WriteRCSetting(&Settings_workspacesX);
+    Settings_WriteRCSetting(&Settings_workspacesY);
     Workspaces_Reconfigure();
     send_desk_refresh();
 }
@@ -1136,7 +1157,6 @@ void Workspaces_DeskSwitch(int i)
 }
 
 //====================
-
 ST void MoveWindowToWkspc(HWND hwnd, int desk, bool switchto)
 {
     if (NULL == hwnd)

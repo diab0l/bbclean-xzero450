@@ -242,6 +242,9 @@
   #define BBWS_CLEARONBG        26 /* lParam: hwnd or NULL for foregroundwindow */
   #define BBWS_ISONBG           27 /* lParam: hwnd or NULL for foregroundwindow */
 
+  #define BBWS_DESKUP           28
+  #define BBWS_DESKDOWN         29
+
 /*------------------------------------------ */
 #define BB_TASKSUPDATE          10506  /* For plugins: receive only */
   /* lParam for BB_TASKSUPDATE: */
@@ -260,7 +263,8 @@
   #define TRAYICON_REMOVED 2
 
 /* cleanup dead trayicons */
-/* #define BB_CLEANTRAY         10508 - obsolete */
+//@NOTE: is used by SystemBarEx, it does not seem to be obsolette
+#define BB_CLEANTRAY            10508
 /* #define BB_CLEANTASKS        10509 - obsolete */
 
 /* File dragged over/dropped on desktop.
