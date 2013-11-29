@@ -289,7 +289,7 @@ void bbTooltip::_Show()
 
 #define VALID_OUTLINECOLOR  (1<<16) //October 30, 2011
 	if (m_pInfo->pStyle->validated & VALID_OUTLINECOLOR) {	
-		COLORREF cr0;
+		//COLORREF cr0;
 			RECT rcOutline;
 			//_CopyRect(&rcOutline, r);
 			rcOutline.bottom = r.bottom;

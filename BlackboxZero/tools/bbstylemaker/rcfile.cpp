@@ -76,9 +76,9 @@ bool ReadBool(LPCSTR fileName, LPCSTR szKey, bool bDefault)
 {
     LPCSTR szValue = read_value(fileName, szKey, NULL);
     if (szValue) {
-        if (!stricmp(szValue, "true"))
+        if (!_stricmp(szValue, "true"))
             return true;
-        if (!stricmp(szValue, "false"))
+        if (!_stricmp(szValue, "false"))
             return false;
     }
     return bDefault;

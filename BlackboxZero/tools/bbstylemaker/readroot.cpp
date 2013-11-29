@@ -33,7 +33,7 @@ int bsetroot_parse(NStyleStruct *pss, const char *command)
     memset(r, 0, sizeof *r);
     memset(pSI, 0, sizeof *pSI);
 
-    strlwr(NextToken(token, &cptr, NULL));
+    _strlwr(NextToken(token, &cptr, NULL));
     //f = strstr(token, "bsetroot") || strstr(token, "bsetbg");
 
     init_root(r);

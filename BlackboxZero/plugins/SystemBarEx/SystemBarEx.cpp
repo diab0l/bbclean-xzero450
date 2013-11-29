@@ -48,7 +48,7 @@ int beginSlitPlugin(HINSTANCE hPluginInstance, HWND hBBSlit) {
 int beginPlugin (HINSTANCE hPluginInstance) {
     BYTE		i = 0;
     WNDCLASS	wc;
-	FILE* fp;
+	//FILE* fp;
 
 	//int		k = 0;
 	//int		instances = 0;

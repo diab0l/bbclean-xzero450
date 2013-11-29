@@ -271,7 +271,7 @@ unsigned getkey (const char *keystr, unsigned* pmod)
     unsigned vkey, modifier;
 
     vkey = modifier = 0;
-    p = strupr(strcpy(keytograb, keystr));
+    p = _strupr(strcpy(keytograb, keystr));
     for (;;)
     {
         while (' ' == *p)
