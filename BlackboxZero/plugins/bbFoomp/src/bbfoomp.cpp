@@ -1515,7 +1515,7 @@ void Finfo::update()
 	if (FooHandle = FindWindow("{DA7CD0DE-1602-45e6-89A1-C2CA151E008E}", NULL)) // Foobar 8.3
 	{
 		GetWindowText(FooHandle, song_title, sizeof(song_title));
-		if (stricmp(song_title, "uninteresting")==0) // It seems Columns UI 1.2 is loaded for 8.3
+		if (_stricmp(song_title, "uninteresting")==0) // It seems Columns UI 1.2 is loaded for 8.3
 		{
 			FooHandle = FindWindow("{E7076D1C-A7BF-4f39-B771-BCBE88F2A2A8}", NULL);
 			GetWindowText(FooHandle, song_title, sizeof(song_title));

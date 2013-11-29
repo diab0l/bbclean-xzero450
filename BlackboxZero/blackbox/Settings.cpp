@@ -170,7 +170,7 @@ void parse_font(StyleItem *si, const char *font)
 
     if (subst)
         for (r = substlist; r[0]; r+=2)
-            if (0 == stricmp(si->Font, r[0])) {
+            if (0 == _stricmp(si->Font, r[0])) {
                 if (stristr(si->Font, "bold"))
                     si->FontWeight = FW_BOLD;
                 strcpy(si->Font, r[1]);
@@ -1192,7 +1192,7 @@ void Settings_ReadRCSettings(void)
 #ifdef __BBCORE__
     defaultrc_path[0] = 0;
     p = ReadString(extensionsrcPath(NULL), "blackbox.theme:", "");
-    if (p[0] && 0 != stricmp(p, "default")) {
+    if (p[0] && 0 != _stricmp(p, "default")) {
         FindRCFile(defaultrc_path, p, NULL);
     }
 #endif

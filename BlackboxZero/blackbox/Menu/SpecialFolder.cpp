@@ -306,22 +306,22 @@ static int folder_compare(MenuItem** pm1, MenuItem** pm2)
     a1 = m1->m_pszTitle;
     b1 = m2->m_pszTitle;
     if (1 != sortmode || f == M_SORT_NAME || f == M_SORT_FOLDER)
-        return stricmp(a1, b1); // sort by name
+        return _stricmp(a1, b1); // sort by name
 
     a2 = strrchr(a1,'.');
     b2 = strrchr(b1,'.');
     if (a2 == NULL)
-        return (b2 == NULL) ? stricmp(a1, b1) : -1;
+        return (b2 == NULL) ? _stricmp(a1, b1) : -1;
     else
     if (b2 == NULL)
         return 1;
 
-    if (0 != (z = stricmp(a2,b2))) // sort by extension
+    if (0 != (z = _stricmp(a2,b2))) // sort by extension
         return z;
 
     x = a2-a1;
     y = b2-b1;
-    if (0 != (z = memicmp(a1,b1,x<y?x:y)))
+    if (0 != (z = _memicmp(a1,b1,x<y?x:y)))
         return z;
     if (0 != (z = x-y))
         return z;
@@ -434,13 +434,13 @@ int LoadFolder(
 
         if (pszExtra) {
             char *p = (char*)file_extension(szDispName);
-            if (0 == stricmp(p, ".style"))
+            if (0 == _stricmp(p, ".style"))
                 *p = 0; // cut off .style file-extension
         }
 
         if (options & LF_join) {
             dolist (pItem, *ppItems) {
-                if (0 == stricmp(pItem->m_pszTitle, szDispName)) {
+                if (0 == _stricmp(pItem->m_pszTitle, szDispName)) {
                     //dbg_printf("join: %s %d", szDispName, 0 != (attr & ef_folder));
                     if (attr & ef_folder)
                         append_node(&pItem->m_pidl_list, pidl_list);

@@ -811,7 +811,7 @@ int save_style(HWND hwnd, int flags)
         if (!get_save_filename(hwnd, temp, "Save style as...", "blackbox style\0*.*\0"))
             return 0;
 
-        if (0 != stricmp(temp, work_stylefile))
+        if (0 != _stricmp(temp, work_stylefile))
             flags = 2;
 
         if (flags == 2)
@@ -1871,7 +1871,7 @@ void configure_interface(struct dlg *dlg)
     // menu bullets
         show_section(dlg, GRD_HDR, GRD_INL, false);
         check_radio(dlg, BUL_EMP + get_bulletstyle(work_style.menuBullet));
-        check_radio(dlg, BUL_LEF + (0!=stricmp(work_style.menuBulletPosition, "left")));
+        check_radio(dlg, BUL_LEF + (0!=_stricmp(work_style.menuBulletPosition, "left")));
     }
 
     // bevel

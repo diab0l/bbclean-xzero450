@@ -944,7 +944,7 @@ bool BBP_read_window_modes(struct plugin_info *PI, const char *rcfile)
     PI->clickRaise      = BBP_read_bool(PI, "clickRaise", true);
 	PI->transparent     = BBP_read_bool(PI, "transparent", false);
     PI->alphaValue      = (BYTE)eightScale_up(BBP_read_int(PI,  "alpha.value",  *(int *)GetSettingPtr(SN_MENUALPHA)));
-    PI->orient_vertical = PI->is_bar || 0 == stricmp("vertical", BBP_read_string(PI, NULL, "orientation", "vertical"));
+    PI->orient_vertical = PI->is_bar || 0 == _stricmp("vertical", BBP_read_string(PI, NULL, "orientation", "vertical"));
 	if (false == PI->no_icons)
 	{
 		PI->saturation		= eightScale_up(BBP_read_int(PI,  "icon.saturation", 3));
@@ -1149,17 +1149,17 @@ bool BBP_broam_bool(struct plugin_info *PI, const char *temp, const char *key, b
 {
     int n = strlen(key);
     const char *s;
-    if (memicmp(temp, key, n))
+    if (_memicmp(temp, key, n))
         return false;
     s = temp + n;
     while (' ' == *s) ++s;
-    if (0 == *s || 0 == stricmp(s, "toggle"))
+    if (0 == *s || 0 == _stricmp(s, "toggle"))
         *ip = false == *ip;
     else
-    if (0 == stricmp(s, "false"))
+    if (0 == _stricmp(s, "false"))
         *ip = false;
     else
-    if (0 == stricmp(s, "true"))
+    if (0 == _stricmp(s, "true"))
         *ip = true;
     else
         return false;
@@ -1171,7 +1171,7 @@ bool BBP_broam_int(struct plugin_info *PI, const char *temp, const char *key, in
 {
     int n = strlen(key);
     const char *s;
-    if (memicmp(temp, key, n))
+    if (_memicmp(temp, key, n))
         return false;
     s = temp + n;
     if (' ' != *s)
@@ -1189,7 +1189,7 @@ bool BBP_broam_string(struct plugin_info *PI, const char *temp, const char *key,
 {
     int n = strlen(key);
     const char *s;
-    if (memicmp(temp, key, n))
+    if (_memicmp(temp, key, n))
         return false;
     s = temp + n;
     if (' ' != *s)
@@ -1284,26 +1284,26 @@ int BBP_handle_broam(struct plugin_info *PI, const char *temp)
         return BBP_BROAM_HANDLED;
     }
 
-    if (!stricmp(temp, "about"))
+    if (!_stricmp(temp, "about"))
     {
         PI->about_box(_THIS);
         return BBP_BROAM_HANDLED;
     }
 
-    if (!stricmp(temp, "editRC"))
+    if (!_stricmp(temp, "editRC"))
     {
         BBP_edit_file(PI->rcpath);
         return BBP_BROAM_HANDLED;
     }
 
-    if (0 == stricmp(temp, "readme"))
+    if (0 == _stricmp(temp, "readme"))
     {
         char temp[MAX_PATH];
         BBP_edit_file(set_my_path(PI->hInstance, temp, "readme.txt"));
         return BBP_BROAM_HANDLED;
     }
 
-    if (!stricmp(temp, "LoadDocs"))
+    if (!_stricmp(temp, "LoadDocs"))
     {
         char docspath[MAX_PATH];
 		locate_file(PI->hInstance, docspath, PI->class_name, "html");
@@ -1313,10 +1313,10 @@ int BBP_handle_broam(struct plugin_info *PI, const char *temp)
 
     if (BBP_broam_string(PI, temp, "orientation", &s))
     {
-        if (!stricmp(s, "vertical"))
+        if (!_stricmp(s, "vertical"))
             PI->orient_vertical = true;
         else
-        if (!stricmp(s, "horizontal"))
+        if (!_stricmp(s, "horizontal"))
             PI->orient_vertical = false;
         BBP_set_window_modes(PI);
         return BBP_BROAM_HANDLED | BBP_BROAM_METRICS;
@@ -1429,12 +1429,12 @@ LRESULT CALLBACK BBP_WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lPar
             const char *temp = (LPCSTR)lParam;
             int f, len;
 
-            if (0 == stricmp(temp, "@BBShowPlugins")) {
+            if (0 == _stricmp(temp, "@BBShowPlugins")) {
                 PI->toggled_hidden = false;
                 BBP_set_window_modes(PI);
                 goto pass_result;
             }
-            if (0 == stricmp(temp, "@BBHidePlugins")) {
+            if (0 == _stricmp(temp, "@BBHidePlugins")) {
                 if (PI->pluginToggle) {
                     PI->toggled_hidden = true;
                     BBP_set_window_modes(PI);
@@ -1446,7 +1446,7 @@ LRESULT CALLBACK BBP_WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lPar
                 goto pass_nothing;
 
             len = PI->broam_key_len;
-            if (len && 0 == memicmp(temp, PI->broam_key, len) && '.' == temp[len]) {
+            if (len && 0 == _memicmp(temp, PI->broam_key, len) && '.' == temp[len]) {
                 f = 0;
                 temp += len + 1;
                 goto do_broam;
@@ -1456,7 +1456,7 @@ LRESULT CALLBACK BBP_WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lPar
                 goto pass_nothing;
 
             len = PI->broam_key_len_common;
-            if (len && 0 == memicmp(temp, PI->broam_key, len)) {
+            if (len && 0 == _memicmp(temp, PI->broam_key, len)) {
                 f = BBP_BROAM_COMMON;
                 temp += len;
                 goto do_broam;
@@ -1627,7 +1627,7 @@ static struct class_info **find_class(const char *name)
 {
     struct class_info **pp;
     for (pp = &CI; *pp; pp = &(*pp)->next)
-        if (0 == stricmp((*pp)->name, name)) break;
+        if (0 == _stricmp((*pp)->name, name)) break;
     return pp;
 }
 

@@ -157,9 +157,9 @@ void Desk_new_background(const char *p)
     p = Desk_extended_rootCommand(p);
     if (p)
     {
-        if (0 == stricmp(p, "none"))
+        if (0 == _stricmp(p, "none"))
             p = "";
-        if (0 == stricmp(p, "style"))
+        if (0 == _stricmp(p, "style"))
             p = NULL;
     }
     if (false == Settings_enableBackground)

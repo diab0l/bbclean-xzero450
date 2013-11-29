@@ -762,14 +762,14 @@ ST LRESULT CALLBACK Toolbar_WndProc(HWND hwnd, UINT message, WPARAM wParam, LPAR
         {
             const char *broam = (const char*)lParam;
 
-            if (!stricmp(broam, "@BBShowPlugins"))
+            if (!_stricmp(broam, "@BBShowPlugins"))
             {
                 Toolbar_hidden = false;
                 Toolbar_UpdatePosition();
                 break;
             }
 
-            if (!stricmp(broam, "@BBHidePlugins"))
+            if (!_stricmp(broam, "@BBHidePlugins"))
             {
                 if (Settings_toolbar.pluginToggle)
                 {

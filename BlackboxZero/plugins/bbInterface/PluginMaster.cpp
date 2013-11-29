@@ -242,9 +242,9 @@ int beginPlugin(HINSTANCE hMainInstance)
 	plugin_hwnd_blackbox = GetBBWnd();
 
 	const char *bbv = GetBBVersion();
-	if (0 == memicmp(bbv, "bblean", 6)) BBVersion = BBVERSION_LEAN;
+	if (0 == _memicmp(bbv, "bblean", 6)) BBVersion = BBVERSION_LEAN;
 	else
-	if (0 == memicmp(bbv, "bb", 2)) BBVersion = BBVERSION_XOB;
+	if (0 == _memicmp(bbv, "bb", 2)) BBVersion = BBVERSION_XOB;
 	else BBVersion = BBVERSION_09X;
 
 	//Deal with os info
@@ -458,12 +458,12 @@ int plugin_message(int tokencount, char *tokens[], bool from_core, module* calle
 {
 	char *filename;
 
-	if (tokencount == 3 && !stricmp(tokens[2], szBActionSave))
+	if (tokencount == 3 && !_stricmp(tokens[2], szBActionSave))
 	{
 		config_save(config_path_mainscript);
 		return 0;
 	}
-	else if (!stricmp(tokens[2], szBActionSaveAs))
+	else if (!_stricmp(tokens[2], szBActionSaveAs))
 	{
 		if (tokencount == 4)
 		{
@@ -478,12 +478,12 @@ int plugin_message(int tokencount, char *tokens[], bool from_core, module* calle
 		}       
 		return 0;
 	}
-	else if (tokencount == 3 && !stricmp(tokens[2], szBActionRevert))
+	else if (tokencount == 3 && !_stricmp(tokens[2], szBActionRevert))
 	{
 		plugin_reconfigure(true);
 		return 0;
 	}
-	else if (!stricmp(tokens[2], szBActionLoad))
+	else if (!_stricmp(tokens[2], szBActionLoad))
 	{
 		if (tokencount == 4)
 		{
@@ -500,41 +500,41 @@ int plugin_message(int tokencount, char *tokens[], bool from_core, module* calle
 		}
 		else if (tokencount == 6)
 		{
-			if (0 == stricmp(tokens[4], "from"))
+			if (0 == _stricmp(tokens[4], "from"))
 			{
 				config_load(tokens[5], caller, tokens[3]);
 				return 0;
-			} else if (0 == stricmp(tokens[4], "into"))
+			} else if (0 == _stricmp(tokens[4], "into"))
 			{
 				config_load(tokens[3], module_get(tokens[5]));
 				return 0;
 			}
 		}
-		else if (tokencount == 8 && 0 == stricmp(tokens[4], "from") && 0 == stricmp(tokens[6], "into"))
+		else if (tokencount == 8 && 0 == _stricmp(tokens[4], "from") && 0 == _stricmp(tokens[6], "into"))
 		{
 			config_load(tokens[5], module_get(tokens[7]), tokens[3]);
 			return 0;
 		}
 	}
-	else if (!stricmp(tokens[2], szBActionAbout))
+	else if (!_stricmp(tokens[2], szBActionAbout))
 	{
 		if (tokencount == 3)
 		{
 			BBMessageBox(NULL, szPluginAbout, szVersion, MB_OK|MB_SYSTEMMODAL);
 			return 0;
 		}
-		else if (tokencount == 4 && !stricmp(tokens[3], "LastControl"))
+		else if (tokencount == 4 && !_stricmp(tokens[3], "LastControl"))
 		{
 			BBMessageBox(NULL, szPluginAboutLastControl, szAppName, MB_OK|MB_SYSTEMMODAL);
 			return 0;
 		}
-		else if (tokencount == 4 && !stricmp(tokens[3], "QuickHelp"))
+		else if (tokencount == 4 && !_stricmp(tokens[3], "QuickHelp"))
 		{
 			BBMessageBox(NULL, szPluginAboutQuickRef, szAppName, MB_OK|MB_SYSTEMMODAL);
 			return 0;
 		}
 	}
-	else if (!stricmp(tokens[2], szBActionEdit))
+	else if (!_stricmp(tokens[2], szBActionEdit))
 	{
 		//SendMessage(plugin_hwnd_blackbox, BB_EDITFILE, (WPARAM)-1, (LPARAM) config_path_mainscript);
 		//return 0;
@@ -542,10 +542,10 @@ int plugin_message(int tokencount, char *tokens[], bool from_core, module* calle
 		BBExecute(NULL, "",temp , config_path_mainscript, NULL, SW_SHOWNORMAL, false);
 		return 0;
 	}
-	else if (tokencount == 5 && !stricmp(tokens[2], szBActionSetPluginProperty))
+	else if (tokencount == 5 && !_stricmp(tokens[2], szBActionSetPluginProperty))
 	{
 		for (struct plugin_properties *p = plugin_properties; p->key; p++)
-			if (p->data && 0 == stricmp(tokens[3], p->key)) {
+			if (p->data && 0 == _stricmp(tokens[3], p->key)) {
 				switch (p->type) {
 					case M_BOL:
 						if (config_set_bool(tokens[4], (bool*)p->data)) break; return 1;
@@ -560,12 +560,12 @@ int plugin_message(int tokencount, char *tokens[], bool from_core, module* calle
 				return 0;
 			}
 	}
-	else if (tokencount == 4 && !stricmp(tokens[2], szBActionOnLoad) )
+	else if (tokencount == 4 && !_stricmp(tokens[2], szBActionOnLoad) )
 	{
 		config_set_str(tokens[3],&(globalmodule.actions[MODULE_ACTION_ONLOAD]));
 		return 0;
 	}
-	else if (tokencount == 4 && !stricmp(tokens[2], szBActionOnUnload) )
+	else if (tokencount == 4 && !_stricmp(tokens[2], szBActionOnUnload) )
 	{
 		config_set_str(tokens[3],&(globalmodule.actions[MODULE_ACTION_ONUNLOAD]));
 		return 0;

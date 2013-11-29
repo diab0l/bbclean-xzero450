@@ -105,7 +105,7 @@ int agenttype_graph_create(agent *a, char *parameterstring)
 	int charttype = -1;
 	for (int  i = 0; i < AGENTTYPE_GRAPH_CHARTTYPECOUNT; i++)
 	{
-		if (!stricmp(parameterstring, agenttype_graph_charttypes[i])) charttype = i; 
+		if (!_stricmp(parameterstring, agenttype_graph_charttypes[i])) charttype = i; 
 	}
 	if (charttype == -1) return 1;
 
@@ -179,13 +179,13 @@ int agenttype_graph_destroy(agent *a)
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 int agenttype_graph_message(agent *a, int tokencount, char *tokens[])
 {
-	if (!stricmp("GraphType", tokens[5]))
+	if (!_stricmp("GraphType", tokens[5]))
 	{
 		agenttype_graph_details *details = (agenttype_graph_details *) a->agentdetails;
 		int charttype = -1;
 		for (int  i = 0; i < AGENTTYPE_GRAPH_CHARTTYPECOUNT; i++)
 		{
-			if (!stricmp(tokens[6], agenttype_graph_charttypes[i])) charttype = i; 
+			if (!_stricmp(tokens[6], agenttype_graph_charttypes[i])) charttype = i; 
 		}
 		if (charttype == -1) return 1;
 		details->charttype = charttype;

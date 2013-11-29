@@ -112,7 +112,7 @@ int agenttype_autoscalegraph_create(agent *a, char *parameterstring)
 	int charttype = -1;
 	for (int  i = 0; i < AGENTTYPE_AUTOSCALEGRAPH_CHARTTYPECOUNT; i++)
 	{
-		if (!stricmp(parameterstring, agenttype_autoscalegraph_charttypes[i])) charttype = i; 
+		if (!_stricmp(parameterstring, agenttype_autoscalegraph_charttypes[i])) charttype = i; 
 	}
 	if (charttype == -1) return 1;
 
@@ -188,24 +188,24 @@ int agenttype_autoscalegraph_destroy(agent *a)
 int agenttype_autoscalegraph_message(agent *a, int tokencount, char *tokens[])
 {
 	agenttype_autoscalegraph_details *details = (agenttype_autoscalegraph_details *) a->agentdetails;
-	if (!stricmp("AutoScaleGraphType", tokens[5]))
+	if (!_stricmp("AutoScaleGraphType", tokens[5]))
 	{
 		int charttype = -1;
 		for (int  i = 0; i < AGENTTYPE_AUTOSCALEGRAPH_CHARTTYPECOUNT; i++)
 		{
-			if (!stricmp(tokens[6], agenttype_autoscalegraph_charttypes[i])) charttype = i; 
+			if (!_stricmp(tokens[6], agenttype_autoscalegraph_charttypes[i])) charttype = i; 
 		}
 		if (charttype == -1) return 1;
 		details->charttype = charttype;
 		control_notify(a->controlptr, NOTIFY_NEEDUPDATE, NULL);
 		return 0;
 	}
-	else if (!stricmp("CustomChartColor", tokens[5]) && config_set_bool(tokens[6],&(details->use_custom_color)))
+	else if (!_stricmp("CustomChartColor", tokens[5]) && config_set_bool(tokens[6],&(details->use_custom_color)))
 	{
 		control_notify(a->controlptr, NOTIFY_NEEDUPDATE, NULL);
 		return 0;
 	}
-	else if (!stricmp("ChartColor",tokens[5])){
+	else if (!_stricmp("ChartColor",tokens[5])){
 		details->use_custom_color = true;
 		COLORREF colorval;
 		if((colorval = ReadColorFromString(tokens[6])) != -1){
@@ -214,12 +214,12 @@ int agenttype_autoscalegraph_message(agent *a, int tokencount, char *tokens[])
 		}
 		return 0;
 	}
-	else if(!stricmp("AutoScale",tokens[5]) && config_set_bool(tokens[6],&(details->use_user_range)))
+	else if(!_stricmp("AutoScale",tokens[5]) && config_set_bool(tokens[6],&(details->use_user_range)))
 	{
 		control_notify(a->controlptr, NOTIFY_NEEDUPDATE, NULL);
 		return 0;
 	}
-	else if(!stricmp("MaxRange",tokens[5]))
+	else if(!_stricmp("MaxRange",tokens[5]))
 	{
 		double temp = ReadValueFromString(tokens[6]);
 		if(temp <= 0) return 1;

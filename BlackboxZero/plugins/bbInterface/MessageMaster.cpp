@@ -81,17 +81,17 @@ void message_interpret(const char *message, bool from_core, module* caller)
 	if (memcmp(message, szBBroam, szBBroamLength))
 	{
 		//The standard BlackBox Messages
-		if (!stricmp(message, "@BBShowPlugins"))
+		if (!_stricmp(message, "@BBShowPlugins"))
 		{
 			control_pluginsvisible(true);
 			return;
 		}
-		if (!stricmp(message, "@BBHidePlugins"))
+		if (!_stricmp(message, "@BBHidePlugins"))
 		{
 			control_pluginsvisible(false);
 			return;
 		}
-		if (!memicmp(message, "@Script",7))
+		if (!_memicmp(message, "@Script",7))
 		{
 			char* buf = new char[strlen(message)+1]; // local buffer.
 			strcpy(buf,message); //NOTE: possible alternate method would be copying out the messages one by one.
@@ -319,7 +319,7 @@ start:
 	if (*curtok < tokencount)
 		while (t->key)
 		{
-			if (0 == stricmp(t->key, tokens[*curtok]))
+			if (0 == _stricmp(t->key, tokens[*curtok]))
 			{
 				if (t->id > 100)
 				{
@@ -525,7 +525,7 @@ int get_string_index (const char *key, const char **string_list)
 {
 	int i;
 	for (i=0; *string_list; i++, string_list++)
-		if (0==stricmp(key, *string_list)) return i;
+		if (0==_stricmp(key, *string_list)) return i;
 	return -1;
 }
 

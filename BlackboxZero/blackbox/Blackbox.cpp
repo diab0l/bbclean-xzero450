@@ -621,8 +621,8 @@ void reconfigure_blackbox(void)
 void set_focus_model(const char *fm_string)
 {
     int fm;
-    fm = 0 == stricmp(fm_string, "SloppyFocus") ? 1
-       : 0 == stricmp(fm_string, "AutoRaise") ? 3
+    fm = 0 == _stricmp(fm_string, "SloppyFocus") ? 1
+       : 0 == _stricmp(fm_string, "AutoRaise") ? 3
        : 0
        ;
     SystemParametersInfo(SPI_SETACTIVEWNDTRKTIMEOUT, 0,
@@ -665,7 +665,7 @@ void reset_extended_rootCommand(void)
         // with key held down:
         // keep background as is, that is we set the custom
         // rootcommand option to what was in the previous style
-        if (0 == stricmp(Desk_extended_rootCommand(NULL), "style"))
+        if (0 == _stricmp(Desk_extended_rootCommand(NULL), "style"))
             Desk_extended_rootCommand(mStyle.rootCommand);
     } else {
         //if (GetAsyncKeyState(VK_SHIFT) & 0x8000)
@@ -1200,7 +1200,7 @@ void post_command(const char *cmd)
 /* check and parse "Workspace1" etc. strings */
 int get_workspace_number(const char *s)
 {
-    if (0 == memicmp(s, "workspace", 9)) {
+    if (0 == _memicmp(s, "workspace", 9)) {
         int n = atoi(s+9);
         if (n >= 1 && n <= 9)
             return n - 1;
@@ -1402,7 +1402,7 @@ int exec_core_broam(const char *broam)
 
     action = corebroam_table;
     do {
-        if (0==stricmp(action->str, core_cmd))
+        if (0==_stricmp(action->str, core_cmd))
             break;
     } while ((++action)->str);
 
@@ -1436,13 +1436,13 @@ int exec_core_broam(const char *broam)
 
         case e_quiet:
             // check for 'no confirmation' option
-            if (0 == memicmp(core_args, "-q"/*uiet*/, 2))
+            if (0 == _memicmp(core_args, "-q"/*uiet*/, 2))
                 lParam = BBOPT_QUIET;
             break;
 
         case e_pause:
             // check for 'pause restart' option
-            if (0 == memicmp(core_args, "-p"/*ause*/, 2))
+            if (0 == _memicmp(core_args, "-p"/*ause*/, 2))
                 lParam = BBOPT_PAUSE;
             break;
 
@@ -1515,9 +1515,9 @@ bool get_opt_command(char *opt_cmd, const char *cmd)
 {
     //dbg_printf("optcmd %s", cmd);
     if (0 == opt_cmd[0]) {
-        if (0 == memicmp(cmd, "@BBCore.", 8)) {
+        if (0 == _memicmp(cmd, "@BBCore.", 8)) {
             // internals, currently for style and rootcommand
-#define CHECK_BROAM(broam) 0 == memicmp(cmd, s = broam, sizeof broam - 3)
+#define CHECK_BROAM(broam) 0 == _memicmp(cmd, s = broam, sizeof broam - 3)
             const char *s;
             if (CHECK_BROAM(MM_STYLE_BROAM)) {
                 sprintf(opt_cmd, s, stylePath(NULL));
@@ -1538,7 +1538,7 @@ bool get_opt_command(char *opt_cmd, const char *cmd)
             return true;
         }
     }
-    return opt_cmd[0] && 0 == stricmp(opt_cmd, cmd);
+    return opt_cmd[0] && 0 == _stricmp(opt_cmd, cmd);
 }
 
 //===========================================================================
@@ -1565,18 +1565,18 @@ bool exec_script(const char *broam)
 
 bool exec_broam(const char *broam)
 {
-    if (0 == memicmp(broam, "@BBCore.", 8)) {
+    if (0 == _memicmp(broam, "@BBCore.", 8)) {
         if (0 == exec_core_broam(broam))
             goto broam_error;
-    } else if (0 == memicmp(broam, "@BBCfg.", 7)) {
+    } else if (0 == _memicmp(broam, "@BBCfg.", 7)) {
         if (0 == exec_cfg_command(broam+7))
             goto broam_error;
-    } else if (0==memicmp(broam, "@Script", 7)) {
+    } else if (0==_memicmp(broam, "@Script", 7)) {
         exec_script(broam+7);
         return true;
-    } else if (0==stricmp(broam, "@BBHidePlugins")) {
+    } else if (0==_stricmp(broam, "@BBHidePlugins")) {
         Menu_All_Toggle(PluginsHidden = true);
-    } else if (0==stricmp(broam, "@BBShowPlugins")) {
+    } else if (0==_stricmp(broam, "@BBShowPlugins")) {
         Menu_All_Toggle(PluginsHidden = false);
     }
     return false;

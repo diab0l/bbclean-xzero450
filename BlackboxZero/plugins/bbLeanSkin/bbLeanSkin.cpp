@@ -247,7 +247,7 @@ bool make_exclusion_list(void)
         }
         strlwr(line = line_buffer);
         option = 0;
-        if (0 == memicmp (line, "hook-early:", 11))
+        if (0 == _memicmp (line, "hook-early:", 11))
         {
             option = 1;
             line += 10;
@@ -372,7 +372,7 @@ void write_log(const char *s)
 bool get_param(const char **msg, const char *key)
 {
     int l = strlen(key);
-    if (0 != memicmp(*msg, key, l) || (unsigned char)(*msg)[l] > ' ')
+    if (0 != _memicmp(*msg, key, l) || (unsigned char)(*msg)[l] > ' ')
         return false;
     *msg += l;
     while (' ' ==  **msg)
@@ -416,13 +416,13 @@ LRESULT CALLBACK WndProc (HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
         break;
 
     case BB_GETBOOL:
-        if (0 == memicmp((LPCSTR)lParam, "@BBLeanSkin.", 12))
+        if (0 == _memicmp((LPCSTR)lParam, "@BBLeanSkin.", 12))
         {
             const char *msg = (LPCSTR)lParam + 12;
-            if (0 == stricmp(msg, "toggleSkin")) {
+            if (0 == _stricmp(msg, "toggleSkin")) {
                 *(int*)wParam = engine_running;
             }
-            else if (0 == stricmp(msg, "toggleLog")) {
+            else if (0 == _stricmp(msg, "toggleLog")) {
                 *(int*)wParam = NULL != hwndLog;
             }
             else if (get_param(&msg, "buttonOrder")) {
@@ -436,24 +436,24 @@ LRESULT CALLBACK WndProc (HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
         break;
 
     case BB_BROADCAST:
-        if (0 != memicmp((LPCSTR)lParam, "@BBLeanSkin.", 12))
+        if (0 != _memicmp((LPCSTR)lParam, "@BBLeanSkin.", 12))
             break;
 
         msg = (LPCSTR)lParam + 12;
 
-        if (0 == stricmp(msg, "About"))
+        if (0 == _stricmp(msg, "About"))
         {
             about_box();
             break;
         }
 
-        if (0 == stricmp(msg, "Reconfigure"))
+        if (0 == _stricmp(msg, "Reconfigure"))
         {
             reconfigureEngine();
             break;
         }
 
-        if (0 == stricmp(msg, "toggleLog"))
+        if (0 == _stricmp(msg, "toggleLog"))
         {
 toggle_log:
             WriteBool(rcpath, "bbleanskin.option.enableLog:", false == enableLog);
@@ -461,7 +461,7 @@ toggle_log:
             goto menu_update;
         }
 
-        if (0 == stricmp(msg, "toggleSkin"))
+        if (0 == _stricmp(msg, "toggleSkin"))
         {
             if (engine_running)
             {
@@ -633,10 +633,10 @@ bool init_app(void)
     int a, b, c;
 
     bbv = GetBBVersion();
-    if (0 == memicmp(bbv, "bblean", 6))
+    if (0 == _memicmp(bbv, "bblean", 6))
         BBVersion = 2;
     else
-    if (0 == memicmp(bbv, "bb", 2))
+    if (0 == _memicmp(bbv, "bb", 2))
         BBVersion = 1;
     else
         BBVersion = 0;
@@ -727,7 +727,7 @@ void read_buttons(const char *buttonfile)
 {
     HBITMAP hbmp = NULL;
 
-    if (buttonfile && buttonfile[0] && 0 != stricmp(buttonfile, "default"))
+    if (buttonfile && buttonfile[0] && 0 != _stricmp(buttonfile, "default"))
     {
         hbmp = (HBITMAP)LoadImage(
             NULL,

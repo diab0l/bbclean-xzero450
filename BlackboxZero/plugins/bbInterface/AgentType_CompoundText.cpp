@@ -146,7 +146,7 @@ int agenttype_compoundtext_destroy(agent *a)
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 int agenttype_compoundtext_message(agent *a, int tokencount, char *tokens[])
 {
-	if (!stricmp("Formatting", tokens[5]))
+	if (!_stricmp("Formatting", tokens[5]))
 	{
 		agenttype_compoundtext_details *details = (agenttype_compoundtext_details *) a->agentdetails;
 		free_string(&details->text);

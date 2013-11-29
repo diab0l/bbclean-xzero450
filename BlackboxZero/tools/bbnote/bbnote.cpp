@@ -1908,7 +1908,7 @@ int bb_menu(HWND hwnd, int f)
 /*----------------------------------------------------------------------------*/
 int bcomp (const void *a, const void *b)
 {
-    return stricmp(((struct button *)a)->str, ((struct button *)b)->str);
+    return _stricmp(((struct button *)a)->str, ((struct button *)b)->str);
 }
 
 void bb_file_menu (HWND hwnd, int f, struct strl *sp)

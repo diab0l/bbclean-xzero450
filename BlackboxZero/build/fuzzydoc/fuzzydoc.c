@@ -193,7 +193,7 @@ struct string_node *new_string_node(const char *s)
 #define lower_char(c) ((c)>='A' && (c)<='Z' ? (c)+32 : c)
 #define upper_char(c) ((c)>='a' && (c)<='z' ? (c)-32 : c)
 
-int stricmp(const char *a, const char *b)
+int _stricmp(const char *a, const char *b)
 {
     for (;;++a, ++b) {
         int c = *a, d = *b;
@@ -207,7 +207,7 @@ int stricmp(const char *a, const char *b)
     }
 }
 
-int memicmp(const void *a, const void *b, unsigned n)
+int _memicmp(const void *a, const void *b, unsigned n)
 {
     for (;n; ++a, ++b, --n) {
         int c = *(unsigned char*)a;
@@ -482,7 +482,7 @@ void make_topic_str(struct line_node *line, struct line_node *lines, char *s)
         if (l->topic_ref
          && l->chapter == line->chapter
          && l->org_topic_length == k
-         && 0 == memicmp(l->topic_ref, buffer, k)
+         && 0 == _memicmp(l->topic_ref, buffer, k)
          )
             ++n;
 
@@ -608,7 +608,7 @@ void encode_line(char *d, const char *s, bool pre, bool header)
                 }
             }
             else
-            if (c == '(' && x && d == p && 0 == memicmp(s, "See '", 5))
+            if (c == '(' && x && d == p && 0 == _memicmp(s, "See '", 5))
             {
                 /* internal link: (See 'That chapter'). */
                 const char *a = s + 5;
@@ -700,7 +700,7 @@ void encode_line(char *d, const char *s, bool pre, bool header)
                     --e;
                 p = extract_string(buffer_2, s, e-s);
 
-                if (0 == memicmp(p, "mailto:", 7))
+                if (0 == _memicmp(p, "mailto:", 7))
                     p += 7;
             /*
                 else
@@ -715,7 +715,7 @@ void encode_line(char *d, const char *s, bool pre, bool header)
                 continue;
             }
             else
-            if (c == '[' && 0 == memicmp(s, "Figure ", 7))
+            if (c == '[' && 0 == _memicmp(s, "Figure ", 7))
             {
                 const char *e, *f; int n;
                 s += 6; while (' ' == *++s);
@@ -1556,7 +1556,7 @@ void read_lines(const char *path, struct line_node **plines)
 
         if (sa[0] == '[' && ']' == sa[n-1])
         {
-            if (0 == memicmp(sa, "[See ", 5))
+            if (0 == _memicmp(sa, "[See ", 5))
             {
                 sa[n-1] = 0;
                 se = sa + 5;
@@ -1565,7 +1565,7 @@ void read_lines(const char *path, struct line_node **plines)
                 continue;
             }
 
-            if (0 == stricmp(sa, "[fuzzydoc]"))
+            if (0 == _stricmp(sa, "[fuzzydoc]"))
             {
                 sa = buffer;
                 while (fgets(sa, sizeof buffer - (sa - buffer), fp))
@@ -1589,7 +1589,7 @@ void read_lines(const char *path, struct line_node **plines)
                     if (sa[0] == '/' && sa[1] == '/')
                         continue;
 
-                    if (0 == stricmp(sa, "[endfuzzy]"))
+                    if (0 == _stricmp(sa, "[endfuzzy]"))
                         break;
 
                     //printf(":: %s\n", buffer);
@@ -1730,16 +1730,16 @@ int main (int argc, char *argv[])
     tm = get_val("tocmode", NULL);
     if (tm)
     {
-        if (0 == stricmp(tm, "para"))  toc_mode = TOC_PARA;
-        if (0 == stricmp(tm, "list"))  toc_mode = TOC_LIST;
-        if (0 == stricmp(tm, "lines")) toc_mode = TOC_LINES;
+        if (0 == _stricmp(tm, "para"))  toc_mode = TOC_PARA;
+        if (0 == _stricmp(tm, "list"))  toc_mode = TOC_LIST;
+        if (0 == _stricmp(tm, "lines")) toc_mode = TOC_LINES;
     }
 
     put_toc = true;
 
-    cvt_amp = 0 != stricmp(get_val("cvt_amp", ""), "false");
-    numbers = 0 == stricmp(get_val("numbers", ""), "true");
-    no_escape = 0 == stricmp(get_val("escape", ""), "false");
+    cvt_amp = 0 != _stricmp(get_val("cvt_amp", ""), "false");
+    numbers = 0 == _stricmp(get_val("numbers", ""), "true");
+    no_escape = 0 == _stricmp(get_val("escape", ""), "false");
 
     /*--------------------------------------------- */
     /* scan through lines to see what it all means */

@@ -84,7 +84,7 @@ int beginPlugin(HINSTANCE hPluginInstance)
 
     BBhwnd = GetBBWnd();
 
-    if (0 == memicmp(GetBBVersion(), "bblean", 6))
+    if (0 == _memicmp(GetBBVersion(), "bblean", 6))
     {
         MessageBox(NULL, "This plugin is not required with bblean", szAppName, MB_OK|MB_TOPMOST|MB_SETFOREGROUND);
         return 1;

@@ -80,7 +80,7 @@ int config_save(char *filename)
 		//Close the file
 		fclose(config_file_out);
 
-		if (0 == stricmp(config_path_mainscript, filename))
+		if (0 == _stricmp(config_path_mainscript, filename))
 			check_mainscript_filetime();
 
 		//Save the other files, too
@@ -144,7 +144,7 @@ int config_load(char *filename, module* caller, const char *section)
 			if (config_line[0] == '[')
 			{
 				if (wanted_section) break;
-				if (0 == stricmp(config_line, section))
+				if (0 == _stricmp(config_line, section))
 					wanted_section = true;
 				continue;
 			}
@@ -624,8 +624,8 @@ bool config_set_double(char *string, double *valptr, double min, double max)
 }
 bool config_set_bool(char *string, bool *valptr)
 {
-	if (!stricmp(string, szTrue)) {*valptr = true; return true;}
-	else if (!stricmp(string, szFalse)) {*valptr = false; return true;}
+	if (!_stricmp(string, szTrue)) {*valptr = true; return true;}
+	else if (!_stricmp(string, szFalse)) {*valptr = false; return true;}
 	return false;
 }
 bool config_isstringzero(const char *string)

@@ -164,7 +164,7 @@ const char *get_relative_path(HINSTANCE h, const char *path)
     int l;
     get_exe_path(h, basedir, sizeof basedir);
     l = strlen(basedir);
-    if (l && 0 == memicmp(path, basedir, l))
+    if (l && 0 == _memicmp(path, basedir, l))
         return path + l;
     return path;
 }

@@ -73,7 +73,7 @@ int agenttype_run_create(agent *a, char *parameterstring)
 	details->workingdir = NULL;
 
 	//Copy the parameter string
-	if (!stricmp(parameterstring, "*browse*"))
+	if (!_stricmp(parameterstring, "*browse*"))
 	{
 		//Get the file
 		char *file = dialog_file(szFilterAll, "Select File", NULL, NULL, false);
@@ -120,14 +120,14 @@ int agenttype_run_destroy(agent *a)
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 int agenttype_run_message(agent *a, int tokencount, char *tokens[])
 {
-	if (!stricmp("Arguments", tokens[5]))
+	if (!_stricmp("Arguments", tokens[5]))
 	{
 		agenttype_run_details *details = (agenttype_run_details *) a->agentdetails;
 		free_string(&details->arguments);
 		if (*tokens[6]) details->arguments = new_string(tokens[6]);
 		return 0;
 	}
-	if (!stricmp("WorkingDir", tokens[5]))
+	if (!_stricmp("WorkingDir", tokens[5]))
 	{
 		agenttype_run_details *details = (agenttype_run_details *) a->agentdetails;
 		free_string(&details->workingdir);

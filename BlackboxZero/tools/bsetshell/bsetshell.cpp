@@ -177,7 +177,7 @@ ST bool get_per_user(void)
     char buffer[MAX_PATH];
     buffer[0] = 0;
     rw_reg(A_RD|A_SZ, HKEY_LOCAL_MACHINE, inimapstr, "Shell", buffer);
-    return 0 == memicmp(buffer, "USR:", 4);
+    return 0 == _memicmp(buffer, "USR:", 4);
 }
 
 /* ======================================================================== */
@@ -250,7 +250,7 @@ display:
 
         strlwr(strcpy(temp, buffer));
 
-        if (0 == stricmp(temp, szBlackbox)) {
+        if (0 == _stricmp(temp, szBlackbox)) {
             id = IDC_RBN1;
         } else if (strstr(temp, "explorer")) {
             id = IDC_RBN2;

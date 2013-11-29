@@ -1876,7 +1876,7 @@ void Menu::Sort(MenuItem **ppItems, int(*cmp_fn)(MenuItem **, MenuItem**))
 
 static int item_compare(MenuItem** m1, MenuItem** m2)
 {
-    return stricmp((*m1)->m_pszTitle, (*m2)->m_pszTitle);
+    return _stricmp((*m1)->m_pszTitle, (*m2)->m_pszTitle);
 }
 
 // for invocation from the keyboard:
@@ -2194,9 +2194,9 @@ void Menu_Reconfigure(void)
 
     MenuInfo.nBulletStyle = get_menu_bullet(mStyle.menuBullet);
 
-    MenuInfo.openLeft = 0 == stricmp(Settings_menu.openDirection, "bullet")
+    MenuInfo.openLeft = 0 == _stricmp(Settings_menu.openDirection, "bullet")
         ? MenuInfo.nBulletPosition == FOLDER_LEFT
-        : 0 == stricmp(Settings_menu.openDirection, "left")
+        : 0 == _stricmp(Settings_menu.openDirection, "left")
         ;
 
 	/* BlackboxZero 1.7.2012

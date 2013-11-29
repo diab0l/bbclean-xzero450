@@ -10,8 +10,6 @@
 #define WINVER 0x0500
 
 #define WS_EX_LAYERED   0x00080000
-#define LWA_ALPHA       0x00000002
-#define LWA_COLORKEY    1 
 
 #if (_MSC_VER >= 1400) 
 

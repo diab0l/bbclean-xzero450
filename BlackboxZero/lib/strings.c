@@ -66,7 +66,7 @@ int get_string_index (const char *key, const char * const * string_array)
 {
     int i; const char *s;
     for (i=0; NULL != (s = *string_array); i++, string_array++)
-        if (0==stricmp(key, s))
+        if (0==_stricmp(key, s))
             return i;
     return -1;
 }

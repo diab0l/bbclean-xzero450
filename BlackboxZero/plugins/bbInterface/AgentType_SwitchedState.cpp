@@ -96,7 +96,7 @@ int agenttype_switchedstate_create(agent *a, char *parameterstring)
 	int agenttype = -1;
 	for (int i = 0; i < AGENTTYPE_SWITCHEDSTATE_TYPECOUNT; i++)
 	{
-		if (stricmp(parameterstring, agenttype_switchedstate_typenames[i]) == 0) agenttype = i;
+		if (_stricmp(parameterstring, agenttype_switchedstate_typenames[i]) == 0) agenttype = i;
 	}
 	if (agenttype == -1) return 1;
 

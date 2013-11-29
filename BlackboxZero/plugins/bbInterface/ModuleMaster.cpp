@@ -202,7 +202,7 @@ int module_message(int tokencount, char *tokens[], bool from_core, module* calle
 {
 	char *filename;
 
-	if ((tokencount == 3) && !stricmp(tokens[2], szBActionCreate))
+	if ((tokencount == 3) && !_stricmp(tokens[2], szBActionCreate))
 	{
 		if (filename = dialog_file(szFilterScript, "Save new Module in...", ".rc", config_path_plugin, true))
 		{
@@ -210,7 +210,7 @@ int module_message(int tokencount, char *tokens[], bool from_core, module* calle
 			else return 1;
 		}           
 	}
-	else if ((tokencount > 2) && !stricmp(tokens[2], szBActionLoad))
+	else if ((tokencount > 2) && !_stricmp(tokens[2], szBActionLoad))
 	{
 		if (tokencount == 3)
 		{
@@ -230,15 +230,15 @@ int module_message(int tokencount, char *tokens[], bool from_core, module* calle
 			return 0;
 		}
 	}
-	else if (tokencount == 4 && !stricmp(tokens[2], szBActionToggle) )
+	else if (tokencount == 4 && !_stricmp(tokens[2], szBActionToggle) )
 	{
 		module_toggle(tokens[3]);
 		if (from_core) menu_update_modules();
 		return 0;
 	}
-	else if (tokencount == 4 && !stricmp(tokens[2], szBActionSetDefault) )
+	else if (tokencount == 4 && !_stricmp(tokens[2], szBActionSetDefault) )
 	{
-		if (!stricmp(tokens[3],"*global*"))
+		if (!_stricmp(tokens[3],"*global*"))
 			currentmodule = &globalmodule;
 		else if (module *m = module_get(tokens[3]))
 			currentmodule = m;
@@ -250,30 +250,30 @@ int module_message(int tokencount, char *tokens[], bool from_core, module* calle
 	module *m = module_get(tokens[3]);
 	if (!m) return 1;
 
-	if (tokencount == 4 && !stricmp(tokens[2], szBActionEdit) )
+	if (tokencount == 4 && !_stricmp(tokens[2], szBActionEdit) )
 	{
 		char temp[MAX_PATH]; GetBlackboxEditor(temp);
 		BBExecute(NULL, "", temp , m->filepath, NULL, SW_SHOWNORMAL, false);
 		return 0;
 	}
-	else if (tokencount == 5 && !stricmp(tokens[2], szBActionOnLoad) )
+	else if (tokencount == 5 && !_stricmp(tokens[2], szBActionOnLoad) )
 	{
 		config_set_str(tokens[4],&(m->actions[MODULE_ACTION_ONLOAD]));
 		return 0;
 	}
-	else if (tokencount == 5 && !stricmp(tokens[2], szBActionOnUnload) )
+	else if (tokencount == 5 && !_stricmp(tokens[2], szBActionOnUnload) )
 	{
 		config_set_str(tokens[4],&(m->actions[MODULE_ACTION_ONUNLOAD]));
 		return 0;
 	}
-	else if (tokencount == 5 && !stricmp(tokens[2], szBActionRename) )
+	else if (tokencount == 5 && !_stricmp(tokens[2], szBActionRename) )
 	{
 		return module_rename(m,tokens[4]);
 	}
-	else if (tokencount == 6 && !stricmp(tokens[2], szBActionSetModuleProperty) )
+	else if (tokencount == 6 && !_stricmp(tokens[2], szBActionSetModuleProperty) )
 	{
-		if (!stricmp(tokens[4],"Author")) module_set_author(m,tokens[5]);
-		else if (!stricmp(tokens[4],"Comments")) module_set_comments(m,tokens[5]);
+		if (!_stricmp(tokens[4],"Author")) module_set_author(m,tokens[5]);
+		else if (!_stricmp(tokens[4],"Comments")) module_set_comments(m,tokens[5]);
 		return 0;
 	}
 	return 1;

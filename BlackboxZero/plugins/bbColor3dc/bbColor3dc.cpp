@@ -88,7 +88,7 @@ int beginPlugin(HINSTANCE h_instance)
 
     hInstance = h_instance;
     BBhwnd = GetBBWnd();
-    is_bblean = 0 == memicmp(GetBBVersion(), "bblean", 6);
+    is_bblean = 0 == _memicmp(GetBBVersion(), "bblean", 6);
 
     if (is_bblean)
         *(FARPROC*)&pGetSettingPtr =
@@ -186,7 +186,7 @@ LRESULT CALLBACK MsgWndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
             break;
 
         case BB_GETBOOL:
-            if (0 == memicmp((LPCSTR)lParam, "@BBColor3dc.", 12))
+            if (0 == _memicmp((LPCSTR)lParam, "@BBColor3dc.", 12))
             {
                 const char *msg_string = (LPCSTR)lParam + 12;
                 if (0 == n_stricmp(&msg_string, "Read"))
@@ -198,7 +198,7 @@ LRESULT CALLBACK MsgWndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
             break;
 
         case BB_BROADCAST:
-            if (0 == memicmp((LPCSTR)lParam, "@BBColor3dc.", 12))
+            if (0 == _memicmp((LPCSTR)lParam, "@BBColor3dc.", 12))
             {
                 const char *msg_string = (LPCSTR)lParam + 12;
                 if (0 == n_stricmp(&msg_string, "Read"))
@@ -218,7 +218,7 @@ LRESULT CALLBACK MsgWndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                     syscolor_write(msg_string);
                     break;
                 }
-                if (0 == stricmp(msg_string, "Clear"))
+                if (0 == _stricmp(msg_string, "Clear"))
                 {
                     syscolor_restore();
                     break;
@@ -517,7 +517,7 @@ bool parse_3dc(FILE *fp, COLORREF *cr_buffer)
 int n_stricmp(const char **pp, const char *s)
 {
     int n = strlen (s);
-    int i = memicmp(*pp, s, n);
+    int i = _memicmp(*pp, s, n);
     if (i)
         return i;
     i = (*pp)[n] - ' ';
@@ -887,7 +887,7 @@ int syscolor_handle_bbi_message(const char * p)
         n = 0;
         do {
             ++n;
-            if (0 == stricmp(p, *cs)) {
+            if (0 == _stricmp(p, *cs)) {
                 item_set = n;
                 break;
             }

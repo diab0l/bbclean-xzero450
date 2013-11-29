@@ -304,16 +304,16 @@ int controltype_slider_message(control *c, int tokencount, char *tokens[])
 	controltype_slider_details *details = (controltype_slider_details *) c->controldetails;
 
 	//If it's set control property
-	if (tokencount == 6 && !stricmp(tokens[2], szBActionSetControlProperty))
+	if (tokencount == 6 && !_stricmp(tokens[2], szBActionSetControlProperty))
 	{
 		//Check all settable values
 		if (
-			   (!stricmp(tokens[4], "Value") && config_set_double_expr(tokens[5], &details->value, 0.0, 1.0))
-			|| (!stricmp(tokens[4], "Reversed") && config_set_bool(tokens[5], &details->reversed))
-			|| (!stricmp(tokens[4], "Vertical") && config_set_bool(tokens[5], &details->vertical))
-			|| (!stricmp(tokens[4], "Appearance") && config_set_int(tokens[5], &details->appearance, 0, 2))
-			|| (!stricmp(tokens[4], "BroadcastValueMinimum") && config_set_int(tokens[5], &details->broadcast_value_minimum, -32767, 32767))
-			|| (!stricmp(tokens[4], "BroadcastValueMaximum") && config_set_int(tokens[5], &details->broadcast_value_maximum, -32767, 32767))
+			   (!_stricmp(tokens[4], "Value") && config_set_double_expr(tokens[5], &details->value, 0.0, 1.0))
+			|| (!_stricmp(tokens[4], "Reversed") && config_set_bool(tokens[5], &details->reversed))
+			|| (!_stricmp(tokens[4], "Vertical") && config_set_bool(tokens[5], &details->vertical))
+			|| (!_stricmp(tokens[4], "Appearance") && config_set_int(tokens[5], &details->appearance, 0, 2))
+			|| (!_stricmp(tokens[4], "BroadcastValueMinimum") && config_set_int(tokens[5], &details->broadcast_value_minimum, -32767, 32767))
+			|| (!_stricmp(tokens[4], "BroadcastValueMaximum") && config_set_int(tokens[5], &details->broadcast_value_maximum, -32767, 32767))
 			)
 		{
 			details->track_needsupdate = true;
@@ -368,7 +368,7 @@ void *controltype_slider_getdata(control *c, int datatype)
 bool controltype_slider_getstringdata(control *c, char *buffer, char *propertyname)
 {
 	controltype_slider_details *details = (controltype_slider_details *) c->controldetails;
-	if (!stricmp(propertyname,"Value"))
+	if (!_stricmp(propertyname,"Value"))
 	{
 		sprintf(buffer, "%lf", details->value);
 		return true;
@@ -377,7 +377,7 @@ bool controltype_slider_getstringdata(control *c, char *buffer, char *propertyna
 	//It contains a certain "value" that can be associated with a control.  Various things
 	//such as broams can reference it.
 	//For sliders, this value is the adjusted value using the min and max.
-	else if (!stricmp(propertyname,"BroadcastValue"))
+	else if (!_stricmp(propertyname,"BroadcastValue"))
 	{
 		long broadcastvalue = (long) (details->value * (((long) details->broadcast_value_maximum) - ((long) details->broadcast_value_minimum)) + details->broadcast_value_minimum);
 		sprintf(buffer, "%d", broadcastvalue);

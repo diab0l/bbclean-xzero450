@@ -663,7 +663,7 @@ int LoadFile(LPSTR pszFileName) {
     GetFullPathName(pszFileName,256,tmp,NULL);
 
     for (p=ed0;p!=NULL;p=p->next) {
-        if (0==stricmp(tmp,p->sfilename)) {
+        if (0==_stricmp(tmp,p->sfilename)) {
             insfile(p);
             return 1;
         }}

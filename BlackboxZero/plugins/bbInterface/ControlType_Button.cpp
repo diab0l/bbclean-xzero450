@@ -484,10 +484,10 @@ int controltype_button_message(control *c, int tokencount, char *tokens[])
 	controltype_button_details *details = (controltype_button_details *) c->controldetails;
 
 	//If it's set control property
-	if (tokencount == 6 && !stricmp(tokens[2], szBActionSetControlProperty))
+	if (tokencount == 6 && !_stricmp(tokens[2], szBActionSetControlProperty))
 	{
 		//Only pressed, only for two state buttons
-		if (details->is_twostate && !stricmp(tokens[4], "Pressed") && config_set_bool(tokens[5], &details->is_on))
+		if (details->is_twostate && !_stricmp(tokens[4], "Pressed") && config_set_bool(tokens[5], &details->is_on))
 		{
 			style_draw_invalidate(c);
 			return 0;
@@ -567,12 +567,12 @@ void *controltype_button_getdata(control *c, int datatype)
 bool controltype_button_getstringdata(control *c, char *buffer, char *propertyname)
 {
 	controltype_button_details *details = (controltype_button_details *) c->controldetails;
-	if (details->is_twostate && !stricmp(propertyname,"Pressed"))
+	if (details->is_twostate && !_stricmp(propertyname,"Pressed"))
 	{
 		strcpy(buffer, (details->is_on ? "1" : "0"));
 		return true;
 	}
-	else if (!stricmp(propertyname, "Caption"))
+	else if (!_stricmp(propertyname, "Caption"))
 	{
 		strcpy(buffer, details->caption);
 	}
@@ -580,7 +580,7 @@ bool controltype_button_getstringdata(control *c, char *buffer, char *propertyna
 	//It contains a certain "value" that can be associated with a control.  Various things
 	//such as broams can reference it.
 	//For sliders, this value is the adjusted value using the min and max.
-	else if (!stricmp(propertyname,"BroadcastValue"))
+	else if (!_stricmp(propertyname,"BroadcastValue"))
 	{
 		if (details->is_twostate)
 		{

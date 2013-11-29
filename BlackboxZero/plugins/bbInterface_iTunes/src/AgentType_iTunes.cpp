@@ -521,10 +521,10 @@ int agenttype_itunespoller_create(agent *a, char *parameterstring)
 	int commandcode = 0;	
 	for (int i = 1; i < ITUNES_POLLINGTYPECOUNT; i++)
 	{
-		if (!stricmp(parameterstring, agenttype_itunes_pollingnames[i]))
+		if (!_stricmp(parameterstring, agenttype_itunes_pollingnames[i]))
 			commandcode = i;
 	}
-	if(!stricmp(parameterstring,"iTunesArtwork"))
+	if(!_stricmp(parameterstring,"iTunesArtwork"))
 		commandcode = ITUNES_POLLINGTYPECOUNT;  //Temporary value
 	if (commandcode == 0) return 1;
 

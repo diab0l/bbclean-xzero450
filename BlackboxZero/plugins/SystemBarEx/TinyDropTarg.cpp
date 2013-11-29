@@ -5,7 +5,7 @@
 #include <shlobj.h>
 #include <shellapi.h>
 
-#define BB_DRAGOVER (WM_USER+100)
+//#define BB_DRAGOVER (WM_USER+100)
 #define TASK_RISE_TIMER 4
 
 //int x = 0, y = 0;

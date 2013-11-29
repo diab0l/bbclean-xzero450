@@ -284,13 +284,13 @@ int agenttype_winamppoller_create(agent *a, char *parameterstring)
 {
 	//Figure out what type of agent this is
 	int commandcode = 0;	
-	if (!stricmp(a->agenttypeptr->agenttypename, "WinampScale") && !stricmp(parameterstring, "TrackPosition")) commandcode = WINAMP_POLLINGTYPE_POSITION;
-	else if (!stricmp(a->agenttypeptr->agenttypename, "WinampBool") && !stricmp(parameterstring, "IsPlaying")) commandcode = WINAMP_POLLINGTYPE_ISPLAYING;
+	if (!_stricmp(a->agenttypeptr->agenttypename, "WinampScale") && !_stricmp(parameterstring, "TrackPosition")) commandcode = WINAMP_POLLINGTYPE_POSITION;
+	else if (!_stricmp(a->agenttypeptr->agenttypename, "WinampBool") && !_stricmp(parameterstring, "IsPlaying")) commandcode = WINAMP_POLLINGTYPE_ISPLAYING;
 	else
 	{
 		for (int i = WINAMP_POLLINGTYPE_LASTSCALE + 1; i < WINAMP_POLLINGTYPECOUNT; i++)
 		{
-			if (!stricmp(a->agenttypeptr->agenttypename, "WinampText") && !stricmp(parameterstring, agenttype_winamp_pollingnames[i])) commandcode = i;
+			if (!_stricmp(a->agenttypeptr->agenttypename, "WinampText") && !_stricmp(parameterstring, agenttype_winamp_pollingnames[i])) commandcode = i;
 		}
 	}
 	if (commandcode == 0) return 1;

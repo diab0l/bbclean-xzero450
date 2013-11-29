@@ -111,7 +111,7 @@ int agenttype_graph_create(agent *a, char *parameterstring)
 	int charttype = -1;
 	for (int  i = 0; i < AGENTTYPE_GRAPH_CHARTTYPECOUNT; i++)
 	{
-		if (!stricmp(parameterstring, agenttype_graph_charttypes[i])) charttype = i; 
+		if (!_stricmp(parameterstring, agenttype_graph_charttypes[i])) charttype = i; 
 	}
 	if (charttype == -1) return 1;
 
@@ -186,24 +186,24 @@ int agenttype_graph_destroy(agent *a)
 int agenttype_graph_message(agent *a, int tokencount, char *tokens[])
 {
 	agenttype_graph_details *details = (agenttype_graph_details *) a->agentdetails;
-	if (!stricmp("GraphType", tokens[5]))
+	if (!_stricmp("GraphType", tokens[5]))
 	{
 		int charttype = -1;
 		for (int  i = 0; i < AGENTTYPE_GRAPH_CHARTTYPECOUNT; i++)
 		{
-			if (!stricmp(tokens[6], agenttype_graph_charttypes[i])) charttype = i; 
+			if (!_stricmp(tokens[6], agenttype_graph_charttypes[i])) charttype = i; 
 		}
 		if (charttype == -1) return 1;
 		details->charttype = charttype;
 		control_notify(a->controlptr, NOTIFY_NEEDUPDATE, NULL);
 		return 0;
 	}
-	else if (!stricmp("CustomChartColor", tokens[5]) && config_set_bool(tokens[6],&(details->use_custom_color)))
+	else if (!_stricmp("CustomChartColor", tokens[5]) && config_set_bool(tokens[6],&(details->use_custom_color)))
 	{
 		control_notify(a->controlptr, NOTIFY_NEEDUPDATE, NULL);
 		return 0;
 	}
-	else if (!stricmp("ChartColor",tokens[5])){
+	else if (!_stricmp("ChartColor",tokens[5])){
 		details->use_custom_color = true;
 		COLORREF colorval;
 		if((colorval = ReadColorFromString(tokens[6])) != -1){

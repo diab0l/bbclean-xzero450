@@ -162,7 +162,7 @@ int agenttype_diskspacemonitor_create(agent *a, char *parameterstring)
 	int monitor_type = DISKSPACEMONITOR_TYPE_NONE;
 	for (int i = 1; i < DISKSPACEMONITOR_NUMTYPES; i++)
 	{
-		if (stricmp(agenttype_diskspacemonitor_types[i], parameterstring) == 0)
+		if (_stricmp(agenttype_diskspacemonitor_types[i], parameterstring) == 0)
 		{
 			monitor_type = i;
 			break;

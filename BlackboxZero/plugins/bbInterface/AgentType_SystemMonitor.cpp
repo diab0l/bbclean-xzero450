@@ -260,7 +260,7 @@ int agenttype_systemmonitor_create(agent *a, char *parameterstring)
 	int monitor_type = SYSTEMMONITOR_TYPE_NONE;
 	for (int i = 1; i < SYSTEMMONITOR_NUMTYPES; i++)
 	{
-		if (stricmp(agenttype_systemmonitor_types[i], parameterstring) == 0)
+		if (_stricmp(agenttype_systemmonitor_types[i], parameterstring) == 0)
 		{
 			monitor_type = i;
 			break;

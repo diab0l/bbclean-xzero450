@@ -217,7 +217,7 @@ int agenttype_networkmonitor_create(agent *a, char *parameterstring)
 	int monitor_interface_number = AGENTTYPE_NETWORKMONITOR_NUMINTERFACES;
 	for (int i = 0; i < AGENTTYPE_NETWORKMONITOR_NUMINTERFACES; i++)
 	{
-		if (stricmp(agenttype_networkmonitor_interface_numbers[i], parameterstring) == 0)
+		if (_stricmp(agenttype_networkmonitor_interface_numbers[i], parameterstring) == 0)
 		{
 			monitor_interface_number = i;
 			break;
@@ -297,7 +297,7 @@ int agenttype_networkmonitor_message(agent *a, int tokencount, char *tokens[])
 {
 	agenttype_networkmonitor_details *details = (agenttype_networkmonitor_details *) a->agentdetails;
 	          
-	if (!stricmp("MonitorType", tokens[5]) && config_set_int(tokens[6],&details->monitor_types, 0,2)){
+	if (!_stricmp("MonitorType", tokens[5]) && config_set_int(tokens[6],&details->monitor_types, 0,2)){
 		control_notify(a->controlptr,NOTIFY_NEEDUPDATE,NULL);
 	}
 	//No errors

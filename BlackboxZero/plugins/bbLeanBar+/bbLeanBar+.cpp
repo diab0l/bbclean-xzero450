@@ -1497,7 +1497,7 @@ void barinfo::process_broam(const char *temp, int f)
     for (cp = cfg_menu; cp->displ; cp++)
     {
         int n = strlen(cp->msg);
-        if (n && 0 == memicmp(temp, cp->msg, n))
+        if (n && 0 == _memicmp(temp, cp->msg, n))
         {
             if (cp->ptr)
             {
@@ -1511,10 +1511,10 @@ void barinfo::process_broam(const char *temp, int f)
                 if (cp->f & CFG_STR)
                     strcpy((char*)cp->ptr, temp);
                 else
-                if (0 == stricmp(temp, "true"))
+                if (0 == _stricmp(temp, "true"))
                     *(bool*)cp->ptr = true;
                 else
-                if (0 == stricmp(temp, "false"))
+                if (0 == _stricmp(temp, "false"))
                     *(bool*)cp->ptr = false;
                 else
                     *(bool*)cp->ptr = false == *(bool*)cp->ptr;

@@ -360,7 +360,7 @@ Menu *CfgMenuMaker(const char *title, const char *defbroam, const struct cfgmenu
                 MakeMenuItemString(pMenu, item_text, cmd, (const char*)v);
                 continue;
             } else if (is_fixed_string(v)) {
-                checked = 0 == stricmp((const char *)v, strchr(cmd, ' ')+1);
+                checked = 0 == _stricmp((const char *)v, strchr(cmd, ' ')+1);
             } else if (v) {
                 checked = *(bool*)v;
             }
@@ -402,7 +402,7 @@ static const struct cfgmenu * find_cfg_item(
     const struct cfgmenu *p;
     for (p = pmenu; p->text; ++p)
         if (p->command) {
-            if (0 == memicmp(cmd, p->command, strlen(p->command))) {
+            if (0 == _memicmp(cmd, p->command, strlen(p->command))) {
             *pp_menu = pmenu;
             return p;
             }
@@ -454,7 +454,7 @@ int exec_cfg_command(const char *argument)
     const void *v;
 
     // is it a plugin related command?
-    if (0 == memicmp(argument, "plugin.", 7)) {
+    if (0 == _memicmp(argument, "plugin.", 7)) {
         if (0 == PluginManager_handleBroam(argument+7))
             return 0;
         Menu_Update(MENU_UPD_CONFIG);

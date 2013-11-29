@@ -431,7 +431,7 @@ void SeparatorItem::Paint(HDC hDC)
 		int yS = y + pSI->ShadowY;
 		int leftS  = left + pSI->ShadowX;
 		int rightS = right + pSI->ShadowX;
-		if (0 == stricmp(Settings_menu.separatorStyle,"gradient")) {
+		if (0 == _stricmp(Settings_menu.separatorStyle,"gradient")) {
 			// Gradient shadow
 			for (x = 0; x <= dist; ++x) {
 				int pos, hue = x * 255 / dist;
@@ -440,7 +440,7 @@ void SeparatorItem::Paint(HDC hDC)
 				pos = rightS - x;
 				SetPixel(hDC, pos, yS, mixcolors(cs, GetPixel(hDC, pos, y), hue));
 			}
-		} else if (0 == stricmp(Settings_menu.separatorStyle,"flat")) {
+		} else if (0 == _stricmp(Settings_menu.separatorStyle,"flat")) {
 			// Flat shadow
 			for (x = 0; x <= dist; ++x) {
 				int pos;
@@ -455,7 +455,7 @@ void SeparatorItem::Paint(HDC hDC)
 	}
 
 	//Draw Separator
-	if (0 == stricmp(Settings_menu.separatorStyle,"gradient")) {
+	if (0 == _stricmp(Settings_menu.separatorStyle,"gradient")) {
 		for (x = 0; x <= dist; ++x) {
 			int pos, hue = x * 255 / dist;
 			pos = left + x;
@@ -463,13 +463,13 @@ void SeparatorItem::Paint(HDC hDC)
 			pos = right - x;
 			SetPixel(hDC, pos, y, mixcolors(c, GetPixel(hDC, pos, y), hue));
 		}
-	} else if (0 == stricmp(Settings_menu.separatorStyle,"flat")) {
+	} else if (0 == _stricmp(Settings_menu.separatorStyle,"flat")) {
 		for (x = 0; x <= dist; ++x) {
 			int pos; //, hue = x * 255 / dist;
 			pos = left + x; SetPixel(hDC, pos, y, c);
 			pos = right - x; SetPixel(hDC, pos, y, c);
 		}
-	} else if (0 == stricmp(Settings_menu.separatorStyle,"bevel")) {
+	} else if (0 == _stricmp(Settings_menu.separatorStyle,"bevel")) {
 		for (x = 0; x <= dist; ++x) {
 			int pos;
 			pos = left + x; SetPixel(hDC, pos, y, mixcolors(0x00000000, GetPixel(hDC, pos, y), 160));

@@ -280,7 +280,7 @@ int control_saveas_control(control *c, int tokencount, char **tokens)
 	char *filename = tokens[4];
 
 	//If the browse option is chosen
-	if (!stricmp(filename, "*browse*"))
+	if (!_stricmp(filename, "*browse*"))
 	{       
 		filename = dialog_file(szFilterScript, "Save This Control As", ".rc", config_path_plugin, true);
 		if (!filename)
@@ -338,7 +338,7 @@ bool lookup_renamed_controls(struct renamed_control *RC, char *new_name)
 {
 	while (RC)
 	{
-		if (0 == stricmp(new_name, RC->c->controlname))
+		if (0 == _stricmp(new_name, RC->c->controlname))
 			break;
 		RC = RC->next;
 	}
@@ -468,7 +468,7 @@ int control_message(int tokencount, char *tokens[], bool from_core, module* call
 	if (tokencount < 4) return 1;
 	
 	//The create scenario, we don't need to find a control
-	if (!stricmp(tokens[2], szBActionCreate))
+	if (!_stricmp(tokens[2], szBActionCreate))
 		return control_message_create(tokencount, tokens, false, caller);
 	
 	//Find the control
@@ -476,39 +476,39 @@ int control_message(int tokencount, char *tokens[], bool from_core, module* call
 	if (!c) return 1;
 
 	//Create child only if allowed
-	if (!stricmp(tokens[2], szBActionCreateChild))
+	if (!_stricmp(tokens[2], szBActionCreateChild))
 		return control_message_create(tokencount, tokens, c->controltypeptr->can_parent, c->moduleptr);
 
 	// "Delete"
-	if (!stricmp(tokens[2], szBActionDelete))
+	if (!_stricmp(tokens[2], szBActionDelete))
 		return control_message_delete(c, tokencount, tokens);
 
 	// "Save This Control As..."
-	if (!stricmp(tokens[2], szBActionSaveAs))
+	if (!_stricmp(tokens[2], szBActionSaveAs))
 		return control_saveas_control(c, tokencount, tokens);
 
 	// "Clone"
-	if (!stricmp(tokens[2], "Clone"))
+	if (!_stricmp(tokens[2], "Clone"))
 		return control_clone(c);
 
 	int result;
 
 	// "Set Window Property"
-	if (!stricmp(tokens[2], szBActionSetWindowProperty))
+	if (!_stricmp(tokens[2], szBActionSetWindowProperty))
 		result = window_message_setproperty(c, tokencount, tokens);
 	else
 	//If it's rename, try to rename it
-	if (tokencount == 5 && !stricmp(tokens[2], szBActionRename))
+	if (tokencount == 5 && !_stricmp(tokens[2], szBActionRename))
 		result = control_rename(c, tokens[4]);
 	else
-	if (tokencount == 5 && !stricmp(tokens[2], szBActionAssignToModule))
+	if (tokencount == 5 && !_stricmp(tokens[2], szBActionAssignToModule))
 		result = control_assign_to_module(c, tokens[4]);
 	else
-	if (!stricmp(tokens[2], szBActionDetachFromModule))
+	if (!_stricmp(tokens[2], szBActionDetachFromModule))
 		result = control_detach_from_module(c);
 	else
 	//If it's a plugin property message, reroute it to the plugin_message handler
-	if (!stricmp(tokens[2], szBActionSetPluginProperty))
+	if (!_stricmp(tokens[2], szBActionSetPluginProperty))
 		result = control_set_pluginproperty(c, tokencount, tokens, caller);
 	else
 	//Pass it up to the control, since we can't handle it here

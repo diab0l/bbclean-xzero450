@@ -118,7 +118,7 @@ extern "C"
 #define NUMBER_PLACEMENT 8
 
 
-#define BB_DRAGOVER (WM_USER+100)
+//#define BB_DRAGOVER (WM_USER+100)
 #define TASK_RISE_TIMER 4
 
 

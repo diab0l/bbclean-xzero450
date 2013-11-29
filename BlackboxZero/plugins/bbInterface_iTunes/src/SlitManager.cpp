@@ -40,7 +40,7 @@ PluginInfo *get_plugin(PluginInfo *PI, char *module_name)
 	PluginInfo *p;
 	int l = strlen(module_name);
 	dolist (p, PI)
-		if (0 == memicmp(module_name, p->module_name, l)
+		if (0 == _memicmp(module_name, p->module_name, l)
 			&& (0 == p->module_name[l] || '.' == p->module_name[l]))
 			break;
 	return p;
@@ -215,7 +215,7 @@ void get_unique_modulename(PluginInfo *PI, HMODULE hMO, char *buffer)
 	PluginInfo *p; int n = 1;
 	dolist (p, PI)
 	{
-		if (0 == memicmp(temp, p->module_name, len)
+		if (0 == _memicmp(temp, p->module_name, len)
 			&& (0 == p->module_name[len] || '.' == p->module_name[len]))
 		{
 			if (1 == n)
@@ -390,7 +390,7 @@ const char * check_relative_path(const char *filename)
 	GetBlackboxPath(bb_path, MAX_PATH);
 	int len = strlen(bb_path);
 
-	if (0 == memicmp(bb_path, filename, len))
+	if (0 == _memicmp(bb_path, filename, len))
 		return filename + len;
 	return filename;
 }
@@ -413,7 +413,7 @@ bool unloadPlugin(ModuleInfo **pm, const char *module_name)
 	ModuleInfo *m; bool result = false;
 	for (; NULL != (m = *pm);)
 	{
-		if (NULL == module_name || 0 == stricmp(module_name, m->module_name))
+		if (NULL == module_name || 0 == _stricmp(module_name, m->module_name))
 		{
 			m_unloadPlugin(m);
 			*pm = m->next;

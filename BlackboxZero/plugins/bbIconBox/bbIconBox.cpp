@@ -1330,7 +1330,7 @@ void icon_box::process_broam(const char *temp, int f)
         return;
     }
 
-    if (!stricmp(temp, "remove"))
+    if (!_stricmp(temp, "remove"))
     {
         PostMessage(hwnd, BBIB_DELETE, 0, 0);
         return;
@@ -1352,7 +1352,7 @@ void icon_box::common_broam(const char *temp)
     if (BBP_broam_string(NULL, temp, "remove", &rest)) {
         if (g_PI && g_PI->next)
             dolist (p, g_PI)
-                if (0 == stricmp(((icon_box*)p)->m_name, rest)) {
+                if (0 == _stricmp(((icon_box*)p)->m_name, rest)) {
                     PostMessage(p->hwnd, BBIB_DELETE, 0, 0);
                     break;
                 }
@@ -1360,10 +1360,10 @@ void icon_box::common_broam(const char *temp)
     } else if (BBP_broam_string(NULL, temp, "create.set", &rest)) {
         strcpy(create_path, rest);
 
-    } else if (0 == stricmp(temp, "create.path")) {
+    } else if (0 == _stricmp(temp, "create.path")) {
         strcpy(path, create_path);
 
-    } else if (0 == stricmp(temp, "create.browse")) {
+    } else if (0 == _stricmp(temp, "create.browse")) {
         GetBlackboxPath(path, sizeof path);
         if (false == select_folder(NULL, szAppName, name, path))
             path[0] = 0;
@@ -1395,7 +1395,7 @@ void icon_box::common_broam(const char *temp)
 
         for (;;) {
             dolist (p, g_PI)
-                if (0 == stricmp(((icon_box*)p)->m_name, name)) break;
+                if (0 == _stricmp(((icon_box*)p)->m_name, name)) break;
             if (NULL == p) break;
             sprintf(name + n, "/%d", ++x);
         }
@@ -1928,9 +1928,9 @@ int beginPluginEx(HINSTANCE hPluginInstance, HWND hSlit)
 
     BBhwnd = GetBBWnd();
     const char *bbv = GetBBVersion();
-    if (0 == memicmp(bbv, "bblean", 6)) BBVersion = BBVERSION_LEAN;
+    if (0 == _memicmp(bbv, "bblean", 6)) BBVersion = BBVERSION_LEAN;
     else
-    if (0 == memicmp(bbv, "bb", 2)) BBVersion = BBVERSION_XOB;
+    if (0 == _memicmp(bbv, "bb", 2)) BBVersion = BBVERSION_XOB;
     else BBVersion = BBVERSION_09X;
 
     g_hSlit = hSlit;

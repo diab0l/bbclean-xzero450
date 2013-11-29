@@ -261,7 +261,7 @@ void set_lang(const char *p) {
 
     for (lp=lasearch;NULL!=(cp=(*lp)->ext);lp++) {
        for (;NULL!=*cp;cp++) {
-            if (!stricmp(buf,*cp)) {
+            if (!_stricmp(buf,*cp)) {
                 goto brk;
             }}}
 brk:

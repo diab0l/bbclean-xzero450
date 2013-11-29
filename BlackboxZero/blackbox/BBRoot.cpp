@@ -146,7 +146,7 @@ ST bool is_bsetroot_command(const char **cptr)
 {
     char token[MAX_PATH];
     *(char*)file_extension(NextToken(token, cptr, NULL)) = 0;
-    return 0 == stricmp(token, "bsetroot") || 0 == stricmp(token, "bsetbg");
+    return 0 == _stricmp(token, "bsetroot") || 0 == _stricmp(token, "bsetbg");
 }
 
 HBITMAP load_desk_bitmap(const char* command, bool makebmp)

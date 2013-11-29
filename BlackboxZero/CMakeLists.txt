@@ -20,6 +20,12 @@ if (MINGW)
 	set(CMAKE_SHARED_LIBRARY_PREFIX "")
 endif (MINGW)
 
+if (MSVC)
+	# there are lot of warnings from using unsecure functions
+	# FIXME: get rid of this in far future
+	add_definitions(-D_CRT_SECURE_NO_WARNINGS)
+endif (MSVC)
+
 # font tools and conversion
 add_subdirectory(build/bdf2fon)
 add_custom_target(fonts ALL)

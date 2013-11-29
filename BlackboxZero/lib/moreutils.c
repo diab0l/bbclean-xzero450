@@ -119,7 +119,7 @@ unsigned int eightScale_up(unsigned int i)
 // case insensitive string compare, up to length of second string
 int my_substr_icmp(const char *a, const char *b)
 {
-	return memicmp(a, b, strlen(b));
+	return _memicmp(a, b, strlen(b));
 }
 
 //===========================================================================
@@ -127,7 +127,7 @@ int my_substr_icmp(const char *a, const char *b)
 int n_stricmp(const char **pp, const char *s)
 {
 	int n = (int)strlen (s);
-	int i = memicmp(*pp, s, n);
+	int i = _memicmp(*pp, s, n);
 	if (i) return i;
 	i = (*pp)[n] - ' ';
 	if (i > 0) return i;
@@ -158,7 +158,7 @@ int trim_address(char q[MAX_PATH], int is, int js)
 
 int substr_icmp(const char *a, const char *b)
 {
-    return memicmp(a, b, strlen(b));
+    return _memicmp(a, b, strlen(b));
 }
 
 //===========================================================================

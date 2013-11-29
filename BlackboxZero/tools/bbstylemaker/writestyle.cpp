@@ -355,7 +355,7 @@ int check_item(const char *dd, const struct ck *ck)
                 return 1;
             if (check_item(cc, ck->k))
                 return 1;
-        } else if (c == (int)strlen(ck->p) && 0 == memicmp(ck->p, cc, c)) {
+        } else if (c == (int)strlen(ck->p) && 0 == _memicmp(ck->p, cc, c)) {
             return check_item(dd, ck->k);
         }
         ++ck;
@@ -372,7 +372,7 @@ struct lin_list *FindRCComment(struct fil_list *fl, LPCSTR keyword)
 {
     struct lin_list *tl;
     dolist (tl, fl->lines)
-        if (tl->k==1 && 0==stricmp(tl->str+tl->k, keyword))
+        if (tl->k==1 && 0==_stricmp(tl->str+tl->k, keyword))
             return tl;
     return NULL;
 }
@@ -642,7 +642,7 @@ struct bulletstyles { const char *s; int b; } bulletstyles[]= {
 int get_bulletstyle (const char *tmp)
 {
     struct bulletstyles *bp;
-    for (bp = bulletstyles; bp->s && stricmp(tmp,bp->s);bp++);
+    for (bp = bulletstyles; bp->s && _stricmp(tmp,bp->s);bp++);
     return bp->b;
 }
 
@@ -1027,8 +1027,8 @@ int writestyle(
 
     // get some options
     tabify = ReadBool(rcpath, "bbstylemaker.tabify", false);
-    g_rc.dos_eol = 0 == stricmp(ReadString(rcpath, "bbstylemaker.eolMode", ""), "dos");
-    colorMode = 0 == stricmp(ReadString(rcpath, "bbstylemaker.colorMode", ""), "rgb");
+    g_rc.dos_eol = 0 == _stricmp(ReadString(rcpath, "bbstylemaker.eolMode", ""), "dos");
+    colorMode = 0 == _stricmp(ReadString(rcpath, "bbstylemaker.colorMode", ""), "rgb");
     fontMode = ReadInt(rcpath, "bbstylemaker.fontMode", 1);
     useWildcards = ReadBool(rcpath, "bbstylemaker.wildcards.use", false);
 

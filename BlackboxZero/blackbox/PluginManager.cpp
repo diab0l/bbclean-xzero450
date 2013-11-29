@@ -166,7 +166,7 @@ ST struct plugins *append_plugin(const char *rcline)
         n = 0, l = strlen(name);
         dolist (q2, bbplugins) {
             char *p = q2->name;
-            if (p && 0 == memicmp(p, name, l) && (0 == p[l] || '.' == p[l]))
+            if (p && 0 == _memicmp(p, name, l) && (0 == p[l] || '.' == p[l]))
                 n++;
         }
 
@@ -178,7 +178,7 @@ ST struct plugins *append_plugin(const char *rcline)
         }
 
         // accept BBSlit and BBSlit?
-        q->isslit = 0 == memicmp(name, "BBSlit", 6)
+        q->isslit = 0 == _memicmp(name, "BBSlit", 6)
             && (name[6] == 0 || name[6] == '.');
 
         q->n_instance = n;
@@ -347,7 +347,7 @@ ST int load_plugin(struct plugins *q, HWND hSlit)
         // check for compatibility
 
 #ifndef BBTINY
-        if (0 == stricmp(q->name, "BBDDE"))
+        if (0 == _stricmp(q->name, "BBDDE"))
         {
             error = error_plugin_is_built_in;
             break;
@@ -613,15 +613,15 @@ ST Menu *get_menu(const char *title, char *menu_id, bool pop, struct plugins **q
             if (false == get_string_within(command, sizeof command, &cp, "[]"))
                 continue;
             get_string_within(label, sizeof label, &cp, "()");
-            if (0 == stricmp(command, "nop"))
+            if (0 == _stricmp(command, "nop"))
                 MakeMenuNOP(pMenu, label);
-            else if (0 == stricmp(command, "sep"))
+            else if (0 == _stricmp(command, "sep"))
                 MakeMenuNOP(pMenu, NULL);
-            else if (0 == stricmp(command, "submenu") && *label) {
+            else if (0 == _stricmp(command, "submenu") && *label) {
                 sprintf(end_id, "_%s", label);
                 pSub = get_menu(label, menu_id, pop, qp, b_slit);
                 MakeSubmenu(pMenu, pSub, NULL);
-            } else if (0 == stricmp(command, "end")) {
+            } else if (0 == _stricmp(command, "end")) {
                 break;
             }
         }
@@ -783,7 +783,7 @@ int PluginManager_handleBroam(const char *args)
     } else {
         dolist (q, bbplugins)
             if (q->name
-                && 0 == stricmp(/*e_remove==action?q->path:*/q->name, buffer))
+                && 0 == _stricmp(/*e_remove==action?q->path:*/q->name, buffer))
                 break;
     }
 

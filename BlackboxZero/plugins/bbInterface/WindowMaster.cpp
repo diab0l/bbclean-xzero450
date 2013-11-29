@@ -711,7 +711,7 @@ int window_message_setproperty(control *c, int tokencount, char *tokens[])
 
 	if (tokencount == 5)
 	{
-		if (!stricmp(tokens[4], "Detach") && control_make_parentless(c))
+		if (!_stricmp(tokens[4], "Detach") && control_make_parentless(c))
 		{
 			window_make_child(w, NULL);
 			needs_posupdate = needs_transupdate = needs_visupdate = needs_stickyupdate = true;
@@ -725,22 +725,22 @@ int window_message_setproperty(control *c, int tokencount, char *tokens[])
 		errors = 1;
 	else
 	//Figure out which property to set, and what to do once it's set
-	if (!stricmp(tokens[4], szWPx) && config_set_int_expr(tokens[5], &w->x))
+	if (!_stricmp(tokens[4], szWPx) && config_set_int_expr(tokens[5], &w->x))
 		{ needs_posupdate = true; }
 	else
-	if (!stricmp(tokens[4], szWPy) && config_set_int_expr(tokens[5], &w->y))
+	if (!_stricmp(tokens[4], szWPy) && config_set_int_expr(tokens[5], &w->y))
 		{ needs_posupdate = true; }
 	else
-	if (!stricmp(tokens[4], szWPwidth) && config_set_int_expr(tokens[5], &w->width))
+	if (!_stricmp(tokens[4], szWPwidth) && config_set_int_expr(tokens[5], &w->width))
 		{ style_draw_invalidate(c); needs_posupdate = true; }
 	else
-	if (!stricmp(tokens[4], szWPheight) && config_set_int_expr(tokens[5], &w->height))
+	if (!_stricmp(tokens[4], szWPheight) && config_set_int_expr(tokens[5], &w->height))
 		{ style_draw_invalidate(c); needs_posupdate = true; }
 	else
-	if (!stricmp(tokens[4], szWPisbordered) && config_set_bool(tokens[5], &w->is_bordered))
+	if (!_stricmp(tokens[4], szWPisbordered) && config_set_bool(tokens[5], &w->is_bordered))
 		{ style_draw_invalidate(c); }
 	else
-	if (!stricmp(tokens[4], szWPStyle) && -1 != (i = get_string_index(tokens[5], szStyleNames)))
+	if (!_stricmp(tokens[4], szWPStyle) && -1 != (i = get_string_index(tokens[5], szStyleNames)))
 	{
 		if(w->has_custom_style) { delete w->styleptr; w->styleptr = 0; w->has_custom_style = false; } //get rid of previous custom style
 		w->style = i; style_draw_invalidate(c); needs_transupdate = true;
@@ -771,42 +771,42 @@ int window_message_setproperty(control *c, int tokencount, char *tokens[])
 		}
 	}
 	else
-	if (!stricmp(tokens[4], szWPisvisible) && config_set_bool(tokens[5], &w->is_visible))
+	if (!_stricmp(tokens[4], szWPisvisible) && config_set_bool(tokens[5], &w->is_visible))
 		{ needs_visupdate = true; }
 	else
 	if (!c->parentptr)
 	{
-		if (!stricmp(tokens[4], szWPtransparency) && config_set_int(tokens[5], &w->transparency, 0, 100))
+		if (!_stricmp(tokens[4], szWPtransparency) && config_set_int(tokens[5], &w->transparency, 0, 100))
 			{ needs_transupdate = true; }
 		else
-		if (!stricmp(tokens[4], szWPisonallworkspaces) && config_set_bool(tokens[5], &w->is_onallworkspaces))
+		if (!_stricmp(tokens[4], szWPisonallworkspaces) && config_set_bool(tokens[5], &w->is_onallworkspaces))
 			{ needs_stickyupdate = true; }
 		else
-		if (!stricmp(tokens[4], szWPisontop) && config_set_bool(tokens[5], &w->is_ontop))
+		if (!_stricmp(tokens[4], szWPisontop) && config_set_bool(tokens[5], &w->is_ontop))
 			{ needs_posupdate = true; }
 		else
-		if (!stricmp(tokens[4], szWPisslitted) && config_set_bool(tokens[5], &w->useslit))
+		if (!_stricmp(tokens[4], szWPisslitted) && config_set_bool(tokens[5], &w->useslit))
 			{ needs_slitupdate = true; }
 		else
-		if (!stricmp(tokens[4], szWPistoggledwithplugins) && config_set_bool(tokens[5], &w->is_toggledwithplugins))
+		if (!_stricmp(tokens[4], szWPistoggledwithplugins) && config_set_bool(tokens[5], &w->is_toggledwithplugins))
 			{ needs_visupdate = true; }
 		else
-		if (!stricmp(tokens[4], szWPistransparent) && config_set_bool(tokens[5], &w->is_transparent))
+		if (!_stricmp(tokens[4], szWPistransparent) && config_set_bool(tokens[5], &w->is_transparent))
 			{ needs_transupdate = true; }
 		else
-		if (!stricmp(tokens[4], szWPautohide) && config_set_bool(tokens[5], &w->autohide))
+		if (!_stricmp(tokens[4], szWPautohide) && config_set_bool(tokens[5], &w->autohide))
 			{ needs_posupdate = needs_transupdate = true; w->is_autohidden = window_test_autohide(w, NULL); }
 		else
-		if (!stricmp(tokens[4], "AttachTo") && control_make_childof(c, tokens[5]))
+		if (!_stricmp(tokens[4], "AttachTo") && control_make_childof(c, tokens[5]))
 		{
 			window_make_child(w, c->parentptr->windowptr);
 			needs_posupdate = needs_transupdate = needs_visupdate = needs_stickyupdate = true;
 		}
 		else
-		if (!stricmp(tokens[4], szWPmakeinvisible))
+		if (!_stricmp(tokens[4], szWPmakeinvisible))
 		{			
-			if (!stricmp(tokens[5], szWPmakeinvisible_winblur)) w->makeinvisible = MAKEINVISIBLE_WINLOSEFOCUS;
-			else if (!stricmp(tokens[5], szWPmakeinvisible_bbblur)) w->makeinvisible = MAKEINVISIBLE_BBLOSEFOCUS;
+			if (!_stricmp(tokens[5], szWPmakeinvisible_winblur)) w->makeinvisible = MAKEINVISIBLE_WINLOSEFOCUS;
+			else if (!_stricmp(tokens[5], szWPmakeinvisible_bbblur)) w->makeinvisible = MAKEINVISIBLE_BBLOSEFOCUS;
 			else w->makeinvisible = MAKEINVISIBLE_NEVER;
 		}
 		else

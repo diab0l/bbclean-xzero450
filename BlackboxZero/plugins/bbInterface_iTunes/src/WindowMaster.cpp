@@ -1449,7 +1449,7 @@ int window_message_setproperty(control *c, int tokencount, char *tokens[])
 
 	if (tokencount == 5)
 	{
-		if (!stricmp(tokens[4], "Detach") && control_make_parentless(c))
+		if (!_stricmp(tokens[4], "Detach") && control_make_parentless(c))
 		{
 			window_make_child(w, NULL);
 			needs_posupdate = needs_transupdate = needs_visupdate = needs_stickyupdate = true;
@@ -1463,22 +1463,22 @@ int window_message_setproperty(control *c, int tokencount, char *tokens[])
 		errors = 1;
 	else
 	//Figure out which property to set, and what to do once it's set
-	if (!stricmp(tokens[4], szWPx) && config_set_int_expr(tokens[5], &w->x))
+	if (!_stricmp(tokens[4], szWPx) && config_set_int_expr(tokens[5], &w->x))
 		{ needs_posupdate = true; }
 	else
-	if (!stricmp(tokens[4], szWPy) && config_set_int_expr(tokens[5], &w->y))
+	if (!_stricmp(tokens[4], szWPy) && config_set_int_expr(tokens[5], &w->y))
 		{ needs_posupdate = true; }
 	else
-	if (!stricmp(tokens[4], szWPwidth) && config_set_int_expr(tokens[5], &w->width))
+	if (!_stricmp(tokens[4], szWPwidth) && config_set_int_expr(tokens[5], &w->width))
 		{ style_draw_invalidate(c); needs_posupdate = true; }
 	else
-	if (!stricmp(tokens[4], szWPheight) && config_set_int_expr(tokens[5], &w->height))
+	if (!_stricmp(tokens[4], szWPheight) && config_set_int_expr(tokens[5], &w->height))
 		{ style_draw_invalidate(c); needs_posupdate = true; }
 	else
-	if (!stricmp(tokens[4], szWPisbordered) && config_set_bool(tokens[5], &w->is_bordered))
+	if (!_stricmp(tokens[4], szWPisbordered) && config_set_bool(tokens[5], &w->is_bordered))
 		{ style_draw_invalidate(c); }
 	else
-	if (!stricmp(tokens[4], szWPStyle) && -1 != (i = get_string_index(tokens[5], szStyleNames)))
+	if (!_stricmp(tokens[4], szWPStyle) && -1 != (i = get_string_index(tokens[5], szStyleNames)))
 	{
 		if(w->has_custom_style) { 
 			delete w->styleptr; 
@@ -1490,7 +1490,7 @@ int window_message_setproperty(control *c, int tokencount, char *tokens[])
 		w->style = i; style_draw_invalidate(c); needs_transupdate = true;
 	}
 	else
-	if (!stricmp(tokens[4], "BaseStyle") && -1 != (i = get_string_index(tokens[5], szStyleNames)))
+	if (!_stricmp(tokens[4], "BaseStyle") && -1 != (i = get_string_index(tokens[5], szStyleNames)))
 	{
 		if(!w->has_custom_style){
 			w->has_custom_style = true;
@@ -1505,7 +1505,7 @@ int window_message_setproperty(control *c, int tokencount, char *tokens[])
 		needs_transupdate = true;
 	}
 	else
-	if (!stricmp(tokens[4], "UseCustomValue") && -1 != (i = get_string_index(tokens[5],szStyleProperties)))
+	if (!_stricmp(tokens[4], "UseCustomValue") && -1 != (i = get_string_index(tokens[5],szStyleProperties)))
 	{
 		w->nosavevalue &= ~(1<<i);
 		if(!w->has_custom_style){
@@ -1519,7 +1519,7 @@ int window_message_setproperty(control *c, int tokencount, char *tokens[])
 		needs_transupdate = true;
 	}
 	else
-	if (!stricmp(tokens[4], "UseStyleDefault") && -1 != (i = get_string_index(tokens[5],szStyleProperties)))
+	if (!_stricmp(tokens[4], "UseStyleDefault") && -1 != (i = get_string_index(tokens[5],szStyleProperties)))
 	{
 		w->nosavevalue |= (1<<i);
 		if(!w->has_custom_style){
@@ -1579,7 +1579,7 @@ int window_message_setproperty(control *c, int tokencount, char *tokens[])
 		needs_transupdate = true;
 	}
 	else
-	if (!stricmp(tokens[4],"UseCustomFont") && config_set_bool(tokens[5], &w->use_custom_font))
+	if (!_stricmp(tokens[4],"UseCustomFont") && config_set_bool(tokens[5], &w->use_custom_font))
 	{
 		if(!w->use_custom_font){
 			DeleteObject(w->font);
@@ -1590,7 +1590,7 @@ int window_message_setproperty(control *c, int tokencount, char *tokens[])
 		needs_fontupdate = true;
 	}
 	else
-	if (!stricmp(tokens[4],szWPfontname))
+	if (!_stricmp(tokens[4],szWPfontname))
 	{
 		w->use_custom_font = true;
 		strcpy(w->Fontname,tokens[5]);
@@ -1598,7 +1598,7 @@ int window_message_setproperty(control *c, int tokencount, char *tokens[])
 		needs_fontupdate = true;
 	}
 	else
-	if (!stricmp(tokens[4],szWPfontheight))
+	if (!_stricmp(tokens[4],szWPfontheight))
 	{
 		w->use_custom_font = true;
 		w->FontHeight=atoi(tokens[5]);
@@ -1606,7 +1606,7 @@ int window_message_setproperty(control *c, int tokencount, char *tokens[])
 		needs_fontupdate = true;
 	}
 	else
-	if(!stricmp(tokens[4],szWPfontweight))
+	if(!_stricmp(tokens[4],szWPfontweight))
 	{
 		w->use_custom_font = true;
 		bool temp;
@@ -1631,10 +1631,10 @@ int window_message_setproperty(control *c, int tokencount, char *tokens[])
 		if ( (i==STYLE_BEVELPOS_INDEX) && !config_set_int(tokens[5], &(w->styleptr->bevelposition), 1, 2)) errors = 1;
 		if (i== STYLE_SHADOWCOLOR_INDEX){
 			//Shadow color
-			if(!stricmp(tokens[5],"Auto")){
+			if(!_stricmp(tokens[5],"Auto")){
 				colorval = CLR_INVALID;
 			}
-			else if(!stricmp(tokens[5],"Disable")){
+			else if(!_stricmp(tokens[5],"Disable")){
 				shadow_set = false;
 			}
 			else if((colorval = ReadColorFromString(tokens[5]))==-1)
@@ -1710,7 +1710,7 @@ int window_message_setproperty(control *c, int tokencount, char *tokens[])
 		}
 	}
 	else
-	if (!stricmp(tokens[4], "DefaultBorder")){
+	if (!_stricmp(tokens[4], "DefaultBorder")){
 		StyleItem *tmpstyle;
 		tmpstyle = new StyleItem;
 		*tmpstyle = style_get_copy(w->style);
@@ -1732,15 +1732,15 @@ int window_message_setproperty(control *c, int tokencount, char *tokens[])
 		needs_transupdate = true;
 	}
 	else
-	if (!stricmp(tokens[4], szWPisvisible) && config_set_bool(tokens[5], &w->is_visible))
+	if (!_stricmp(tokens[4], szWPisvisible) && config_set_bool(tokens[5], &w->is_visible))
 		{ needs_visupdate = true; }
 	else
 	if (!c->parentptr)
 	{
-		if (!stricmp(tokens[4], szWPtransparency) && config_set_int(tokens[5], &w->transparency, 0, 100))
+		if (!_stricmp(tokens[4], szWPtransparency) && config_set_int(tokens[5], &w->transparency, 0, 100))
 			{ needs_transupdate = true; }
 		else
-		if (!stricmp(tokens[4], szWPisonallworkspaces) && config_set_bool(tokens[5], &w->is_onallworkspaces))
+		if (!_stricmp(tokens[4], szWPisonallworkspaces) && config_set_bool(tokens[5], &w->is_onallworkspaces))
 			{
 				needs_stickyupdate = true;
 				DesktopInfo di;
@@ -1748,7 +1748,7 @@ int window_message_setproperty(control *c, int tokencount, char *tokens[])
 				w->workspacenumber = di.number ;
 			}
 		else
-		if (!stricmp(tokens[4], szWPworkspacenumber))
+		if (!_stricmp(tokens[4], szWPworkspacenumber))
 			{
 				DesktopInfo di;
 				GetDesktopInfo(&di);
@@ -1758,38 +1758,38 @@ int window_message_setproperty(control *c, int tokencount, char *tokens[])
 
 			}
 		else
-		if (!stricmp(tokens[4], szWPisdetectfullscreen) && config_set_bool(tokens[5], &w->is_detectfullscreen))
+		if (!_stricmp(tokens[4], szWPisdetectfullscreen) && config_set_bool(tokens[5], &w->is_detectfullscreen))
 			{ 
 				needs_posupdate = true; 
 			}
 		else
-		if (!stricmp(tokens[4], szWPisontop) && config_set_bool(tokens[5], &w->is_ontop))
+		if (!_stricmp(tokens[4], szWPisontop) && config_set_bool(tokens[5], &w->is_ontop))
 			{ 
 				needs_posupdate = true; 
 			}
 		else
-		if (!stricmp(tokens[4], szWPisslitted) && config_set_bool(tokens[5], &w->useslit))
+		if (!_stricmp(tokens[4], szWPisslitted) && config_set_bool(tokens[5], &w->useslit))
 			{ needs_slitupdate = true; }
 		else
-		if (!stricmp(tokens[4], szWPistoggledwithplugins) && config_set_bool(tokens[5], &w->is_toggledwithplugins))
+		if (!_stricmp(tokens[4], szWPistoggledwithplugins) && config_set_bool(tokens[5], &w->is_toggledwithplugins))
 			{ needs_visupdate = true; }
 		else
-		if (!stricmp(tokens[4], szWPistransparent) && config_set_bool(tokens[5], &w->is_transparent))
+		if (!_stricmp(tokens[4], szWPistransparent) && config_set_bool(tokens[5], &w->is_transparent))
 			{ needs_transupdate = true; }
 		else
-		if (!stricmp(tokens[4], szWPautohide) && config_set_bool(tokens[5], &w->autohide))
+		if (!_stricmp(tokens[4], szWPautohide) && config_set_bool(tokens[5], &w->autohide))
 			{ needs_posupdate = needs_transupdate = true; w->is_autohidden = window_test_autohide(w, NULL); }
 		else
-		if (!stricmp(tokens[4], "AttachTo") && control_make_childof(c, tokens[5]))
+		if (!_stricmp(tokens[4], "AttachTo") && control_make_childof(c, tokens[5]))
 		{
 			window_make_child(w, c->parentptr->windowptr);
 			needs_posupdate = needs_transupdate = needs_visupdate = needs_stickyupdate = true;
 		}
 		else
-		if (!stricmp(tokens[4], szWPmakeinvisible))
+		if (!_stricmp(tokens[4], szWPmakeinvisible))
 		{			
-			if (!stricmp(tokens[5], szWPmakeinvisible_winblur)) w->makeinvisible = MAKEINVISIBLE_WINLOSEFOCUS;
-			else if (!stricmp(tokens[5], szWPmakeinvisible_bbblur)) w->makeinvisible = MAKEINVISIBLE_BBLOSEFOCUS;
+			if (!_stricmp(tokens[5], szWPmakeinvisible_winblur)) w->makeinvisible = MAKEINVISIBLE_WINLOSEFOCUS;
+			else if (!_stricmp(tokens[5], szWPmakeinvisible_bbblur)) w->makeinvisible = MAKEINVISIBLE_BBLOSEFOCUS;
 			else w->makeinvisible = MAKEINVISIBLE_NEVER;
 		}
 		else
@@ -1801,7 +1801,7 @@ int window_message_setproperty(control *c, int tokencount, char *tokens[])
 	// Slider Option Settings
 	if (errors && w->is_slider){
 		errors = 0;
-		if (!stricmp(tokens[4], "SliderBarStyle") && -1 != (i = get_string_index(tokens[5], szStyleNames)))
+		if (!_stricmp(tokens[4], "SliderBarStyle") && -1 != (i = get_string_index(tokens[5], szStyleNames)))
 		{
 			if (!w->has_custom_style) {
 				w->has_custom_style = true; w->styleptr = new StyleItem; *w->styleptr = style_get_copy(w->style);
@@ -1846,7 +1846,7 @@ int window_message_setproperty(control *c, int tokencount, char *tokens[])
 			}
 		}
 		else
-		if (!stricmp(tokens[4],"DrawSliderInner") && config_set_bool(tokens[5], &(w->sstyleptr->draw_inner))){
+		if (!_stricmp(tokens[4],"DrawSliderInner") && config_set_bool(tokens[5], &(w->sstyleptr->draw_inner))){
 			if(w->sstyleptr->draw_inner && !w->has_custom_style) {
 				w->has_custom_style = true;
 				w->styleptr = new StyleItem; 
@@ -1855,7 +1855,7 @@ int window_message_setproperty(control *c, int tokencount, char *tokens[])
 			style_draw_invalidate(c); needs_transupdate = true;
 		}
 		else
-		if (!stricmp(tokens[4], "SliderInnerStyle") && -1 != (i = get_string_index(tokens[5], szStyleNames)))
+		if (!_stricmp(tokens[4], "SliderInnerStyle") && -1 != (i = get_string_index(tokens[5], szStyleNames)))
 		{
 			w->sstyleptr->draw_inner = true;
 			if (!w->has_custom_style) {
@@ -1908,7 +1908,7 @@ int window_message_setproperty(control *c, int tokencount, char *tokens[])
 	if (errors && w->is_button){
 		errors = 0;
 		int stylenum = (w->bstyleptr->style==STYLETYPE_DEFAULT)?get_pressedstyle_index(w->style):w->bstyleptr->style;
-		if (!stricmp(tokens[4], szWPStyleWhenPressed) && -1 != (i = get_string_index(tokens[5], szPressedStyleNames)))
+		if (!_stricmp(tokens[4], szWPStyleWhenPressed) && -1 != (i = get_string_index(tokens[5], szPressedStyleNames)))
 		{
 			if(w->bstyleptr->has_custom_style) { 
 				delete w->bstyleptr->styleptr; 
@@ -1919,7 +1919,7 @@ int window_message_setproperty(control *c, int tokencount, char *tokens[])
 			w->bstyleptr->style = i; style_draw_invalidate(c); needs_transupdate = true;
 		}
 		else
-		if (!stricmp(tokens[4],"UseCustomFontWhenPressed") && config_set_bool(tokens[5], &w->bstyleptr->use_custom_font))
+		if (!_stricmp(tokens[4],"UseCustomFontWhenPressed") && config_set_bool(tokens[5], &w->bstyleptr->use_custom_font))
 		{
 			if(w->bstyleptr->use_custom_font){
 				style_draw_invalidate(c);
@@ -1937,7 +1937,7 @@ int window_message_setproperty(control *c, int tokencount, char *tokens[])
 			}
 		}
 		else
-		if (!stricmp(tokens[4],szWPfontname_pressed))
+		if (!_stricmp(tokens[4],szWPfontname_pressed))
 		{
 			w->bstyleptr->use_custom_font = true;
 			strcpy(w->bstyleptr->Fontname,tokens[5]);
@@ -1945,7 +1945,7 @@ int window_message_setproperty(control *c, int tokencount, char *tokens[])
 			needs_pressedfontupdate = true;
 		}
 		else
-		if (!stricmp(tokens[4],szWPfontheight_pressed))
+		if (!_stricmp(tokens[4],szWPfontheight_pressed))
 		{
 			w->bstyleptr->use_custom_font = true;
 			w->bstyleptr->FontHeight=atoi(tokens[5]);
@@ -1953,7 +1953,7 @@ int window_message_setproperty(control *c, int tokencount, char *tokens[])
 			needs_pressedfontupdate = true;
 		}
 		else
-		if(!stricmp(tokens[4],szWPfontweight_pressed))
+		if(!_stricmp(tokens[4],szWPfontweight_pressed))
 		{
 			w->bstyleptr->use_custom_font = true;
 			bool temp;
@@ -1981,8 +1981,8 @@ int window_message_setproperty(control *c, int tokencount, char *tokens[])
 			if ( (i==STYLE_BORDERCOLOR_INDEX) && -1 == ( colorval = ReadColorFromString(tokens[5])) ) errors = 1;
 			if (i== STYLE_SHADOWCOLOR_INDEX){
 				//Shadow color
-				if(!stricmp(tokens[5],"Auto"))	colorval = CLR_INVALID;
-				else if(!stricmp(tokens[5],"Disable"))	shadow_set = false;
+				if(!_stricmp(tokens[5],"Auto"))	colorval = CLR_INVALID;
+				else if(!_stricmp(tokens[5],"Disable"))	shadow_set = false;
 				else if((colorval = ReadColorFromString(tokens[5]))==-1) errors = 1;
 			}
 			if ( (i==STYLE_SHADOWPOSX_INDEX || i==STYLE_SHADOWPOSY_INDEX) && !config_set_int(tokens[5],&shadowpos,-100,100)) errors = 1;
@@ -2050,7 +2050,7 @@ int window_message_setproperty(control *c, int tokencount, char *tokens[])
 			}
 		}
 		else
-		if (!stricmp(tokens[4], "BaseStyle(Pressed)") && -1 != (i = get_string_index(tokens[5], szPressedStyleNames)))
+		if (!_stricmp(tokens[4], "BaseStyle(Pressed)") && -1 != (i = get_string_index(tokens[5], szPressedStyleNames)))
 		{
 			if(!w->bstyleptr->has_custom_style){
 				w->bstyleptr->has_custom_style = true;
@@ -2063,7 +2063,7 @@ int window_message_setproperty(control *c, int tokencount, char *tokens[])
 			needs_transupdate = true;
 		}
 		else
-		if (!stricmp(tokens[4], "UseCustomValue(Pressed)") && -1 != (i = get_string_index(tokens[5],szStyleProperties)))
+		if (!_stricmp(tokens[4], "UseCustomValue(Pressed)") && -1 != (i = get_string_index(tokens[5],szStyleProperties)))
 		{
 			w->bstyleptr->nosavevalue &= ~(1<<i);
 			if(!w->bstyleptr->has_custom_style){
@@ -2073,7 +2073,7 @@ int window_message_setproperty(control *c, int tokencount, char *tokens[])
 			}
 		}
 		else
-		if (!stricmp(tokens[4], "UseStyleDefault(Pressed)") && -1 != (i = get_string_index(tokens[5],szStyleProperties)))
+		if (!_stricmp(tokens[4], "UseStyleDefault(Pressed)") && -1 != (i = get_string_index(tokens[5],szStyleProperties)))
 		{
 			w->bstyleptr->nosavevalue |= (1<<i);
 			if(!w->bstyleptr->has_custom_style){
@@ -2139,7 +2139,7 @@ int window_message_setproperty(control *c, int tokencount, char *tokens[])
 			needs_transupdate = true;
 		}
 		else
-		if (!stricmp(tokens[4], "DefaultBorderPressed")){
+		if (!_stricmp(tokens[4], "DefaultBorderPressed")){
 			StyleItem *tmpstyle;
 			tmpstyle = new StyleItem;
 			*tmpstyle = style_get_copy(stylenum);

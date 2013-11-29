@@ -139,18 +139,18 @@ int agenttype_bitmap_message(agent *a, int tokencount, char *tokens[])
 {
 	//Get the agent details
 	agenttype_bitmap_details *details = (agenttype_bitmap_details *) a->agentdetails;
-	if (details->is_icon && !stricmp("Size", tokens[5]) && config_set_int(tokens[6], &details->width, 1, 256))
+	if (details->is_icon && !_stricmp("Size", tokens[5]) && config_set_int(tokens[6], &details->width, 1, 256))
 	{
 		details->height = details->width;
 		control_notify(a->controlptr, NOTIFY_NEEDUPDATE, NULL);
 		return 0;
 	}
-	else if (details->filename && !stricmp("Scale", tokens[5]) && config_set_int(tokens[6], &details->scale, 1, 500))
+	else if (details->filename && !_stricmp("Scale", tokens[5]) && config_set_int(tokens[6], &details->scale, 1, 500))
 	{
 		control_notify(a->controlptr, NOTIFY_NEEDUPDATE, NULL);
 		return 0;
 	}
-	else if (!stricmp("Source", tokens[5]))
+	else if (!_stricmp("Source", tokens[5]))
 	{
 		//Try to set the source
 		char *parameterstring = new_string(tokens[6]);
@@ -161,13 +161,13 @@ int agenttype_bitmap_message(agent *a, int tokencount, char *tokens[])
 	}
 
 	int i;
-	if ( (!stricmp("VAlign", tokens[5])) && (-1 != (i = get_string_index(tokens[6], image_valigns))) )
+	if ( (!_stricmp("VAlign", tokens[5])) && (-1 != (i = get_string_index(tokens[6], image_valigns))) )
 	{
 		details->valign = i;
 		control_notify(a->controlptr, NOTIFY_NEEDUPDATE, NULL);
 		return 0;
 	}
-	else if (!stricmp("HAlign", tokens[5]) && (-1 != (i = get_string_index(tokens[6], image_haligns))) )
+	else if (!_stricmp("HAlign", tokens[5]) && (-1 != (i = get_string_index(tokens[6], image_haligns))) )
 	{
 		details->halign = i;
 		control_notify(a->controlptr, NOTIFY_NEEDUPDATE, NULL);
@@ -436,7 +436,7 @@ int agenttype_bitmaporicon_setsource(agent *a, char *parameterstring)
 	int typeindex = (details->is_icon ? 1 : 0);
 
 	//If the browse option is chosen
-	if (!stricmp(parameterstring, "*browse*"))
+	if (!_stricmp(parameterstring, "*browse*"))
 	{       
 		parameterstring = dialog_file(string_dialogfilts[typeindex], string_dialogtitles[typeindex], NULL /*config_path_plugin*/, string_dialogext[typeindex], false);
 		if (!parameterstring)

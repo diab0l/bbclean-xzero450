@@ -374,11 +374,11 @@ void BBKeys_LoadHotkeys(HWND hwnd)
             continue;
 
         if (*buffer == '-') {
-            if (0 == stricmp("NOLABEL", buffer+1)) {
+            if (0 == _stricmp("NOLABEL", buffer+1)) {
                 showlabel = false;
                 continue;
             }
-            if (0 == stricmp("DEBUG", buffer+1)) {
+            if (0 == _stricmp("DEBUG", buffer+1)) {
                 debug = true;
                 continue;
             }
@@ -395,7 +395,7 @@ void BBKeys_LoadHotkeys(HWND hwnd)
         is_ExecCommand = 0 != command[0];
 
         getparam(buffer, "WITHACTION", action, false == is_ExecCommand);
-        if (0 == stricmp(action, "ExecCommand"))
+        if (0 == _stricmp(action, "ExecCommand"))
             strcpy(action, command);
 
         if (0 == action[0])
@@ -519,15 +519,15 @@ LRESULT CALLBACK HotkeyProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lPara
             break;
 
         case BB_BROADCAST:
-            if (0 == memicmp((LPCSTR)lParam, "@BBKeys.", 8))
+            if (0 == _memicmp((LPCSTR)lParam, "@BBKeys.", 8))
             {
                 lParam += 8;
-                if (0 == stricmp((LPCSTR)lParam, "about"))
+                if (0 == _stricmp((LPCSTR)lParam, "about"))
                 {
                     about_box();
                     break;
                 }
-                if (0 == stricmp((LPCSTR)lParam, "editRC"))
+                if (0 == _stricmp((LPCSTR)lParam, "editRC"))
                 {
                     SendMessage(BBhwnd, BB_EDITFILE, (WPARAM)-1, (LPARAM)rcpath);
                     break;

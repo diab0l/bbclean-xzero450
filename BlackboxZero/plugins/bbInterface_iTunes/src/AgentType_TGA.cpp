@@ -84,7 +84,7 @@ int agenttype_tga_shutdown()
 int agenttype_tga_create(agent *a, char *parameterstring)
 {
 	//If the browse option is chosen
-	if (!stricmp(parameterstring, "*browse*"))
+	if (!_stricmp(parameterstring, "*browse*"))
 	{       
 		parameterstring = dialog_file("TGA Images\0*.tga\0", "Select TGA", config_path_plugin, ".tga", false);
 		if (!parameterstring)

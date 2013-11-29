@@ -109,7 +109,7 @@ void LoadFolder(Folder *pFolder, int iconsize, HWND hwnd)
 
 int cmp_fn(Item** m1, Item** m2)
 {
-    return stricmp((*m1)->m_pszTitle, (*m2)->m_pszTitle);
+    return _stricmp((*m1)->m_pszTitle, (*m2)->m_pszTitle);
 }
 
 // Not ideal - convert list to array, sort it, convert to list again
@@ -133,7 +133,7 @@ Item *join_folders(Item *items)
     if (mi) while (NULL != (mn = mi->next))
     {
         // compare first with second
-        if (mi->m_pszTitle[0] && 0 == stricmp(mi->m_pszTitle, mn->m_pszTitle)) 
+        if (mi->m_pszTitle[0] && 0 == _stricmp(mi->m_pszTitle, mn->m_pszTitle)) 
         {
             // set list ptr to the 3rd item, which becomes the second now
             mi->next = mn->next;

@@ -101,7 +101,7 @@ int agenttype_system_create(agent *a, char *parameterstring)
 	//Figure out the command
 	int index;
 	for (index = 0; index < agenttype_system_touple_count; index++)
-		if (!stricmp(agenttype_system_touples[index].name, parameterstring))
+		if (!_stricmp(agenttype_system_touples[index].name, parameterstring))
 			goto found;
 
 	return 1;

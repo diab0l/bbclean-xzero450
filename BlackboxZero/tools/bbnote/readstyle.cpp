@@ -154,10 +154,10 @@ void Menu_Reconfigure(void)
     MenuInfo.nBulletStyle =
         get_menu_bullet(mStyle.menuBullet);
 
-    if (0 == stricmp(Settings_menu.openDirection, "bullet"))
+    if (0 == _stricmp(Settings_menu.openDirection, "bullet"))
         MenuInfo.openLeft = MenuInfo.nBulletPosition == FOLDER_LEFT;
     else
-        MenuInfo.openLeft = 0 == stricmp(Settings_menu.openDirection, "left");
+        MenuInfo.openLeft = 0 == _stricmp(Settings_menu.openDirection, "left");
 
     // --------------------------------------------------------------
     // calulate metrics:
