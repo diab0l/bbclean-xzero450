@@ -19,7 +19,9 @@ plugins\bbSlit\bbSlit.dll
 
 # - bb interface plugin(s)
 plugins\bbInterface\bbInterface.dll
-plugins\bbInterface_iTunes\bbInterface_iTunes.dll
+!plugins\bbInterface_iTunes\bbInterface_iTunes.dll
+
+!plugins\SystemBarEx\SystemBarEx.dll
 
 # - separator line for the plugin menu
 [sep]
