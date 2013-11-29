@@ -250,10 +250,10 @@ HWND window_under_mouse(void)
 
 int BBWait(int delay, unsigned nObj, HANDLE *pObj)
 {
-    ULONGLONG t_end, t_wait, tick, r;
+    DWORD t_end, t_wait, tick, r;
     int quit = 0;
 
-    t_end = (delay > 0) ? GetTickCount64() + delay : 0;
+    t_end = (delay > 0) ? GetTickCount() + delay : 0;
     do {
         MSG msg;
         while (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE)) {
@@ -266,7 +266,7 @@ int BBWait(int delay, unsigned nObj, HANDLE *pObj)
         }
         r = WAIT_TIMEOUT;
         if (delay > 0) {
-            tick = GetTickCount64();
+            tick = GetTickCount();
             if (tick >= t_end)
                 break;
             t_wait = t_end - tick;
