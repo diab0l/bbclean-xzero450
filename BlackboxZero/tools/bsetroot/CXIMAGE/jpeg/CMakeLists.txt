@@ -50,3 +50,10 @@ set(JPEG_SOURCES
 add_library(jpeg STATIC ${JPEG_SOURCES})
 
 set_property(TARGET jpeg PROPERTY FOLDER "tools/jpeg")
+
+if ( CMAKE_COMPILER_IS_GNUCC )
+    #set_property( TARGET main APPEND_STRING PROPERTY COMPILE_FLAGS -Wall )
+endif ( CMAKE_COMPILER_IS_GNUCC )
+if ( MSVC )
+    set_property( TARGET jpeg APPEND_STRING PROPERTY COMPILE_FLAGS /W1 )
+endif ( MSVC )

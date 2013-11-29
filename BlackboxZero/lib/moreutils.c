@@ -144,7 +144,7 @@ int trim_address(char q[MAX_PATH], int is, int js)
 	p = (strchr(q, is));
 	if (p != NULL)
 	{
-		p = strrev(strrchr(strrev(q), js));
+		p = _strrev(strrchr(_strrev(q), js));
 		strcpy(q, (const char *)(p));
 		return 1;
 	}
@@ -270,10 +270,10 @@ char *get_path(char *pszPath, int nMaxLen, const char *file)
 HICON GetIcon(HWND iWin)
 {
 	HICON hIcon = NULL;
-	SendMessageTimeout(iWin, WM_GETICON, ICON_BIG, 0, SMTO_ABORTIFHUNG|SMTO_BLOCK, 300, (DWORD_PTR*)&hIcon);
+	SendMessageTimeout(iWin, WM_GETICON, ICON_BIG, 0, SMTO_ABORTIFHUNG|SMTO_BLOCK, 300, (PDWORD_PTR)&hIcon);
 	if (NULL == hIcon) hIcon = (HICON)(DWORD_PTR)GetClassLongPtr(iWin, GCLP_HICON);
 	if (NULL == hIcon)
-		SendMessageTimeout(iWin, WM_GETICON, ICON_SMALL, 0, SMTO_ABORTIFHUNG|SMTO_BLOCK, 300, (DWORD_PTR*)&hIcon);
+		SendMessageTimeout(iWin, WM_GETICON, ICON_SMALL, 0, SMTO_ABORTIFHUNG|SMTO_BLOCK, 300, (PDWORD_PTR)&hIcon);
 	if (NULL == hIcon) hIcon = (HICON)(DWORD_PTR)GetClassLongPtr(iWin, GCLP_HICONSM);
 	if (NULL == hIcon) hIcon = LoadIcon(NULL, IDI_APPLICATION);
 	return hIcon;

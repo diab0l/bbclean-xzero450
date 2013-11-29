@@ -597,8 +597,8 @@ int main(int argc, char *argv[])
     } else usage();
   }
   if ( outfile == stdout ) {
-    int fd = fileno(stdout) ;
-    if ( setmode(fd, O_BINARY) < 0 ) {
+    int fd = _fileno(stdout) ;
+    if ( _setmode(fd, O_BINARY) < 0 ) {
       fprintf(stderr, "%s: can't reset stdout to binary mode\n", program);
       exit(1);
     }

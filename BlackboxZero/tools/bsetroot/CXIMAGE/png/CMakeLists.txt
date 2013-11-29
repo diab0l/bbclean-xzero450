@@ -23,3 +23,10 @@ add_library(png STATIC ${PNG_SOURCES})
 target_link_libraries(png zlib)
 
 set_property(TARGET png PROPERTY FOLDER "tools/png")
+
+if ( CMAKE_COMPILER_IS_GNUCC )
+    #set_property( TARGET main APPEND_STRING PROPERTY COMPILE_FLAGS -Wall )
+endif ( CMAKE_COMPILER_IS_GNUCC )
+if ( MSVC )
+    set_property( TARGET png APPEND_STRING PROPERTY COMPILE_FLAGS /W1 )
+endif ( MSVC )

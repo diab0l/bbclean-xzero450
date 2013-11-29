@@ -20,4 +20,9 @@ set(ZLIB_SOURCES
 add_library(zlib STATIC ${ZLIB_SOURCES})
 
 set_property(TARGET zlib PROPERTY FOLDER "tools/zlib")
-
+if ( CMAKE_COMPILER_IS_GNUCC )
+    #set_property( TARGET main APPEND_STRING PROPERTY COMPILE_FLAGS -Wall )
+endif ( CMAKE_COMPILER_IS_GNUCC )
+if ( MSVC )
+    set_property( TARGET zlib APPEND_STRING PROPERTY COMPILE_FLAGS /W1 )
+endif ( MSVC )

@@ -446,7 +446,7 @@ int agenttype_bitmaporicon_setsource(agent *a, char *parameterstring)
 
 		//If we have an absolute path, and only a relative path is necessary
 		int lenpath = strlen(config_path_plugin);
-		if (!strnicmp(config_path_plugin, parameterstring, lenpath))
+		if (!_strnicmp(config_path_plugin, parameterstring, lenpath))
 		{
 			strcpy(parameterstring, &parameterstring[lenpath]);
 		}

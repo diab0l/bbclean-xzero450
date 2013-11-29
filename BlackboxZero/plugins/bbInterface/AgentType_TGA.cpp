@@ -95,7 +95,7 @@ int agenttype_tga_create(agent *a, char *parameterstring)
 
 		//If we have an absolute path, and only a relative path is necessary
 		int lenpath = strlen(config_path_plugin);
-		if (!strnicmp(config_path_plugin, parameterstring, lenpath-1))
+		if (!_strnicmp(config_path_plugin, parameterstring, lenpath-1))
 		{
 			strcpy(parameterstring, &parameterstring[lenpath]);           
 		}

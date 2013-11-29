@@ -971,7 +971,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 				// ========== END PLAYBACK ORDER BROAMS
 
 				// ========== CUSTOM COMMAND BROAMS
-				else if (!strnicmp(token2, "Press", 5))
+				else if (!_strnicmp(token2, "Press", 5))
 				{
 					int button_idx = atoi(token2+5);
 					if (button_idx > 0 && button_idx < NUM_BUTTONS && buttons[button_idx-1].cmdarg[0])
@@ -980,7 +980,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 					}
 					break;
 				}
-				else if (!strnicmp(token2, "AltPress", 8))
+				else if (!_strnicmp(token2, "AltPress", 8))
 				{
 					int button_idx = atoi(token2+8);
 					if (button_idx > 0 && button_idx < NUM_BUTTONS && buttons[button_idx-1].altcmdarg[0])

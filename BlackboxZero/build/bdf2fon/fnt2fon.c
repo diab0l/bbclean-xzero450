@@ -41,7 +41,7 @@ static const char *output_file;
 
 static void cleanup_files(void)
 {
-    if (output_file) unlink( output_file );
+    if (output_file) _unlink( output_file );
 }
 
 static void usage(char **argv)
@@ -256,7 +256,7 @@ int main(int argc, char **argv)
         fp = fopen(argv[i+1], "rb");
 
         while(1) {
-            nread = read(fileno(fp), buf, sizeof(buf));
+            nread = _read(_fileno(fp), buf, sizeof(buf));
             if(!nread) break;
             fwrite(buf, nread, 1, ofp);
         }
