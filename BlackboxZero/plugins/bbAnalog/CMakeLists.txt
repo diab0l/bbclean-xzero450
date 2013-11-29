@@ -11,6 +11,8 @@ add_library(bbAnalog SHARED ${bbAnalog_SOURCES})
 target_link_libraries(bbAnalog blackbox bblib bbPlugin)
 target_link_libraries(bbAnalog version comctl32)
 
+set_property(TARGET bbAnalog PROPERTY FOLDER "plugins/bbAnalog")
+
 install(FILES readme.txt DESTINATION plugins/bbAnalog)
 install(TARGETS bbAnalog RUNTIME DESTINATION plugins/bbAnalog)
 if(NOT EXISTS "${CMAKE_INSTALL_PREFIX}/plugins/bbAnalog/${bbAnalog_RESOURCES}")

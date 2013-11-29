@@ -11,6 +11,8 @@ add_executable(bsetshell WIN32 ${bsetshell_SOURCES})
 target_link_libraries(bsetshell bblib)
 target_link_libraries(bsetshell version comctl32)
 
+set_property(TARGET bsetshell PROPERTY FOLDER "tools/bsetshell")
+
 #if(NOT EXISTS "${CMAKE_INSTALL_PREFIX}/${bsetshell_RESOURCES}")
 #	install(FILES ${bsetshell_RESOURCES} DESTINATION .)
 #endif()

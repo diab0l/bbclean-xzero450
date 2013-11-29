@@ -49,6 +49,8 @@ add_library(bbInterface_iTunes SHARED ${bbInterface_iTunes_SOURCES})
 target_link_libraries(bbInterface_iTunes blackbox bblib bbPlugin)
 target_link_libraries(bbInterface_iTunes version gdiplus comsuppw iphlpapi comctl32 iTunesCOMWindowsSDK)
 
+set_property(TARGET bbInterface_iTunes PROPERTY FOLDER "plugins/bbInterface_iTunes")
+
 #INSTALL_IF_NEW = bbinterface.rc
 #install(FILES changes.txt DESTINATION plugins/bbInterface)
 install(TARGETS bbInterface_iTunes RUNTIME DESTINATION plugins/bbInterface_iTunes)

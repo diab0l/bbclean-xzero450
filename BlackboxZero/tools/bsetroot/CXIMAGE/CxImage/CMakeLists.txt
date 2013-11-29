@@ -34,3 +34,4 @@ set(XIMA_OTHER_SOURCES
 
 include_directories(${CMAKE_SOURCE_DIR}/tools/bsetroot/CXIMAGE/zlib)
 add_library(cximage STATIC ${XIMA_SOURCES})
+set_property(TARGET cximage PROPERTY FOLDER "tools/cximage")

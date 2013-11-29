@@ -11,6 +11,8 @@ add_library(bbWorkspaceWheel SHARED ${bbWorkspaceWheel_SOURCES})
 target_link_libraries(bbWorkspaceWheel blackbox bblib bbPlugin)
 target_link_libraries(bbWorkspaceWheel version comctl32)
 
+set_property(TARGET bbWorkspaceWheel PROPERTY FOLDER "plugins/bbWorkspaceWheel")
+
 install(FILES readme.txt DESTINATION plugins/bbWorkspaceWheel)
 install(TARGETS bbWorkspaceWheel RUNTIME DESTINATION plugins/bbWorkspaceWheel)
 #if(NOT EXISTS "${CMAKE_INSTALL_PREFIX}/plugins/bbWorkspaceWheel/${bbWorkspaceWheel_RESOURCES}")

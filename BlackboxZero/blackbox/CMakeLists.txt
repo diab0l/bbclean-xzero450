@@ -72,6 +72,7 @@ set_target_properties(blackbox PROPERTIES ENABLE_EXPORTS ON)
 target_link_libraries(blackbox bblib)
 target_link_libraries(blackbox version comctl32)
 
+#set_property(TARGET bbRecycleBin PROPERTY FOLDER "plugins/bbRecycleBin")
 
 install(TARGETS blackbox
 		RUNTIME DESTINATION .

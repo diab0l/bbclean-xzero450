@@ -13,3 +13,5 @@ set(bbPlugin_SOURCES
 add_library(bbPlugin STATIC ${bbPlugin_SOURCES})
 target_link_libraries(bbPlugin blackbox bblib)
 
+set_property(TARGET bbPlugin PROPERTY FOLDER "plugins/bbPlugin")
+

@@ -14,6 +14,8 @@ add_library(bbLeanBar SHARED ${bbLeanBar_SOURCES})
 target_link_libraries(bbLeanBar blackbox bblib bbPlugin)
 target_link_libraries(bbLeanBar version comctl32)
 
+set_property(TARGET bbLeanBar PROPERTY FOLDER "plugins/bbLeanBar")
+
 install(FILES readme.txt DESTINATION plugins/bbLeanBar)
 install(TARGETS bbLeanBar RUNTIME DESTINATION plugins/bbLeanBar)
 if(NOT EXISTS "${CMAKE_INSTALL_PREFIX}/plugins/bbLeanBar/${bbLeanBar_RESOURCES}")

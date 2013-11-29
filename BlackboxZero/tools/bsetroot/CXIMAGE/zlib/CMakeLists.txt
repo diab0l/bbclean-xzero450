@@ -19,3 +19,5 @@ set(ZLIB_SOURCES
 
 add_library(zlib STATIC ${ZLIB_SOURCES})
 
+set_property(TARGET zlib PROPERTY FOLDER "tools/zlib")
+

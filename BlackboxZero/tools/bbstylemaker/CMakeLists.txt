@@ -26,6 +26,8 @@ add_executable(bbstylemaker WIN32 ${bbstylemaker_SOURCES})
 target_link_libraries(bbstylemaker bblib)
 target_link_libraries(bbstylemaker version comctl32)
 
+set_property(TARGET bbstylemaker PROPERTY FOLDER "tools/bbstylemaker")
+
 if(NOT EXISTS "${CMAKE_INSTALL_PREFIX}/${bbstylemaker_RESOURCES}")
 	install(FILES ${bbstylemaker_RESOURCES} DESTINATION .)
 endif()

@@ -42,6 +42,8 @@ add_library(bbInterface SHARED ${bbInterface_SOURCES})
 target_link_libraries(bbInterface blackbox bblib bbPlugin)
 target_link_libraries(bbInterface version comctl32 gdiplus winmm msimg32)
 
+set_property(TARGET bbInterface PROPERTY FOLDER "plugins/bbInterface")
+
 #INSTALL_IF_NEW = bbinterface.rc
 #install(FILES changes.txt DESTINATION plugins/bbInterface)
 install(TARGETS bbInterface RUNTIME DESTINATION plugins/bbInterface)

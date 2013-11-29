@@ -16,6 +16,8 @@ add_library(SystemBarEx SHARED ${SystemBarEx_SOURCES})
 target_link_libraries(SystemBarEx blackbox bblib bbPlugin)
 target_link_libraries(SystemBarEx version comctl32)
 
+set_property(TARGET SystemBarEx PROPERTY FOLDER "plugins/SystemBarEx")
+
 #install(FILES readme.txt DESTINATION plugins/SystemBarEx)
 install(TARGETS SystemBarEx RUNTIME DESTINATION plugins/SystemBarEx)
 #if(NOT EXISTS "${CMAKE_INSTALL_PREFIX}/plugins/SystemBarEx/${SystemBarEx_RESOURCES}")

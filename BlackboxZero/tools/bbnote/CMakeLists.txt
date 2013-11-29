@@ -21,8 +21,11 @@ add_executable(bbnote WIN32 ${bbnote_exe_SOURCES})
 target_link_libraries(bbnote bblib blackbox)
 target_link_libraries(bbnote version comctl32)
 
+set_property(TARGET bbnote PROPERTY FOLDER "tools/bbnote")
+
 add_library(bbnote-proxy SHARED bbnote-proxy.cpp)
 target_link_libraries(bbnote-proxy bblib blackbox)
+set_property(TARGET bbnote-proxy PROPERTY FOLDER "tools/bbnote-proxy")
 
 #TODO: only for Settings?
 #Settings.obj : DEFINES += -D BBSETTING_STYLEREADER_ONLY -D BBSETTING_NOWINDOW

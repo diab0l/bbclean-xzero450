@@ -21,3 +21,5 @@ set(PNG_SOURCES
 include_directories(${CMAKE_SOURCE_DIR}/tools/bsetroot/CXIMAGE/zlib)
 add_library(png STATIC ${PNG_SOURCES})
 target_link_libraries(png zlib)
+
+set_property(TARGET png PROPERTY FOLDER "tools/png")

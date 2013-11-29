@@ -19,6 +19,7 @@ include_directories(${CMAKE_SOURCE_DIR}/lib)
 target_link_libraries(bsetroot cximage zlib jpeg png)
 target_link_libraries(bsetroot bblib blackbox)
 target_link_libraries(bsetroot version comctl32 )
+set_property(TARGET bsetroot PROPERTY FOLDER "tools/bsetroot")
 
 if(NOT EXISTS "${CMAKE_INSTALL_PREFIX}/${bsetroot_RESOURCES}")
 	install(FILES ${bsetroot_RESOURCES} DESTINATION .)
@@ -35,6 +36,7 @@ set(bsetbg_RESOURCES
 add_executable(bsetbg WIN32 ${bsetbg_SOURCES}) 
 target_link_libraries(bsetbg bblib)
 target_link_libraries(bsetbg version comctl32)
+set_property(TARGET bsetbg PROPERTY FOLDER "tools/bsetbg")
 
 if(NOT EXISTS "${CMAKE_INSTALL_PREFIX}/${bsetbg_RESOURCES}")
 	install(FILES ${bsetbg_RESOURCES} DESTINATION .)

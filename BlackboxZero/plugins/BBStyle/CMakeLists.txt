@@ -13,5 +13,7 @@ add_library(BBStyle SHARED ${BBStyle_SOURCES})
 target_link_libraries(BBStyle bblib blackbox)
 target_link_libraries(BBStyle version comctl32 shlwapi)
 
+set_property(TARGET BBStyle PROPERTY FOLDER "plugins/BBStyle")
+
 install(TARGETS BBStyle RUNTIME DESTINATION plugins/BBStyle)
 

@@ -14,6 +14,7 @@ endif (MINGW)
 add_library(bbRecycleBin SHARED ${bbRecycleBin_SOURCES})
 target_link_libraries(bbRecycleBin blackbox bblib bbPlugin)
 target_link_libraries(bbRecycleBin version comctl32 shlwapi)
+set_property(TARGET bbRecycleBin PROPERTY FOLDER "plugins/bbRecycleBin")
 
 install(FILES readme.txt DESTINATION plugins/bbRecycleBin)
 install(TARGETS bbRecycleBin RUNTIME DESTINATION plugins/bbRecycleBin)

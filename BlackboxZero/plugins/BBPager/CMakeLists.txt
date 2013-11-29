@@ -15,6 +15,8 @@ add_library(BBPager SHARED ${BBPager_SOURCES})
 target_link_libraries(BBPager blackbox bblib bbPlugin)
 target_link_libraries(BBPager version comctl32)
 
+set_property(TARGET BBPager PROPERTY FOLDER "plugins/BBPager")
+
 #INSTALL_IF_NEW = bbpager.rc
 install(FILES changes.txt DESTINATION plugins/BBPager)
 install(TARGETS BBPager RUNTIME DESTINATION plugins/BBPager)

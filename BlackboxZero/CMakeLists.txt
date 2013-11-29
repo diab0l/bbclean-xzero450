@@ -1,7 +1,7 @@
 project(BlackboxZero)
 cmake_minimum_required(VERSION 2.8.9)
 set(CMAKE_VERBOSE_MAKEFILE on)
-
+set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 set(CMAKE_INSTALL_PREFIX "c:/bbLean_M")
 
 set (CLEAN_FILES

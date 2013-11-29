@@ -5,12 +5,14 @@ set_target_properties(bdf2fnt PROPERTIES
 	RUNTIME_OUTPUT_DIRECTORY_DEBUG ${CMAKE_BINARY_DIR}
 	RUNTIME_OUTPUT_DIRECTORY_RELEASE ${CMAKE_BINARY_DIR}
 )
+set_property(TARGET bdf2fnt PROPERTY FOLDER "tools/bdf2fnt")
 add_executable(fnt2fon fnt2fon.c)
 set_target_properties(fnt2fon PROPERTIES LINK_FLAGS_DEBUG "/SUBSYSTEM:CONSOLE")
 set_target_properties(fnt2fon PROPERTIES
 	RUNTIME_OUTPUT_DIRECTORY_DEBUG ${CMAKE_BINARY_DIR}
 	RUNTIME_OUTPUT_DIRECTORY_RELEASE ${CMAKE_BINARY_DIR}
 )
+set_property(TARGET fnt2fon PROPERTY FOLDER "tools/fnt2fon")
 
 message("bdf2fon in ${CMAKE_BINARY_DIR}")
 

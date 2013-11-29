@@ -49,3 +49,4 @@ set(JPEG_SOURCES
 
 add_library(jpeg STATIC ${JPEG_SOURCES})
 
+set_property(TARGET jpeg PROPERTY FOLDER "tools/jpeg")

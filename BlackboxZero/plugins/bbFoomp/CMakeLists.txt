@@ -14,6 +14,8 @@ add_library(bbFoomp SHARED ${bbFoomp_SOURCES})
 target_link_libraries(bbFoomp blackbox bblib bbPlugin)
 target_link_libraries(bbFoomp version comctl32)
 
+set_property(TARGET bbFoomp PROPERTY FOLDER "plugins/bbFoomp")
+
 #install(FILES readme.txt DESTINATION plugins/bbFoomp)
 install(TARGETS bbFoomp RUNTIME DESTINATION plugins/bbFoomp)
 #if(NOT EXISTS "${CMAKE_INSTALL_PREFIX}/plugins/bbFoomp/${bbFoomp_RESOURCES}")
