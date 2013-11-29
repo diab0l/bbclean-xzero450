@@ -14,6 +14,14 @@ set_target_properties(fnt2fon PROPERTIES
 )
 set_property(TARGET fnt2fon PROPERTY FOLDER "tools/fnt2fon")
 
+if ( CMAKE_COMPILER_IS_GNUCC )
+    #set_property( TARGET main APPEND_STRING PROPERTY COMPILE_FLAGS -Wall )
+endif ( CMAKE_COMPILER_IS_GNUCC )
+if ( MSVC )
+    set_property( TARGET bdf2fnt APPEND_STRING PROPERTY COMPILE_FLAGS /W1 )
+    set_property( TARGET fnt2fon APPEND_STRING PROPERTY COMPILE_FLAGS /W1 )
+endif ( MSVC )
+
 message("bdf2fon in ${CMAKE_BINARY_DIR}")
 
 #ALWAYS_32 = 1
