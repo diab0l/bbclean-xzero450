@@ -941,7 +941,7 @@ void RemoveOnBG(HWND hwnd)
 // export to BBVWM.cpp
 bool check_onbg_plugin(HWND hwnd)
 {
-    return assoc(onbg_list, hwnd);
+    return assoc(onbg_list, hwnd) != 0;
 }
 
 bool CheckOnBG(HWND hwnd)
