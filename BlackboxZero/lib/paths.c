@@ -24,7 +24,7 @@
 
 char* unquote(char *src)
 {
-    int l = strlen(src);
+    int l = (int)strlen(src);
     if (l >= 2 && (src[0] == '\"' || src[0] == '\'') && src[l-1] == src[0])
         return extract_string(src, src+1, l-2);
     return src;
@@ -32,7 +32,7 @@ char* unquote(char *src)
 
 char *quote_path(char *path)
 {
-    int l = strlen(path);
+    int l = (int)strlen(path);
     if (l >= 2
      && (path[0] == '\"' || path[0] == '\'')
      && path[l-1] == path[0])
@@ -48,7 +48,7 @@ char *quote_path(char *path)
 
 const char *file_basename(const char *path)
 {
-    int nLen = strlen(path);
+    int nLen = (int)strlen(path);
     while (nLen && !IS_SLASH(path[nLen-1])) nLen--;
     return path + nLen;
 }
@@ -72,13 +72,13 @@ char *file_directory(char *buffer, const char *path)
     f = file_basename(path);
     if (f >= path+2 && f[-2] != ':')
         --f;
-    return extract_string(buffer, path, f-path);
+    return extract_string(buffer, path, (int)(f-path));
 }
 
 /* remove trailing slashes but keep/add for root (C:\) */
 char *fix_path(char *path)
 {
-    int l = strlen(path);
+    int l = (int)strlen(path);
     if (l>=2 && IS_SLASH(path[l-1]) && ':' != path[l-2])
         path[l-1] = 0;
     else
@@ -106,7 +106,7 @@ int is_absolute_path(const char *path)
 /* concatenate directory / file */
 char *join_path(char *buffer, const char *dir, const char *filename)
 {
-    int l = strlen(dir);
+    int l = (int)strlen(dir);
     if (l) {
         memcpy(buffer, dir, l);
         if (!IS_SLASH(buffer[l-1]))
@@ -163,7 +163,7 @@ const char *get_relative_path(HINSTANCE h, const char *path)
     char basedir[MAX_PATH];
     int l;
     get_exe_path(h, basedir, sizeof basedir);
-    l = strlen(basedir);
+    l = (int)strlen(basedir);
     if (l && 0 == _memicmp(path, basedir, l))
         return path + l;
     return path;

@@ -217,7 +217,7 @@ COLORREF ParseLiteralColor(LPCSTR color)
 {
     int i, n, s; unsigned l; char *p, c, buf[32]; const char *cp;
 
-    l = strlen(color) + 1;
+    l = (int)strlen(color) + 1;
     if (l > sizeof buf)
         return (COLORREF)-1;
 

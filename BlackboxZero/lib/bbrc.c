@@ -114,7 +114,7 @@ ST int translate_key070(char *key)
     char *d;
     int l, n, x, k, f, r = 0;
 
-    l = strlen(key);
+    l = (int)(strlen(key));
     if (0 == l)
         return 0;
 
@@ -129,7 +129,7 @@ ST int translate_key070(char *key)
     {
         for (n = 0; 0 != (p = *pp); ++n, pp += x) {
             f = p[0] == '^';
-            k = strlen(p += f);
+            k = (int)(strlen(p += f));
             d = key+l-k;
             if (!(f ? d == key : d > key && d[-1] == '.'))
                 continue;
@@ -197,16 +197,16 @@ ST bool translate_key065(char *key)
     };
     const char **p = pairs;
     bool ret = false;
-    int k = 0;
+    size_t k = 0;
     do
     {
         char *q = (char*)stristr(key, *p);
         if (q)
         {
-            int lp = strlen(p[0]);
-            int lq = strlen(q);
-            int lr = strlen(p[1]);
-            int k0 = k + lr - lp;
+            size_t lp = strlen(p[0]);
+            size_t lq = strlen(q);
+            size_t lr = strlen(p[1]);
+            size_t k0 = k + lr - lp;
             memmove(q + lr, q + lp, lq - lp + 1);
             memmove(q, p[1], lr);
             k = k0;
@@ -434,9 +434,13 @@ char scan_line(char **pp, char **ss, int *ll)
     for (s = p; 0!=(e=*p) && 10!=e; p++)
         if (e == 9) *p = ' ';
     //cut off trailing spaces
-    for (d = p; d>s && IS_SPC(d[-1]); d--);
+    for (d = p; d>s && IS_SPC(d[-1]); d--)
+		;
     //ready for next line
-    *d=0, *pp = p + (10 == e), *ss = s, *ll = d-s;
+    *d=0;
+	*pp = p + (10 == e);
+	*ss = s;
+	*ll = (int)(d-s);
     return c;
 }
 
@@ -511,7 +515,7 @@ struct lin_list *make_line (struct fil_list *fl, const char *key, const char *va
     int k, v;
     unsigned h;
 
-    v = strlen(val);
+    v = (int)strlen(val);
     h = k = 0;
     if (key)
         h = calc_hash(buffer, key, &k, ':');
@@ -543,7 +547,7 @@ struct lin_list *make_line (struct fil_list *fl, const char *key, const char *va
 
 ST void del_from_list(void *tlp, void *tl, void *n)
 {
-    void *v; int o = (char*)n - (char*)tl;
+    void *v; size_t o = (char*)n - (char*)tl;
     while (NULL != (v = *(void**)tlp)) {
         void **np = (void **)((char *)v+o);
         if (v == tl) {
@@ -668,7 +672,7 @@ void translate_new(char *buffer, int bufsize, char **pkey, int *pklen, int synta
     };
 
     const char **p = pairs;
-    int k = *pklen;
+    size_t k = *pklen;
     if (k >= bufsize) return;
     *pkey = (char *)memcpy(buffer, *pkey, k);
     buffer[k] = 0;
@@ -679,17 +683,17 @@ void translate_new(char *buffer, int bufsize, char **pkey, int *pklen, int synta
         char *q = (char*)stristr(buffer, *p);
         if (q)
         {
-            int lp = strlen(p[0]);
-            int lq = strlen(q);
-            int lr = strlen(p[1]);
-            int k0 = k + lr - lp;
+            size_t lp = strlen(p[0]);
+            size_t lq = strlen(q);
+            size_t lr = strlen(p[1]);
+            size_t k0 = k + lr - lp;
             if (k0 >= bufsize) break;
             memmove(q + lr, q + lp, lq - lp + 1);
             memmove(q, p[1], lr);
             k = k0;
         }
     } while ((p += 2)[0]);
-    *pklen = k;
+    *pklen = (int)k;
 }
 
 /* ------------------------------------------------------------------------- */

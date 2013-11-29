@@ -24,8 +24,8 @@
 int replace_string(char *out, int bufsize, int offset, int len, const char *in)
 {
     int len2, restlen, newlen;
-    len2 = strlen(in);
-    restlen = strlen(out+offset+len) + 1;
+    len2 = (int)strlen(in);
+    restlen = (int)strlen(out+offset+len) + 1;
     newlen = offset+len2+restlen;
     if (newlen > bufsize)
         return 0;
@@ -43,7 +43,7 @@ char *extract_string(char *dest, const char *src, int n)
 
 char *strcpy_max(char *dest, const char *src, int maxlen)
 {
-    int l = strlen(src);
+    int l = (int)strlen(src);
     return extract_string(dest, src, l < maxlen ? l : maxlen-1);
 }
 
@@ -85,7 +85,7 @@ char *new_str_n(const char *s, int n)
 
 char *new_str(const char *s)
 {
-    return s ? new_str_n(s, strlen(s)) : NULL;
+    return s ? new_str_n(s, (int)strlen(s)) : NULL;
 }
 
 void free_str(char **s)
@@ -101,8 +101,8 @@ void replace_str(char **s, const char *n)
 
 char *concat_str(const char *s1, const char *s2)
 {
-    int l1 = strlen(s1);
-    int l2 = strlen(s2);
+    int l1 = (int)strlen(s1);
+    int l2 = (int)strlen(s2);
     char *p = (char*)m_alloc(l1 + l2 + 1);
     memcpy(p, s1, l1);
     memcpy(p + l1, s2, l2);
@@ -129,7 +129,7 @@ static int cstr_cpy(char *out, const char *in)
     }
     if (out) *d = '"';
     ++d;
-    return d - out;
+    return (int)(d - out);
 }
 
 char *m_formatv(const char *fmt, va_list arg_list)
@@ -138,7 +138,7 @@ char *m_formatv(const char *fmt, va_list arg_list)
     char *out, *ptr, c;
     const char *f, *cp;
     char buff[100], tmp[10];
-    int n, len;
+    size_t n, len;
 
     cp = NULL;
     out = NULL;
@@ -229,7 +229,7 @@ unsigned calc_hash(char *p, const char *s, int *pLen, int delim)
         h>>=1;
     }
     *d = 0;
-    *pLen = d - p;
+    *pLen = (int)(d - p);
     return h;
 }
 

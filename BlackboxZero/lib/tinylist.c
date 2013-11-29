@@ -137,7 +137,7 @@ void freeall(void *p)
 
 struct string_node *new_string_node(const char *s)
 {
-    int l = strlen(s);
+    int l = (int)strlen(s);
     struct string_node *b = (struct string_node *)m_alloc(sizeof *b + l);
     memcpy(b->str, s, l+1);
     b->next = NULL;

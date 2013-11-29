@@ -154,7 +154,7 @@ const char *replace_environment_strings_alloc(char **out, const char *src)
     *out = NULL;
     if (0 == strchr(src, '%'))
         return src;
-    len = strlen(src) + 100;
+    len = (int)strlen(src) + 100;
     for (;;) {
         buf = (char*)m_alloc(len);
         r = ExpandEnvironmentStrings(src, buf, len);

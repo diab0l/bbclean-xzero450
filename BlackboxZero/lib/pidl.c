@@ -454,7 +454,7 @@ int get_csidl(const char **pPath)
 
     char buffer[MAX_PATH];
     const char *psub, *path, *cp;
-    int k, l, c, id;
+    size_t k, l, c, id;
 
     if (NULL == (path = *pPath))
         return NO_CSIDL;
@@ -468,8 +468,13 @@ int get_csidl(const char **pPath)
 
     /* check xoblite/Litestep style special folders like $Blackbox$ */
     if (path[0]=='$' && l>=2 && path[l-1]=='$')
+	{
+		int num = 0;
+		l -= 2;
+		num = (int)l;
         /* we need upper letter case */
-        path = strupr(extract_string(buffer, path+1, l -= 2));
+        path = strupr(extract_string(buffer, path+1, num));
+	}
 
     /* search the list above */
     if (l) {
@@ -478,7 +483,7 @@ int get_csidl(const char **pPath)
             if (k == l && 0 == memcmp(path, cp, k)) {
                 /* pointer to the subfolder, or NULL */
                 *pPath = c ? psub : NULL;
-                return (id < LAST_CSIDL) ? id : xob_ids[id - LAST_CSIDL];
+                return (int) ((id < LAST_CSIDL) ? id : xob_ids[id - LAST_CSIDL]);
             }
         }
     }

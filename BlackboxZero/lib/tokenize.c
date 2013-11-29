@@ -54,7 +54,7 @@ int nexttoken(const char **p_out, const char **p_in, const char *delims)
         --e;
     skip_spc(&s);
     *p_out = a, *p_in = s;
-    return e - a;
+    return (int)(e - a);
 }
 
 /* ------------------------------------------------------------------------- */
@@ -88,7 +88,7 @@ int get_string_within (char *dest, int size, const char **p_src, const char *del
                 ++a;
             while (b > a && IS_SPC(b[-1]))
                 --b;
-            extract_string(dest, a, imin(b-a, size-1));
+            extract_string(dest, a, imin((int)(b-a), size-1));
             return 1;
         }
     }
@@ -110,7 +110,7 @@ const char *get_special_command(const char **p_path, char *buffer, int size)
     skip_spc(&b);
     while (a > in && IS_SPC(a[-1]))
         --a;
-    *p_path = extract_string(buffer, in, imin(a-in, size-1));
+    *p_path = extract_string(buffer, in, imin((int)(a-in), size-1));
     return b;
 }
 

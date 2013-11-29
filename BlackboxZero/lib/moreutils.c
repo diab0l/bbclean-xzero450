@@ -200,7 +200,7 @@ void draw_line_h(HDC hDC, int x1, int x2, int y, int w, COLORREF C)
 
 const char *get_delim(const char *path, int d)
 {
-    int nLen = strlen(path);
+    int nLen = (int)strlen(path);
     int n = nLen;
     while (n) { if (path[--n] == d) return path + n; }
     return path + nLen;
