@@ -1,0 +1,59 @@
+How to build bbLean using cmake?
+--------------------------------
+
+There are CMakeList.txt files scattered in the sources.
+
+CMakeLists.txt is the input file for cmake project generator. The generator
+then generates .vcproj, .vcxproj, makefile or whatever user required.
+
+Use command-line CMake or cmake-gui if available.
+
+Command line usage:
+-------------------
+1) go to BlackBoxZero directory
+	cd /c/devel/bb/BlackBoxZero
+2) create build directory
+	mkdir _project
+3) go to build directory
+	cd _project
+4) run generator
+	cmake -G "YOUR GENERATOR" ..
+
+where you substitute GENERATOR for your generator. For example:
+	cmake -G "Visual Studio 11 Win64" ..
+	cmake -G "Visual Studio 11" ..
+	cmake -G "Visual Studio 10 Win64" ..
+	cmake -G "Visual Studio 10" ..
+	cmake -G "Visual Studio 9 2008 Win64" ..
+	cmake -G "MinGW Makefiles" ..
+	cmake -G "MSYS Makefiles" ..
+	cmake -G "Unix Makefiles" ..
+
+Then simply call make, mingw32-make or open .sln in visual studio
+depending on what compiler you intend to use.
+
+Cmake-gui usage:
+----------------
+
+run cmake-gui and fill it like on the screenshot:
+	docs/build_with_cmake.png
+
+1) and 2) adjust paths
+3) click on configure
+4) click on generate
+
+You should see output in the bottom window
+	Configuring done
+	Generating done
+
+Then simply call make, mingw32-make or open .sln in visual studio
+depending on what compiler you intend to use.
+
+Notes:
+------
+
+To build debug version use
+mkdir _project
+cd _project
+cmake -DCMAKE_BUILD_TYPE:STRING=Debug -G "Unix Makefiles" ..
+
