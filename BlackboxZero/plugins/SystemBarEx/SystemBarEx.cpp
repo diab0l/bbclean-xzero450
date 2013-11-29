@@ -940,7 +940,9 @@ end_task_menu:  bSystemBarExHidden = false;
                 setSC(BBTokenizeIndexArray[0], BBTokenizeIndexArray[1]);
 rfr_sty:
                 GetStyleSettings(true);
-                goto rfr_all;
+                //goto rfr_all;
+                //goto rfr_all; //@NOTE: this could be dangerous
+				RefreshAll();
             }
             //-------------------------------------------------------------------
             else if (!_stricmp(broam_temp, "ReadRC")) {
@@ -964,7 +966,8 @@ rfr_sty:
                 deleteSystrayList();
                 SystrayList->clear();
                 bTrayListsUpdated = false;
-                goto rfr_all;
+                //goto rfr_all; //@NOTE: this could be dangerous
+				RefreshAll();
             }
             //-------------------------------------------------------------------
             else if (!_stricmp(broam_temp, "NoIconized"))
@@ -973,7 +976,8 @@ rfr_sty:
                     do pTaskTmp->v->IsIconized = false;
                     while (pTaskTmp = pTaskTmp->next);
                 bTaskbarListsUpdated = false;
-                goto rfr_all;
+                //goto rfr_all; //@NOTE: this could be dangerous
+				RefreshAll();
             }
             //-------------------------------------------------------------------
             else if (!_strnicmp(broam_temp, "String.ClockTip", 15))
@@ -1017,7 +1021,8 @@ rfr_sty:
 				sprintf(PlacementConfigString, "%i%i%i%i%i%i%i", PlacementStruct[0], PlacementStruct[1], PlacementStruct[2], PlacementStruct[3], PlacementStruct[4], PlacementStruct[5], PlacementStruct[6] );
 
                 UpdatePlacementOrder();
-                goto rfr_all;
+                //goto rfr_all; //@NOTE: this could be dangerous
+				RefreshAll();
             }
             //-------------------------------------------------------------------
             else if (!_strnicmp(broam_temp, "Tray", 4))
@@ -1035,7 +1040,7 @@ rfr_sty:
                     pSysTmp = pSysTmp->next;
                 }
                 bTrayListsUpdated = false;
-rfr_all:        RefreshAll();
+				RefreshAll();
             }
             //-------------------------------------------------------------------
             else {
