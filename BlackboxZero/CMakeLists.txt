@@ -24,6 +24,9 @@ if (MSVC)
 	# there are lot of warnings from using unsecure functions
 	# FIXME: get rid of this in far future
 	add_definitions(-D_CRT_SECURE_NO_WARNINGS)
+	# these are mainly conversion bigger --> lesser int type
+	# FIXME: get rid of this in far future
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /wd4267 /wd4244")
 endif (MSVC)
 
 # font tools and conversion
