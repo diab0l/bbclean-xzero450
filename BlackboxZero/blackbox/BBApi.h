@@ -244,6 +244,8 @@
 
   #define BBWS_DESKUP           28
   #define BBWS_DESKDOWN         29
+  #define BBWS_MOVEWINDOWUP     30  /* lParam: hwnd or NULL for foregroundwindow */
+  #define BBWS_MOVEWINDOWDOWN   31  /* lParam: hwnd or NULL for foregroundwindow */
 
 /*------------------------------------------ */
 #define BB_TASKSUPDATE          10506  /* For plugins: receive only */

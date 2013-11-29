@@ -377,6 +377,15 @@ LRESULT Workspaces_Command(UINT msg, WPARAM wParam, LPARAM lParam)
                     MoveWindowToWkspc(get_default_window(hwnd), next_desk(1), true);
                     break;
 
+                case BBWS_MOVEWINDOWDOWN:
+                    MoveWindowToWkspc(get_default_window(hwnd), next_desk(-nScreensX), true);
+                    break;
+
+                case BBWS_MOVEWINDOWUP:
+                    MoveWindowToWkspc(get_default_window(hwnd), next_desk(+nScreensX), true);
+                    break;
+
+
                 // ---------------------------------
                 case BBWS_PREVWINDOW:
                     NextWindow(0 != lParam /*true for all workspaces*/, -1);

@@ -1288,6 +1288,8 @@ static const struct corebroam_table {
     { "OnBackgroundWindow",     BB_WORKSPACE,       e_lptask, BBWS_TOGGLEONBG },
     { "MoveWindowLeft",         BB_WORKSPACE,       e_lptask, BBWS_MOVEWINDOWLEFT },
     { "MoveWindowRight",        BB_WORKSPACE,       e_lptask, BBWS_MOVEWINDOWRIGHT },
+    { "MoveWindowUp",           BB_WORKSPACE,       e_lptask, BBWS_MOVEWINDOWUP },
+    { "MoveWindowDown",         BB_WORKSPACE,       e_lptask, BBWS_MOVEWINDOWDOWN },
     { "MoveWindowToWS",         BB_MOVEWINDOWTON,   e_lptask|e_wpnum, 0},
     { "SendWindowToWS",         BB_SENDWINDOWTON,   e_lptask|e_wpnum, 0},
 
