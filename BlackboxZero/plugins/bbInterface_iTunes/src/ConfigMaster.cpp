@@ -532,7 +532,7 @@ bool Calculator::Eval()
 			{ *def_value = value(false); return true; }
 		return false;
     }
-    catch (const char * c) {
+    catch (const char * /*c*/) {
 //		For debug purposes.
 //		MessageBox(NULL, c, szAppName, MB_OK|MB_SYSTEMMODAL);
         return false;

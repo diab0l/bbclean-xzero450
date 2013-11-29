@@ -429,7 +429,6 @@ int agenttype_bitmaporicon_setsource(agent *a, char *parameterstring)
           "Icon Files(*.ico;*.exe;*.dll;*.icl;*.lnk)\0*.ico;*.exe;*.dll;*.icl;*.lnk\0All Files(*.*)\0*.*\0\0" };
 	const char *string_dialogext[2] = {"", ".ico"};
 	const UINT uint_loadtype[2] = {IMAGE_BITMAP, IMAGE_ICON};
-	char *pathstring;
 
 	//Get the agent details
 	agenttype_bitmap_details *details = (agenttype_bitmap_details *) a->agentdetails;	

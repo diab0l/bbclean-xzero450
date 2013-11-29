@@ -231,7 +231,6 @@ void agenttype_graph_notify(agent *a, int notifytype, void *messagedata)
 	int offset_bottom;
 	int height;
 	int currenty;
-	int xoffset;
 	double *currentvalue;
 	double finalvalue;
 	COLORREF cr;
@@ -327,8 +326,6 @@ void agenttype_graph_notify(agent *a, int notifytype, void *messagedata)
 void *agenttype_graph_getdata(agent *a, int datatype)
 {
 	agenttype_graph_details *details = (agenttype_graph_details *) a->agentdetails;
-
-	bool *boolptr;
 
 	switch (datatype)
 	{

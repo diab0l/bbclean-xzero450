@@ -212,7 +212,6 @@ void agenttype_graph_notify(agent *a, int notifytype, void *messagedata)
 	int offset_bottom;
 	int height;
 	int currenty;
-	int xoffset;
 	double *currentvalue;
 	double finalvalue;
 
@@ -258,7 +257,7 @@ void agenttype_graph_notify(agent *a, int notifytype, void *messagedata)
 				{
 					for (int currentx = width; currentx >= offset_left; currentx--)
 					{
-						currenty = offset_bottom - (height*details->valuehistory[currenthistoryindex]);
+						currenty = offset_bottom - static_cast<int>(height*details->valuehistory[currenthistoryindex]);
 						MoveToEx(di->buffer, currentx, offset_bottom, NULL);
 						LineTo(di->buffer, currentx, currenty);
 						currenthistoryindex--;
@@ -267,11 +266,11 @@ void agenttype_graph_notify(agent *a, int notifytype, void *messagedata)
 				}
 				else if (details->charttype == AGENTTYPE_GRAPH_CHARTTYPE_LINE)
 				{
-					currenty = offset_bottom - (height*details->valuehistory[currenthistoryindex]);
+					currenty = offset_bottom - static_cast<int>(height*details->valuehistory[currenthistoryindex]);
 					for (int currentx = width; currentx >= offset_left; currentx--)
 					{						
 						MoveToEx(di->buffer, currentx, currenty, NULL);
-						currenty = offset_bottom - (height*details->valuehistory[currenthistoryindex]);
+						currenty = offset_bottom - static_cast<int>(height*details->valuehistory[currenthistoryindex]);
 						LineTo(di->buffer, currentx-1, currenty);
 						currenthistoryindex--;
 						if (currenthistoryindex < 0) currenthistoryindex = AGENTTYPE_GRAPH_HISTORYLENGTH - 1;
@@ -302,8 +301,6 @@ void agenttype_graph_notify(agent *a, int notifytype, void *messagedata)
 void *agenttype_graph_getdata(agent *a, int datatype)
 {
 	agenttype_graph_details *details = (agenttype_graph_details *) a->agentdetails;
-
-	bool *boolptr;
 
 	switch (datatype)
 	{

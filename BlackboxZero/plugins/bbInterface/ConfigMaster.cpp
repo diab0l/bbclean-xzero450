@@ -306,8 +306,8 @@ bool check_mainscript_version(void)
 // Couldn't find a round() function in these include files...
 int roundtoint(double d)
 {
-	if (d >= 0.0) return ceil(d - 0.5);
-	else return floor(d + 0.5);
+	if (d >= 0.0) return static_cast<int>(ceil(d - 0.5));
+	else return static_cast<int>(floor(d + 0.5));
 }
 
 class Calculator
@@ -532,7 +532,7 @@ bool Calculator::Eval()
 			{ *def_value = value(false); return true; }
 		return false;
     }
-    catch (const char * c) {
+    catch (const char * /*c */) {
 //		For debug purposes.
 //		MessageBox(NULL, c, szAppName, MB_OK|MB_SYSTEMMODAL);
         return false;
