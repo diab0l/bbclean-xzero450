@@ -399,7 +399,7 @@ p2:
     if ((*ip=i)<1) return 0;
 
     *cp=0;
-    if (lang->flg & NOCASE) strlwr(buf);
+    if (lang->flg & NOCASE) _strlwr(buf);
 
     for (a=hashtab[hashstr(buf)];NULL!=a;a=a->next)
         if (!strcmp(a->str,buf)) return 1;

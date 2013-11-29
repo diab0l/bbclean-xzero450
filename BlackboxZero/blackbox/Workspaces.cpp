@@ -844,7 +844,7 @@ bool check_sticky_name(HWND hwnd)
     char appName[MAX_PATH];
     if (NULL == stickyNamesList || 0 == GetAppByWindow(hwnd, appName))
         return false;
-    strlwr(appName);
+    _strlwr(appName);
     dolist (sl, stickyNamesList)
         if (0==strcmp(appName, sl->str))
             return true;
@@ -879,7 +879,7 @@ ST void WS_LoadStickyNamesList(void)
     fp = FileOpen(path);
     if (fp) {
         while (ReadNextCommand(fp, buffer, sizeof (buffer)))
-            append_string_node(&stickyNamesList, strlwr(buffer));
+            append_string_node(&stickyNamesList, _strlwr(buffer));
         FileClose(fp);
     }
 }
@@ -960,7 +960,7 @@ ST void WS_LoadOnBGNamesList(void)
     fp = FileOpen(path);
     if (fp) {
         while (ReadNextCommand(fp, buffer, sizeof (buffer)))
-            append_string_node(&onBGNamesList, strlwr(buffer));
+            append_string_node(&onBGNamesList, _strlwr(buffer));
         FileClose(fp);
     }
 }
@@ -971,7 +971,7 @@ bool check_onbg_name(HWND hwnd)
     char appName[MAX_PATH];
     if (NULL == onBGNamesList || 0 == GetAppByWindow(hwnd, appName))
         return false;
-    strlwr(appName);
+    _strlwr(appName);
     dolist (sl, onBGNamesList)
         if (0==strcmp(appName, sl->str))
             return true;

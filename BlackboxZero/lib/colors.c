@@ -285,7 +285,7 @@ COLORREF ReadColorFromString(const char* string)
     if (NULL == string)
         return CLR_INVALID;
 
-    s = strlwr(unquote(strcpy_max(stub, string, sizeof stub)));
+    s = _strlwr(unquote(strcpy_max(stub, string, sizeof stub)));
 
     /* check if its an "rgb:12/ee/4c" type string */
     if (0 == memcmp(s, "rgb:", 4)) {

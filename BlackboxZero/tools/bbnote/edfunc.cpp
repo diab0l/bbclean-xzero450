@@ -1882,7 +1882,7 @@ int ed_search(struct sea *sea) {
     p=strcpy(bstr,q=strcpy(cstr,q));
 
     if (0==(sf&16))             //ignore case
-        strlwr(q), strupr(p);
+        _strlwr(q), strupr(p);
 
     for (;m!=i;m+=k)
         if ((e=getchr(m))==q[0]||e==p[0])

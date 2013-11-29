@@ -245,7 +245,7 @@ bool make_exclusion_list(void)
             FileClose(fp);
             break;
         }
-        strlwr(line = line_buffer);
+        _strlwr(line = line_buffer);
         option = 0;
         if (0 == _memicmp (line, "hook-early:", 11))
         {

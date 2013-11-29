@@ -1377,7 +1377,7 @@ void icon_box::common_broam(const char *temp)
             || 0 == memcmp(path, "TASK", 4)
             || 0 == strcmp(path, "PAGER")
             ) {
-            strlwr(strcpy(name, path));
+            _strlwr(strcpy(name, path));
 
         } else {
             struct pidl_node *pidl_list = get_folder_pidl_list(path);

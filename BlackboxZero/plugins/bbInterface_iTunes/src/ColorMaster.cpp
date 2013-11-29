@@ -285,7 +285,7 @@ COLORREF ReadColorFromString(char * string)
 {
     if (NULL == string) return (COLORREF)-1;
     char rgbstr[7];
-    char *s = strlwr(string);
+    char *s = _strlwr(string);
     if ('#'==*s) s++;
     for (;;)
     {

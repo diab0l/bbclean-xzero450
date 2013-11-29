@@ -522,7 +522,7 @@ end_0:
 int is_makefile(const char *name)
 {
     char path[MAX_PATH];
-    return !!strstr(strlwr(strcpy(path, name)), "makefile");
+    return !!strstr(_strlwr(strcpy(path, name)), "makefile");
 }
 
 /*----------------------------------------------------------------------------*/

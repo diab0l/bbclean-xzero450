@@ -49,7 +49,7 @@ const char *get_root_switch(int n)
 ST int next_token(struct rootinfo *r)
 {
     int s = E_eos;
-    strlwr(NextToken(r->token, &r->cptr, " "));
+    _strlwr(NextToken(r->token, &r->cptr, " "));
     r->flag = 1;
     if (r->token[0]) {
         const char * p = r->token;

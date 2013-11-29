@@ -248,7 +248,7 @@ display:
         else
             get_shell(buffer);
 
-        strlwr(strcpy(temp, buffer));
+        _strlwr(strcpy(temp, buffer));
 
         if (0 == _stricmp(temp, szBlackbox)) {
             id = IDC_RBN1;

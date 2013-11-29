@@ -221,7 +221,7 @@ int _memicmp(const void *a, const void *b, unsigned n)
     return 0;
 }
 
-char *strlwr(char *p)
+char *_strlwr(char *p)
 {
     char *a; int c, d;
     for (a = p; 0 != (c = *a); ++a)
@@ -1326,7 +1326,7 @@ int set_flags(struct line_node *lines)
                     char buffer[100];
                     char url[100];
 
-                    strlwr(strcpy(buffer, si));
+                    _strlwr(strcpy(buffer, si));
                     make_url(url, buffer);
                     sprintf(buffer, "chapter-%d", l->chapter);
                     set_val(buffer, url);
@@ -1716,7 +1716,7 @@ int main (int argc, char *argv[])
     {
         while (fgets(line, sizeof line, fp))
         {
-            strlwr(line);
+            _strlwr(line);
             if (strstr(line, "<frameset"))
                 { framed_mode = true; break; }
         }

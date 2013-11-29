@@ -544,7 +544,7 @@ bool read_from_style(const char *filename_3dc, COLORREF *cr_buffer)
         while (fgets(line, sizeof line, fp))
         {
             if (('!' == *line || '#' == *line)
-                && strstr(strlwr(line), "3dc")
+                && strstr(_strlwr(line), "3dc")
                 && (strstr(line, filename_3dc) || strstr(line, "start"))
                 && !strstr(line, "rootcommand:")
                 && parse_3dc(fp, cr_buffer)
@@ -586,7 +586,7 @@ bool read_3dc(COLORREF *cr_buffer)
     char style_path[MAX_PATH];
     char filename_3dc[MAX_PATH];
 
-    strlwr(strcpy(style_path, stylePath()));
+    _strlwr(strcpy(style_path, stylePath()));
 
     char *dot = strrchr(style_path, '.');
     char *bsl = strrchr(style_path, '\\');

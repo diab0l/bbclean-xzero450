@@ -222,7 +222,7 @@ skip:
         case e_begin:
         case e_submenu:
             sprintf(buffer, "%s_%s", IDString, label);
-            strlwr(buffer + strlen(IDString));
+            _strlwr(buffer + strlen(IDString));
             pSub = ParseMenu(src, p_data, buffer);
             if (pSub)
                 pItem = MakeSubmenu(pMenu, pSub, label);
@@ -335,7 +335,7 @@ skip:
         // everything else is converted to a '@BBCore.xxx' broam
         core_broam:
             f = sprintf(buffer, "@bbCore.%s", command);
-            strlwr(buffer+8);
+            _strlwr(buffer+8);
             if (p_data[0])
                 sprintf(buffer + f, " %s", p_data);
             pItem = MakeMenuItem(pMenu, label[0]?label:command, buffer, false);
@@ -356,7 +356,7 @@ char *Core_IDString(char *buffer, const char *menu_id)
 {
     const char id[] = "Core_";
     memcpy(buffer, id, sizeof id-1);
-    strlwr(strcpy(buffer + sizeof id-1, menu_id));
+    _strlwr(strcpy(buffer + sizeof id-1, menu_id));
     return buffer;
 }
 

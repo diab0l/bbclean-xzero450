@@ -490,7 +490,7 @@ double get_range_value(double value){
 double ReadValueFromString(char * string){
 	double val=0;
 	if(string == NULL) return -1.0;
-	char *s = strlwr(string);
+	char *s = _strlwr(string);
 	while(*s == ' ') s++;
 	char *p;
 	for(p=s;*p!='\0';p++){

@@ -1319,7 +1319,7 @@ int GetAppByWindow(HWND hwnd, char* processName)
                     }
                 } while (pModule32Next(hPr, &me));
             }
-            strlwr(processName);
+            _strlwr(processName);
             CloseHandle(hPr);
         }
     }

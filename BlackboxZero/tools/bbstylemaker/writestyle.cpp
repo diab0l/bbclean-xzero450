@@ -520,7 +520,7 @@ struct lin_list* make_wildcard(
 
     char wbuf[200];
     int m, n;
-    strlwr(strcpy(wbuf, wc));
+    _strlwr(strcpy(wbuf, wc));
 
     // first build a list of all items that match the suggested wildcard
     dolist (sl, fl->lines) {

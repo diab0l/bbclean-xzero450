@@ -121,7 +121,7 @@ ST int translate_key070(char *key)
     if (key[l-1] == ':')
         key[--l] = 0;
 
-    strlwr(key);
+    _strlwr(key);
     if (NULL != (d = strstr(key, "hilite")))
         memcpy(d, "active", 6), r = 1;
 
@@ -296,7 +296,7 @@ int is_stylefile(const char *path)
     char *temp = read_file_into_buffer(path, 10000);
     int r = false;
     if (temp) {
-        r = NULL != strstr(strlwr(temp), "menu.frame");
+        r = NULL != strstr(_strlwr(temp), "menu.frame");
         m_free(temp);
     }
     return r;
@@ -1040,7 +1040,7 @@ int findtex(const char *p, int prop)
 void parse_item(LPCSTR szItem, StyleItem *item)
 {
     char buf[256]; int t;
-    strlwr(strcpy(buf, szItem));
+    _strlwr(strcpy(buf, szItem));
     t = item->parentRelative = NULL != strstr(buf, "parentrelative");
     if (t) {
         item->type = item->bevelstyle = item->bevelposition = item->interlaced = 0;
