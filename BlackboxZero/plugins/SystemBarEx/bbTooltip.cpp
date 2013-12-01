@@ -114,7 +114,7 @@ void bbTooltip::Start(HINSTANCE h_host_instance, HWND h_host, bbTooltipInfo *p_i
         m_hostInstance,
         NULL);
 
-    SetWindowLongPtr(m_TipHwnd, GWLP_USERDATA, (long)this);
+    SetWindowLongPtr(m_TipHwnd, GWLP_USERDATA, (LONG_PTR)this);
 
     m_hSecondaryBuf = CreateCompatibleDC(NULL);
     m_hBitmapNull = (HBITMAP)SelectObject(m_hSecondaryBuf, CreateCompatibleBitmap(m_hSecondaryBuf, 2, 2));

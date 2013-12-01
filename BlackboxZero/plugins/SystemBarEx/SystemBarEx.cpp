@@ -14,6 +14,7 @@
  --------------------------------------------------------------------------------*/
 #include "sbex.h"
 #include "SystemBarEx.h"
+#include "win0x500.h"
 
 //bool multipleInstances = false;
 //int	numberInstances = 0;

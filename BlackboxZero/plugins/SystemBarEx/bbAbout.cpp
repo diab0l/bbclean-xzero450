@@ -53,7 +53,7 @@ bbAbout::bbAbout(HINSTANCE h_host_instance, bbAbout **p_this) {
         m_hostInstance,
         NULL);
 
-    SetWindowLongPtr(m_AboutHwnd, GWLP_USERDATA, (long)this);
+    SetWindowLongPtr(m_AboutHwnd, GWLP_USERDATA, (LONG_PTR)this);
 
     m_hSecondaryBuf = CreateCompatibleDC(NULL);
     m_hBitmapNull = (HBITMAP)SelectObject(m_hSecondaryBuf, CreateCompatibleBitmap(m_hSecondaryBuf, 2, 2));
