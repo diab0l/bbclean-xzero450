@@ -1,40 +1,11 @@
 project(BlackboxZero)
 cmake_minimum_required(VERSION 2.8.9)
 set(CMAKE_VERBOSE_MAKEFILE on)
-set_property(GLOBAL PROPERTY USE_FOLDERS ON)
-#set(CMAKE_INSTALL_PREFIX "c:/bbLean_M")
 
-set (CLEAN_FILES
-  bbnote.ini
-  docs/bbnote.*
-  bbstylemaker.rc
-  docs/bbstylemaker.txt
-  docs/nls-c.txt
-  bsetroot.rc
-  docs/bsetroot.*
-  docs/*.bmp
-  *.exe *.dll
-)
+# use this for develoment, if you do not pass it from command line:
+#set(CMAKE_INSTALL_PREFIX "c:/bbLean_XZ_devel")
 
-if (MINGW)
-	set(CMAKE_SHARED_LIBRARY_PREFIX "")
-	add_definitions(-DPTW32_STATIC_LIB)
-endif (MINGW)
-
-if( ${CMAKE_COMPILER_IS_GNUCXX} )
-	add_definitions(-static-libgcc)
-	add_definitions(-static-libstdc++)
-	set(CMAKE_CXX_LINK_EXECUTABLE "${CMAKE_CXX_LINK_EXECUTABLE} -static-libgcc -static-libstdc++ -lpthread")
-endif( ${CMAKE_COMPILER_IS_GNUCXX} )
-
-if (MSVC)
-	# there are lot of warnings from using unsecure functions
-	# FIXME: get rid of this in far future
-	add_definitions(-D_CRT_SECURE_NO_WARNINGS)
-	# these are mainly conversion bigger --> lesser int type
-	# FIXME: get rid of this in far future
-	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /wd4267 /wd4244")
-endif (MSVC)
+include(build/compiler.cmake)
 
 # font tools and conversion
 add_subdirectory(build/bdf2fon)
@@ -89,18 +60,10 @@ add_subdirectory(plugins/BBStyle)
 add_subdirectory(plugins/bbRecycleBin)
 add_subdirectory(plugins/bbInterface)
 
-
-if( CMAKE_SIZEOF_VOID_P EQUAL 8 )
-	set(buildbits 64)
-else( CMAKE_SIZEOF_VOID_P EQUAL 8 )
-	set(buildbits 32)
-endif( CMAKE_SIZEOF_VOID_P EQUAL 8 )
-
-# mingw 64 bit does not work yet!
+# NOTE: mingw 64 bit does not work yet!
 if (MSVC)
 	add_subdirectory(plugins/SystemBarEx)
 endif (MSVC)
-
 if (MINGW)
 	if (NOT ${buildbits} MATCHES "64")
 		add_subdirectory(plugins/SystemBarEx)
@@ -133,6 +96,19 @@ set(main_RESOURCES
 
 install_if_absent(${main_RESOURCES})
 install(DIRECTORY styles backgrounds DESTINATION .)
+
+# not used (yet).. from old makefiles
+set (CLEAN_FILES
+  bbnote.ini
+  docs/bbnote.*
+  bbstylemaker.rc
+  docs/bbstylemaker.txt
+  docs/nls-c.txt
+  bsetroot.rc
+  docs/bsetroot.*
+  docs/*.bmp
+  *.exe *.dll
+)
 
 
 
