@@ -81,7 +81,24 @@ add_subdirectory(plugins/BBPager)
 add_subdirectory(plugins/BBStyle)
 add_subdirectory(plugins/bbRecycleBin)
 add_subdirectory(plugins/bbInterface)
-add_subdirectory(plugins/SystemBarEx)
+
+
+if( CMAKE_SIZEOF_VOID_P EQUAL 8 )
+	set(buildbits 64)
+else( CMAKE_SIZEOF_VOID_P EQUAL 8 )
+	set(buildbits 32)
+endif( CMAKE_SIZEOF_VOID_P EQUAL 8 )
+
+# mingw 64 bit does not work yet!
+if (MSVC)
+	add_subdirectory(plugins/SystemBarEx)
+endif (MSVC)
+
+if (MINGW)
+	if (NOT ${buildbits} MATCHES "64")
+		add_subdirectory(plugins/SystemBarEx)
+	ENDIF()
+endif (MINGW)
 
 # tools
 add_subdirectory(tools/bsetshell)
