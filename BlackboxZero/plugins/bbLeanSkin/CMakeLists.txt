@@ -46,7 +46,6 @@ add_library(${target_name}
 	SHARED
 	engine/hookctl.cpp
 	engine/subclass.cpp
-	${CMAKE_SOURCE_DIR}/blackbox/BImage.cpp
 )
 target_link_libraries(${target_name} blackbox bblib bbPlugin)
 target_link_libraries(${target_name} version comctl32)

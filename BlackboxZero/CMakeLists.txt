@@ -18,7 +18,14 @@ set (CLEAN_FILES
 
 if (MINGW)
 	set(CMAKE_SHARED_LIBRARY_PREFIX "")
+	add_definitions(-DPTW32_STATIC_LIB)
 endif (MINGW)
+
+if( ${CMAKE_COMPILER_IS_GNUCXX} )
+	add_definitions(-static-libgcc)
+	add_definitions(-static-libstdc++)
+	set(CMAKE_CXX_LINK_EXECUTABLE "${CMAKE_CXX_LINK_EXECUTABLE} -static-libgcc -static-libstdc++ -lpthread")
+endif( ${CMAKE_COMPILER_IS_GNUCXX} )
 
 if (MSVC)
 	# there are lot of warnings from using unsecure functions

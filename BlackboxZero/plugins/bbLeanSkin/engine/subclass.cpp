@@ -29,6 +29,7 @@
 #include "hookinfo.h"
 #include "subclass.h"
 #include "drawico.h"
+#include "BImage.cpp" // @TODO: remove @NOTE: when in CMakeList it is a problem for eclipse to read makefiles
 
 #define array_count(ary) (sizeof(ary) / sizeof(ary[0]))
 
