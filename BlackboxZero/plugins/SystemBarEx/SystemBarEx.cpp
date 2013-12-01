@@ -14,7 +14,22 @@
  --------------------------------------------------------------------------------*/
 #include "sbex.h"
 #include "SystemBarEx.h"
-#include "win0x500.h"
+
+// @NOTE: copy from file windef.h from mingw64
+// this is a mingw64 specific thing, elsewhere the min max is defined
+// @NOTE: min, max should be replaced by std::min and std::max preferably
+#if defined __MINGW64__
+#	ifndef NOMINMAX
+#		ifndef max
+#			define max(a,b) (((a) > (b)) ? (a) : (b))
+#		endif
+
+#		ifndef min
+#			define min(a,b) (((a) < (b)) ? (a) : (b))
+#		endif
+#	endif
+#endif
+
 
 //bool multipleInstances = false;
 //int	numberInstances = 0;
