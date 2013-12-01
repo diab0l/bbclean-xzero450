@@ -101,13 +101,6 @@ EXTERN_C BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvRese
     return TRUE;
 }
 
-void *memset(void *d, int c, unsigned l)
-{
-    char *p = (char *)d;
-    while (l) *p++ = c, --l;
-    return d;
-}
-
 void post_click(int n)
 {
     unsigned wParam = 0;
