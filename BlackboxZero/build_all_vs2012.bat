@@ -7,7 +7,7 @@ cmake -G "Visual Studio 11 Win64" -DCMAKE_INSTALL_PREFIX:PATH=c:/bbZero.vs64 ..
 if %errorlevel% neq 0 goto TERM
 call "C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\vcvarsall.bat" x86_amd64
 if %errorlevel% neq 0 goto TERM
-devenv BlackBoxZero.sln /build RelWithDebInfo
+devenv BlackBoxZero.sln /build RelWithDebInfo /project INSTALL
 if %errorlevel% neq 0 goto TERM
 rem devenv BlackBoxZero.sln /build Debug /project INSTALL
 rem devenv BlackBoxZero.sln /build ReleaseWithDebugInfo
@@ -20,7 +20,7 @@ cmake -G "Visual Studio 11 Win64" -DCMAKE_INSTALL_PREFIX:PATH=c:/bbZero.vs64.dbg
 if %errorlevel% neq 0 goto TERM
 call "C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\vcvarsall.bat" x86_amd64
 if %errorlevel% neq 0 goto TERM
-devenv BlackBoxZero.sln /build Debug
+devenv BlackBoxZero.sln /build Debug /project INSTALL
 if %errorlevel% neq 0 goto TERM
 
 cd ..
@@ -31,7 +31,7 @@ cmake -G "Visual Studio 11" -DCMAKE_INSTALL_PREFIX:PATH=c:/bbZero.vs32 ..
 if %errorlevel% neq 0 goto TERM
 call "C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\vcvarsall.bat" x86
 if %errorlevel% neq 0 goto TERM
-devenv BlackBoxZero.sln /build  RelWithDebInfo
+devenv BlackBoxZero.sln /build  RelWithDebInfo /project INSTALL
 if %errorlevel% neq 0 goto TERM
 
 cd ..
@@ -42,7 +42,7 @@ cmake -G "Visual Studio 11" -DCMAKE_INSTALL_PREFIX:PATH=c:/bbZero.vs32.dbg ..
 if %errorlevel% neq 0 goto TERM
 call "C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\vcvarsall.bat" x86
 if %errorlevel% neq 0 goto TERM
-devenv BlackBoxZero.sln /build Debug
+devenv BlackBoxZero.sln /build Debug /project INSTALL
 if %errorlevel% neq 0 goto TERM
 
 rem devenv BlackBoxZero.sln [options] solutionconfig /project bbLeanSkin32

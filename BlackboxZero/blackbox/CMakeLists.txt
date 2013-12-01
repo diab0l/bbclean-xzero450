@@ -82,7 +82,7 @@ install(TARGETS blackbox
 if(MSVC)
   install(FILES ${CMAKE_CURRENT_BINARY_DIR}/Debug/blackbox.pdb
 	DESTINATION .
-#    CONFIGURATIONS Debug
+    CONFIGURATIONS Debug
     )
 endif(MSVC)
 
