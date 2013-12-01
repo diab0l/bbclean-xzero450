@@ -2,19 +2,19 @@
 # this file is intended for usage in MSYS terminal
 
 echo 32bit...
-mkdir _projects.mingw.32
+mkdir _projects.msys.32
+cd _projects.msys.32
 export PATH=/c/mingw/bin:$PATH
-cd _projects.mingw.32
-cmake -G "MSYS Makefiles" -DCMAKE_INSTALL_PREFIX:PATH=c:/bbZero.mingw32 ..
+cmake -G "MSYS Makefiles" -DCMAKE_INSTALL_PREFIX:PATH=c:/bbZero.msys32 ..
 make all install
 
 cd ..
 
 echo 32bit...
-mkdir _projects.mingw.64
-cd _projects.mingw.64
+mkdir _projects.msys.64
+cd _projects.msys.64
 export PATH=/c/mingw64/bin:$PATH
-cmake -G "MSYS Makefiles" -DCMAKE_INSTALL_PREFIX:PATH=c:/bbZero.mingw64 ..
+cmake -G "MSYS Makefiles" -DCMAKE_INSTALL_PREFIX:PATH=c:/bbZero.msys64 ..
 make all install
 
 
