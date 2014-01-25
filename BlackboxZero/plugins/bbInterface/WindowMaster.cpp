@@ -180,7 +180,8 @@ int window_create(control *c)
 
 	// Check to make sure it's okay
 	if (NULL == hwnd)
-	{                          
+	{                
+		DWORD err = GetLastError();
 		if (!plugin_suppresserrors)
 			BBMessageBox(0, "Error creating window", szVersion, MB_OK | MB_ICONERROR | MB_TOPMOST);
 
@@ -397,7 +398,7 @@ void window_save()
 
 LRESULT CALLBACK window_event(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
-	control *controlpointer = (control *)GetWindowLong(hwnd, 0);
+	control *controlpointer = reinterpret_cast<control *>(GetWindowLongPtr(hwnd, 0));
 	bool is_locked_frame(control *c);
 
 	if (NULL == controlpointer)
@@ -407,7 +408,7 @@ LRESULT CALLBACK window_event(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 			// ---------------------------------------------------
 			// bind the window to the control structure
 			controlpointer = (control*)((CREATESTRUCT*)lParam)->lpCreateParams;
-			SetWindowLong(hwnd, 0, (LONG_PTR) controlpointer);
+			SetWindowLongPtr(hwnd, 0, reinterpret_cast<LONG_PTR>(controlpointer));
 			controlpointer->windowptr->hwnd = hwnd;
 		}
 		return DefWindowProc(hwnd, msg, wParam, lParam);
