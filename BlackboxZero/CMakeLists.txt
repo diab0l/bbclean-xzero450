@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 2.8.9)
 set(CMAKE_VERBOSE_MAKEFILE on)
 
 # use this for develoment, if you do not pass it from command line:
-set(CMAKE_INSTALL_PREFIX "c:/bbLean_devel")
+set(CMAKE_INSTALL_PREFIX "c:/bbLean_devel32")
 
 include(build/compiler.cmake)
 
