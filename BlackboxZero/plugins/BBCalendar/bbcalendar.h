@@ -31,9 +31,9 @@
 #ifndef __BBCALENDAR_H
 #define __BBCALENDAR_H
 
-#ifndef ULONG_PTR
+/*#ifndef ULONG_PTR
 #define ULONG_PTR DWORD
-#endif
+#endif*/
 
 #ifndef WS_EX_LAYERED
 #define WS_EX_LAYERED	0x00080000
@@ -84,15 +84,17 @@
 #define DAYSFONT	2
 #define DEFAULT		3
 
-#include <windows.h>
-#include <time.h>
-#include "BBApi.h"
-#include "AggressiveOptimize.h"
+//#include <windows.h>
 
-#pragma comment(lib, "Blackbox.lib")
-#pragma comment(lib, "winmm.lib")
-#pragma comment(lib, "comdlg32.lib")
-#pragma comment(lib, "msimg32.lib") 
+#include <BBApi.h>
+//#include "AggressiveOptimize.h"
+#include <time.h>
+
+// mojmir: not needed, cmake handles this
+//#pragma comment(lib, "Blackbox.lib")
+//#pragma comment(lib, "winmm.lib")
+//#pragma comment(lib, "comdlg32.lib")
+//#pragma comment(lib, "msimg32.lib") 
 
 
 //#include "StdAfx.h"

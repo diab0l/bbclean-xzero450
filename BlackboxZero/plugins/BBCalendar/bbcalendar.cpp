@@ -28,6 +28,8 @@
 */
 
 #include "bbcalendar.h"
+#include <commdlg.h>
+#include <stdlib.h>
 //#include "resource.h"
 
 LPSTR szAppName = "BBCalendar";		// The name of our window class, etc.
@@ -110,7 +112,16 @@ int beginPlugin(HINSTANCE hPluginInstance)
 	// Register to receive Blackbox messages...
 	SendMessage(hwndBlackbox, BB_REGISTERMESSAGE, (WPARAM)hwndBBCalendar, (LPARAM)msgs);
 	// Set magicDWord to make the window sticky (same magicDWord that is used by LiteStep)...
+
+	//mojmir: from BBAPI originaly packed with this plugin. is this necessary?
+	const long magicDWord = 0x49474541; // obsolete
+
+#ifdef _WIN64
+	SetWindowLongPtr(hwndBBCalendar, GWLP_USERDATA, magicDWord);
+#else
 	SetWindowLong(hwndBBCalendar, GWL_USERDATA, magicDWord);
+#endif
+	
 	// Make the window AlwaysOnTop?
 	if(alwaysOnTop) SetWindowPos(hwndBBCalendar, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOACTIVATE | SWP_NOSIZE | SWP_NOMOVE);
 	// Show the window and force it to update...
@@ -2263,8 +2274,8 @@ sprintf(htime,"day%i.s:",n);
 s = ReadInt(freeformpath, htime, 1);
 ur.right = ur.left + 100;
 ur.bottom = ur.top + 100;
-char *nn;
-itoa(n,nn,10); 
+char *nn = 0;
+_itoa(n,nn,10); 
 
 drawRect(hdc,BUTTON,ur,NULL,"dfsafdf");
 DrawText(hdc, "dddd", -1, &ur, DT_VCENTER | DT_CENTER | DT_SINGLELINE);}
@@ -2320,7 +2331,7 @@ void getAlarms()
 		if (alarm[0] != '!') isAlarm[i] = true;
 	}
 	
-	for (i = 0;i<31;i++) 
+	for (int i = 0;i<31;i++) 
 	{
 		isMAlarm[i] = false;
 		sprintf(htime,"%.2d.NN.NNNN:",i+1);
@@ -2330,7 +2341,7 @@ void getAlarms()
 		if (alarm[0] != '!') isMAlarm[i] = true;
 	}
 
-	for (i = 0;i<31;i++) 
+	for (int i = 0;i<31;i++) 
 	{
 		isYAlarm[i] = false;
 		sprintf(htime,"%.2d.%.2d.NNNN:",i+1,month);
