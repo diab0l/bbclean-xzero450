@@ -1,0 +1,38 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: BBPager - Win32 Release--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\DOCUME~1\Laurence\LOCALS~1\Temp\RSP144.tmp" with contents
+[
+/nologo /MD /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_MBCS" /D "_USRDLL" /D "BBPAGER_EXPORTS" /D WINVER=0x0500 /Fp"Release/BBPager.pch" /YX /Fo"Release/" /Fd"Release/" /FD /c 
+"D:\Src\cvs\plugins\BBPager\BBPager.cpp"
+]
+Creating command line "cl.exe @C:\DOCUME~1\Laurence\LOCALS~1\Temp\RSP144.tmp" 
+Creating temporary file "C:\DOCUME~1\Laurence\LOCALS~1\Temp\RSP145.tmp" with contents
+[
+kernel32.lib user32.lib gdi32.lib ../../blackbox/release/Blackbox.lib /nologo /dll /incremental:no /pdb:"Release/BBPager.pdb" /machine:I386 /out:"Release/BBPager.dll" /implib:"Release/BBPager.lib" /opt:nowin98 
+.\Release\BBPager.obj
+.\Release\Drawing.obj
+.\Release\Settings.obj
+.\Release\StdAfx.obj
+.\Release\Style.obj
+.\Release\resource.res
+]
+Creating command line "link.exe @C:\DOCUME~1\Laurence\LOCALS~1\Temp\RSP145.tmp"
+<h3>Output Window</h3>
+Compiling...
+BBPager.cpp
+Linking...
+   Creating library Release/BBPager.lib and object Release/BBPager.exp
+
+
+
+<h3>Results</h3>
+BBPager.dll - 0 error(s), 0 warning(s)
+</pre>
+</body>
+</html>

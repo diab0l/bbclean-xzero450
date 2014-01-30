@@ -1,0 +1,28 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: BB8Ball - Win32 Release--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\DOCUME~1\Admin\LOCALS~1\Temp\RSP299.tmp" with contents
+[
+/nologo /MD /W4 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_MBCS" /D "_USRDLL" /D "BBANALOG_EXPORTS" /Fo"Release/" /Fd"Release/" /FD /c 
+"G:\!!_Work\BB8Ball\BB8Ball.cpp"
+]
+Creating command line "cl.exe @C:\DOCUME~1\Admin\LOCALS~1\Temp\RSP299.tmp" 
+Creating command line "link.exe kernel32.lib user32.lib gdi32.lib /nologo /dll /incremental:no /pdb:"Release/BB8Ball.pdb" /machine:I386 /out:"Release/BB8Ball.dll" /implib:"Release/BB8Ball.lib" /opt:nowin98  ".\Release\BB8Ball.obj" ".\Release\Resource.res" "
+<h3>Output Window</h3>
+Compiling...
+BB8Ball.cpp
+Linking...
+   Creating library Release/BB8Ball.lib and object Release/BB8Ball.exp
+
+
+
+<h3>Results</h3>
+BB8Ball.dll - 0 error(s), 0 warning(s)
+</pre>
+</body>
+</html>

@@ -1,0 +1,323 @@
+<html>
+	<head>
+		<title>BBCalendar</title>
+		<style> BODY { MARGIN-TOP: 5px; SCROLLBAR-FACE-COLOR: #636363; SCROLLBAR-HIGHLIGHT-COLOR: #737373; MARGIN-LEFT: 5px; SCROLLBAR-SHADOW-COLOR: #535353; SCROLLBAR-3DLIGHT-COLOR: #737373; SCROLLBAR-ARROW-COLOR: #ffffff; SCROLLBAR-TRACK-COLOR: #333333; SCROLLBAR-DARKSHADOW-COLOR: #535353; BACKGROUND-COLOR: #333333 }
+	A:hover { COLOR: #888888 }
+	.myhover A:hover { COLOR: #888888 }
+	HR { COLOR: #666666; HEIGHT: 1px }
+	TABLE { FONT-WEIGHT: normal; FONT-SIZE: 8pt; COLOR: #ffffff; FONT-FAMILY: Tahoma; TEXT-ALIGN: left }
+	SPAN { COLOR: #777777 }
+	SPAN.desc { COLOR: #bbbbbb }
+	SPAN.example { COLOR: #555555 }
+	</style>
+		<!-- ---------- --></head>
+	<body text="#ffffff" vLink="#aaaaaa" aLink="#aaaaaa" link="#aaaaaa" bgColor="#333333" leftMargin="5" topMargin="5">
+		<table cellSpacing="2" cellPadding="0" align="center" border="0">
+			<!-- ---------- -->
+			<tr>
+				<td colSpan="2">
+					<table borderColor="#666666" cellSpacing="0" cellPadding="10" width="100%" border="1">
+						<tr bgColor="#555555">
+							<td><font size="+1">BBCalendar&nbsp;
+									<span class="desc">v1.0rc1</span></font>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td vAlign="top">
+					<!-- ---------- -->
+					<table borderColor="#555555" cellSpacing="0" cellPadding="10" width="300" border="1">
+						<tr>
+							<td bgColor="#444444">
+								<center><font color="#777777"><b>description</b></font></center>
+							</td>
+						</tr>
+						<tr bgColor="#333333">
+							<td>BBCalendar&nbsp;is a&nbsp;calendar&nbsp;plugin for <a href="http://desktopian.org/bb/">
+									Blackbox for Windows</a>.
+								
+								<P>BBCalendar&nbsp;v1.0rc1 requirements not ser.</P>
+							</td>
+						</tr>
+						<!-- ---------- -->
+						<tr>
+							<td bgColor="#444444">
+								<center><font color="#777777"><b>revision history</b></font></center>
+							</td>
+						</tr>
+						<tr bgColor="#333333">
+							<td>
+								<p>BBCalendar&nbsp;1.0 (2004-05-31) / <A href="mailto:theo.devil@gmx.net">Theo</A>
+									<span>
+								<li>
+									Original release.</span>
+								</LI></td>
+						</tr>
+						<!-- ---------- -->
+						<tr>
+							<td bgColor="#444444">
+								<center><font color="#777777"><b>future releases?</b></font></center>
+							</td>
+						</tr>
+						<tr bgColor="#333333">
+							<td>
+								<li>
+									&nbsp;</li>
+							</td>
+						</tr>
+						<tr>
+							<td bgColor="#444444">
+								<center><font color="#777777"><b>known issues</b></font></center>
+							</td>
+						</tr>
+						<tr bgColor="#333333">
+							<td>
+								<li>
+									No known issues, but if anyone finds a bug, or discovers an issue, please let 
+									me know. I don't have a windows 9x or ME machine to test anything, so if any 
+									user using one of those systems has a problem, let me know, and I will try to 
+									work with you.
+								</li>
+							</td>
+						</tr>
+						<!-- ---------- -->
+						<tr>
+							<td bgColor="#444444">
+								<center><font color="#777777"><b>license information</b></font></center>
+							</td>
+						</tr>
+						<tr bgColor="#333333">
+							<td>
+							    <span class="desc">© 2004&nbsp;Miroslav 
+            Petrasko&nbsp;[Theo]</span>
+								<p><span>BBCALENDAR IS 
+            PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND. THE AUTHOR DISCLAIMS 
+            ALL WARRANTIES, EITHER EXPRESS OR IMPLIED, INCLUDING THE WARRANTIES 
+            OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. IN NO EVENT 
+            SHALL THE AUTHOR OR ITS SUPPLIERS BE LIABLE FOR ANY DAMAGES 
+            WHATSOEVER INCLUDING DIRECT, INDIRECT, INCIDENTAL, CONSEQUENTIAL, 
+            LOSS OF BUSINESS PROFITS OR SPECIAL DAMAGES, EVEN IF THE AUTHOR OR 
+            ITS SUPPLIERS HAVE BEEN ADVISED OF THE POSSIBILITY OF SUCH 
+            DAMAGES.</span></p>
+							</td>
+						</tr>
+					</table>
+					<!-- ---------- --></td>
+				<td vAlign="top">
+					<!-- ---------- -->
+					<table borderColor="#555555" cellSpacing="0" cellPadding="10" width="500" border="1">
+						<tr>
+							<td bgColor="#222222">
+								<table width="100%" bgColor="#333333">
+									<tr>
+										<td>
+											<center><span class="desc">initial 
+              setup</span></center>
+										</td>
+									</tr>
+								</table>
+								<p>To load BBCalendar you simply need to add the relative path of the plugin (from 
+									your Blackbox directory) to the Blackbox configuration file
+									<span>plugins.rc</span>
+								(located in the Blackbox directory). For example, if you installed Blackbox 
+								into c:\Blackbox, and BBCalendar.dll is located in c:\Blackbox\plugins\BBCalendar\, 
+								you should add the line...
+								<p><span>plugins\BBCalendar\BBCalendar.dll</span>
+									<br>
+									for when you are not loading the BBSlit plugin. Or...<br>
+									<span>&plugins\BBCalendar\BBCalendar.dll</span>
+									<br>
+								for when loading it with or in the BBSlit plugin.
+								<P>
+								...to plugins.rc. Simple, eh? :) Make sure to note the '&' at the beginning of 
+								the second load line.
+								<p>You should also have a look at the
+									<span>BBCalendar.rc</span>
+								file&nbsp;after you load the plugin, in case there are any settings you would 
+								want to customise. The file will be saved if there is no file found.&nbsp; You 
+								can access this file by right clicking on the plugin and choosing the 
+								"Settings" submenu, then choose&nbsp;"Edit Settings".&nbsp; These settings are 
+								shown below. 
+								<!-- ---------- -->
+								<p>
+									<table width="100%" bgColor="#333333">
+										<tr>
+											<td>
+												<center><span class="desc">how to use 
+              BBCalendar...</span></center>
+											</td>
+										</tr>
+									</table>
+								<p><b><u>Mouse Input</u></b>
+								<p>
+								Once the plugin is loaded,&nbsp;a few&nbsp;things can be done with a simple 
+								click on the&nbsp;BBCalendar window.
+								<p><span class="desc">Left 
+            Click&nbsp;&nbsp;<span>none</span> <br>Left Click + Ctrl&nbsp;&nbsp;<span> &nbsp;none</span>&nbsp;<br>Double Left Click&nbsp;&nbsp;<span>&nbsp;Displays the Date/Time control panel item</span>&nbsp; <br>Middle 
+            Click&nbsp;&nbsp;<FONT color="#777777">none</FONT> <br>Right 
+            Click&nbsp;&nbsp;<span>Opens&nbsp;configuration 
+            menu</span>&nbsp; <br>Right Click + 
+            Ctrl&nbsp;&nbsp;<span> none</span> </span>
+								<p><b><u>The Menu</u></b>
+								<p>
+								The plugin menu let's you change or select various things, and most should be 
+								self-explanatory. However, there is one submenu worth mentioning - the 
+								"Settings" submenu.
+								<p>This submenu let's you "Save Settings" (current) to file, or "Reload Settings" 
+									that you have edited. These are important because a) BBCalendar only writes 
+									settings when you tell it to, or on plugin shutdown, and b) you do not need to 
+									reconfigure bb4win in order to have BBCalendar reload settings from the
+									<span>BBCalendar.rc</span>
+								file.&nbsp; One more thing to note.&nbsp; If you change any of the settings, or 
+								move the window, you may want to choose "Save Settings", otherwise when you 
+								choose "Reload Settings" BBCalendar will go back to the last saved configuration. 
+								When you change files manually from the .rc file and save them, always choose 
+								"Reload Settings" so that BBCalendar will get the new settings.
+								<p><b><u>Keyboard Input</u></b>
+								<p>
+								None.
+								<p><b><u>Miscellaneous Notes</u></b>
+								&nbsp;
+								<P>
+									You can now load BBCalendar in the BBSlit plugin, but you must use the '&' at the 
+									beginning of your plugins.rc setting for loading BBCalendar.dll. Do not use the 
+									'&' symbol if you are not loading bbslit.dll in the plugins.rc file. When 
+									loaded with bbslit.dll and the '&' sybmbol for BBCalendar, you have the option of 
+									setting it in and out of the slit at any time. Otherwise the BBCalendar.inSlit: 
+									config setting has no effect when BBCalendar is not loaded with an '&' symbol.
+									<br>
+									<br>
+									Everything centers perfect now. Alarm time can only be set in the rc file. Make 
+									sure you reload the settings using the BBCalendar right click menu. If 
+									BBCalendar.synchronize: false, then the .wav file will only be played once, 
+									otherwise it will be played each time the animation recycles. Each frequency 
+									setting effects the animation recycle count only for each respective alarm, not 
+									how many times the .wav file is played for each alarm. However, the .wav file 
+									will be played as many times as each of the respective frequency settings if 
+									synchronize is true.
+									<br>
+									<br>
+									NOTE: When switching from showing the seconds hand to not shownig the seconds 
+									hand, the redraw timer for BBCalendar is set to one minute, so the minute hand 
+									will not update until exactly one minute after you change the showSeconds 
+									setting to false and then reload BBCalendar.
+									<br>
+									<br>
+									TIP: If the .wav sound gets clipped(not played completely) everytime it plays 
+									in synchronization with the animation, try lowering the animationFPS. This will 
+									animate the alarm at a slower pace, giving more time for the .wav file to 
+									complete it's sound.
+									<br>
+									<br>
+									Also, if you wish for only play part of a .wav file to play each time it is 
+									repeated, and then complete the .wav on the last alarm sound. Try increasing 
+									the animationFPS and test to it to fine tune it to your liking.
+									<br>
+									<br>
+								All currently set alarms can be found in the BBCalendar right click menu, and can 
+								be selected to test that alarm. If there are no alarms, then it will display 
+								"no set alarms" as the menu title name. 
+								<!-- ---------- -->
+								<p>
+									<table width="100%" bgColor="#333333">
+										<tr>
+											<td>
+												<center><span class="desc">BBCalendar.rc 
+              settings</span></center>
+											</td>
+										</tr>
+									</table>
+								<p>
+								If a configuration file for some reason (e.g. you deleted it &lt;g&gt;) can not 
+								be found at startup (BBCalendar will first search for it in the same directory as 
+								the plugin, then in the Blackbox directory), BBCalendar will automatically create 
+								one for you in the same directory as the plugin.&nbsp;&nbsp;Most settings are 
+								configurable from the menu.&nbsp; All number values and .wav file settings must 
+								be done manually in the .rc file.
+								<P><span class="desc">
+								BBCalendar.x: 0<span>  X position of the analog clock.</span>
+								<br>BBCalendar.y: 895<span>  Y position of the analog clock.</span>
+								<br>BBCalendar.size: 40<span>  Width and Height of the analog clock window.  Too small may look distorted.  No less than 5, max 300.</span>
+								<br>BBCalendar.region: 2<span>  Region selection for the clok, 0 - standar rectangle, 1 - oval shape, 2 - oval with a hole in the middle</span>
+								<br>BBCalendar.fontSizeC: 11<span>  Font size used to draw numbers on the clock</span>
+								<br>BBCalendar.inSlit: true<span>  Tells BBCalendar to reload/load in/out of the slit.  Only works if the BBSlit plugin is loaded in the plugins.rc file.</span>
+								<br>BBCalendar.alwaysontop: true<span>  Tells BBCalendar to be ontop of all windows.</span>
+								<br>BBCalendar.transparency: false<span>  Tells BBCalendar to use the alpha value for tranparency opacity.</span> 
+								<br>BBCalendar.alpha: 160<span>  Sets the tranparency level. 0-255, 0 being completely transparent.</span>
+								<br>BBCalendar.snapwindow: true<span>  Tells BBCalendar to snap to the edges of	the screen.</span>
+								<br>BBCalendar.pluginToggle: true<span>  Tells BBCalendar to hide with other plugins.</span>
+								<br>BBCalendar.showSeconds: true<span>  Tells BBCalendar to show/hide seconds hand.</span>
+								<br>// removed in version 1.8 BBCalendar.useRedSeconds: true<span>  Tells BBCalendar to use color Red or fontColor for seconds hand.</span>
+								<br>// removed in version 1.8 BBCalendar.useYellowMins: false<span>  Tells BBCalendar to use color Yellow or fontColor for minutes hand.</span>
+								<br>// removed in version 1.8 BBCalendar.useBlueHours: false<span>  Tells BBCalendar to use color Blue or fontColor for hours hand.</span>
+								<br>BBCalendar.romanNumerals: true<span>  Tells BBCalendar to draw Roman Numerals or draw only tics.</span>
+								<br>BBCalendar.normalNumerals: false<span>  Tells BBCalendar to draw Normal Numerals or draw only tics. You can only draw roman or normal numerals at one time.</span>
+								<br>BBCalendar.showCircle: false<span>  Tells BBCalendar to draw outer edge circle or not.</span>
+								<br>BBCalendar.windowStyle: label<span>  Tells BBCalendar which, (one of label, labelWindow, or clock), style definition to use for inner gradient.</span>
+								<br>BBCalendar.numberColor: #FFFFFF<span>  Color used to draw text, numbers and ticks.</span>
+								<br>BBCalendar.secondHandColor: #FFFFFF<span> Color used to draw seconds hand. </span>
+								<br>BBCalendar.minutedHandColor: #FFFFFF<span> Color used to draw minutes hand. </span>
+								<br>BBCalendar.hourHandColor: #FFFFFF<span> Color used to draw hours hand. </span>
+								<br>BBCalendar.secondHandWidth: 2<span> Width of the seconds hand in pixels </span>
+								<br>BBCalendar.minuteHandWidth: 2<span> Width of the minutes hand in pixels </span>
+								<br>BBCalendar.hourHandWidth: 2<span> Width of the hours hand in pixels </span>
+								<br>BBCalendar.timeAlarm: 9:00pm<span>  Tells BBCalendar when a set time alarm should go off.  Must have am/pm after a 12 hour type time.  
+								If the input string is the wrong format, it will be reset to a blank string.  Spaces between hour:minute and am/pm are welcome, and so are caps for AM/PM.  Remember to reload your settings using BBCalendar right click menu after changing the alarm value.</span>
+								<br>BBCalendar.hourAlarm: true<span>  Tells BBCalendar to use/~use hourly alarm.</span>
+								<br>BBCalendar.halfHourAlarm: true<span>  Tells BBCalendar to use/~use half hour alarm.  Only on 30 minutes after the hour.</span>
+								<br>BBCalendar.timeAlarmFreq: 10<span>  Tells BBCalendar how many times the set alarm will draw.  No less than 1, max 30.</span>
+								<br>BBCalendar.hourAlarmFreq: 10<span>  Tells BBCalendar how many times the hourly alarm will draw.  No less than 1, max 30.</span>
+								<br>BBCalendar.halfHourAlarmFreq: 10<span>  Tells BBCalendar how many times the half hour alarm will draw.  No less than 1, max 30.</span>
+								<br>BBCalendar.animationFPS: 15<span>  Draw speed in frames per second.  Good for fine tuning at different sizes.  No less than 1, max 30.</span>
+								<br>BBCalendar.synchronize: true<span>  Tells BBCalendar to play the .wav file every time the animation loops, else the .wav is played only once.</span>
+								<br>BBCalendar.timeAlarmWav: radarping.wav<span>  Tells BBCalendar which .wav file to play.  Can be an absolute path, or if it is in the same directory as BBCalendar, 
+								use this setting without the path string, just file name.  If not going to use as sound, use .none to indicate you are not using a file.</span>
+								<br>BBCalendar.hourAlarmWav: sonar2.wav<span>  Same as above setting.  If not going to use as sound, use .none to indicate you are not using a file.</span>
+								<br>BBCalendar.halfHourAlarmWav: sonar3.wav<span>  Same as above setting.  If not going to use as sound, use .none to indicate you are not using a file.</span>
+								</span></P>
+								<P>
+									Please note that BBCalendar automatically saves the current running configuration 
+									when you quit or restart Blackbox, overwriting the previous contents of the 
+									file. If you want to change these values and make BBCalendar read them again, 
+									edit the file, then save the file, and then select "Reload Settings" from the 
+									plugin's "Settings" submenu.</P>
+								<p>
+									<table width="100%" bgColor="#333333">
+										<tr>
+											<td>
+												<center><span class="desc">BBCalendar 
+              bro@ms</span></center>
+											</td>
+										</tr>
+									</table>
+									<span class="desc"><br>@BBShowPlugins&nbsp;&nbsp;<span>Standard BB bro@m to show all plugins</span> 
+            <br>@BBHidePlugins&nbsp;&nbsp;<span>Standard BB bro@m to hide all 
+            plugins</span>&nbsp; <br><br>@BBCalendarAbout&nbsp;<span> 
+            Shows the about window</span>&nbsp; <br><br>@BBCalendarPluginToggle&nbsp;&nbsp;<span>Toggles whether BBCalendar&nbsp;hides with other 
+            plugins</span>&nbsp; <br>@BBCalendarOnTop&nbsp;&nbsp;<span>Toggles whether or not BBCalendar is always 
+            ontop</span>&nbsp; <br>@BBCalendarEditRC&nbsp;&nbsp;<span>Opens the&nbsp;BBCalendar's RC file for 
+            configuration</span>&nbsp; <br>@BBCalendarReloadSettings&nbsp;&nbsp;<span>Tells BBCalendar to reload settings from the RC 
+            file</span> <br>@BBCalendarSaveSettings&nbsp;&nbsp;<FONT color="#777777">BBCalendar will save currently 
+											loaded&nbsp;settings.</FONT>&nbsp; <br></span></p>
+							</td>
+						</tr>
+						<!-- ---------- -->
+						<tr>
+							<td bgColor="#444444">
+								<center><font color="#777777"><b>acknowledgements</b></font></center>
+							</td>
+						</tr>
+						<tr bgColor="#333333">
+							<td><span class="desc">Special&nbsp;thanks&nbsp;to all in the #bb4win 
+            channel that contributed.&nbsp; If it was not for your love this 
+            plugin would never had gotten started.&nbsp; :)</span>
+							</td>
+						</tr>
+						<!-- ---------- --></table>
+				</td>
+			</tr>
+		</table>
+	</body>
+</html>

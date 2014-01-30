@@ -1,0 +1,36 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: bbmagnify - Win32 Release--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\DOCUME~1\Admin\LOCALS~1\Temp\RSP3A7.tmp" with contents
+[
+/nologo /MD /W4 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_MBCS" /D "_USRDLL" /D "BBANALOG_EXPORTS" /FR"Release/" /Fo"Release/" /Fd"Release/" /FD /c 
+"G:\!!_Work\BBMagnify\bbmagnify.cpp"
+]
+Creating command line "cl.exe @C:\DOCUME~1\Admin\LOCALS~1\Temp\RSP3A7.tmp" 
+Creating temporary file "C:\DOCUME~1\Admin\LOCALS~1\Temp\RSP3A8.tmp" with contents
+[
+kernel32.lib user32.lib gdi32.lib msimg32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib Blackbox.lib WS2_32.Lib SHLWAPI.LIB /nologo /dll /incremental:yes /pdb:"Release/bbmagnify.pdb" /debug /machine:I386 /out:"Release/bbmagnify.dll" /implib:"Release/bbmagnify.lib" /opt:nowin98 
+".\Release\bbmagnify.obj"
+".\Release\Resource.res"
+]
+Creating command line "link.exe @C:\DOCUME~1\Admin\LOCALS~1\Temp\RSP3A8.tmp"
+<h3>Output Window</h3>
+Compiling...
+bbmagnify.cpp
+Linking...
+Creating command line "bscmake.exe /nologo /o"Release/bbmagnify.bsc"  ".\Release\bbmagnify.sbr""
+Creating browse info file...
+<h3>Output Window</h3>
+
+
+
+<h3>Results</h3>
+bbmagnify.dll - 0 error(s), 0 warning(s)
+</pre>
+</body>
+</html>
