@@ -9,8 +9,6 @@ call "C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\vcvarsall.bat" x86_
 if %errorlevel% neq 0 goto TERM
 devenv BlackBoxZero.sln /build RelWithDebInfo /project INSTALL
 if %errorlevel% neq 0 goto TERM
-rem devenv BlackBoxZero.sln /build Debug /project INSTALL
-rem devenv BlackBoxZero.sln /build ReleaseWithDebugInfo
 
 cd ..
 
@@ -44,6 +42,8 @@ call "C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\vcvarsall.bat" x86
 if %errorlevel% neq 0 goto TERM
 devenv BlackBoxZero.sln /build Debug /project INSTALL
 if %errorlevel% neq 0 goto TERM
+
+cd ..
 
 rem devenv BlackBoxZero.sln [options] solutionconfig /project bbLeanSkin32
 rem devenv BlackBoxZero.sln [options] solutionconfig [/project projectnameorfile [/projectconfig name]]
