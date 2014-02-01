@@ -38,7 +38,7 @@ if( CMAKE_SIZEOF_VOID_P EQUAL 8 )
 	set(target_name "bbLeanSkinEng")
 else( CMAKE_SIZEOF_VOID_P EQUAL 8 )
 	set(buildbits 32)
-	set(target_name "bbLeanSkinEng32")
+	set(target_name "bbLeanSkinEng")
 endif( CMAKE_SIZEOF_VOID_P EQUAL 8 )
 
 #ifeq "$(PROG)" "eng"
