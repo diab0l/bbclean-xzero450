@@ -1,8 +1,8 @@
 /* ==========================================================================
 
   This file is part of the bbLean source code
-  Copyright © 2001-2003 The Blackbox for Windows Development Team
-  Copyright © 2004-2009 grischka
+  Copyright (C) 2001-2003 The Blackbox for Windows Development Team
+  Copyright (C) 2004-2009 grischka
 
   http://bb4win.sourceforge.net/bblean
   http://developer.berlios.de/projects/bblean
@@ -1065,6 +1065,7 @@ static const struct rccfg bbrc_cfg[] = {
 	{ ".menu.closeDelay",          C_INT, (void*)80,       &Settings_menu.closeDelay },/*BlackboxZero 1.3.2012 */
     { ".menu.mouseWheelFactor",    C_INT, (void*)3,        &Settings_menu.mouseWheelFactor },
     { ".menu.alpha.enabled",       C_BOL, (void*)false,    &Settings_menu.alphaEnabled },
+    { ".menu.alpha.value",         C_INT, (void*)255,      &Settings_menu.alphaValue },
     { ".menu.icon.hue",			   C_INT, (void*)2,        &Settings_menu.iconHue },
 	{ ".menu.scrollButton.hue",    C_INT, (void*)2,       &Settings_menu.scrollHue },
     { ".menu.onTop",               C_BOL, (void*)false,    &Settings_menu.onTop },
