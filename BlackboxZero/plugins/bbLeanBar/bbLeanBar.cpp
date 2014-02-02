@@ -3,7 +3,7 @@
   This file is part of the bbLeanBar source code.
 
   bbLeanBar is a plugin for BlackBox for Windows
-  Copyright � 2003-2009 grischka
+  Copyright © 2003-2009 grischka
 
   http://bb4win.sourceforge.net/bblean/
 
@@ -155,11 +155,10 @@ struct barinfo : plugin_info
     int  saturationValue        ;
     int  hueIntensity           ;
     int  maxIconSize            ;
-    
     char strftimeFormat[60]     ;
     bool taskSysmenu            ;
-    int TaskStyle               ;
-    int taskMaxWidth            ;
+    int  TaskStyle              ;
+    int  taskMaxWidth           ;
     bool currentOnly            ;
     bool task_with_border       ;
     bool autoFullscreenHide     ;
@@ -213,7 +212,7 @@ struct barinfo : plugin_info
 
     void about_box()
     {
-        BBP_messagebox(this, MB_OK, "%s - � %s %s\n", szVersion, szCopyright, szInfoEmail);
+        BBP_messagebox(this, MB_OK, "%s - © %s %s\n", szVersion, szCopyright, szInfoEmail);
     }
 
     // --------------------------------------------------------------
@@ -1369,15 +1368,14 @@ void barinfo::GetStyleSettings()
     int margin = 2*T->marginWidth;
 
     int lbl_max = labelH - iconMargin;
-    lbl_max = imax(lbl_max, minHeight);
-    
+
     if (maxIconSize >= 16 || lbl_max >= 16) {
         // with icons>=16 we give up button symmetrie
         // for the sake of icon symmetrie
         lbl_max = imax(lbl_max & ~1, 16);
     }
     lbl_max = imax(lbl_max, minHeight);
-    
+
     TASK_ICON_SIZE = imin(lbl_max, maxIconSize);
 
     lbl_max += iconMargin;;
@@ -1385,9 +1383,9 @@ void barinfo::GetStyleSettings()
     buttonH = labelH + 2*(B->marginWidth-L->marginWidth);
     lbl_max += margin;
 
-    int bar_max = imax(imax(labelH, buttonH), minHeight) + margin;
+    int bar_max = imax(labelH, buttonH) + margin;
     int tray_max = bar_max - margin;
-
+	
     TRAY_ICON_SIZE = imin(tray_max, maxIconSize);
 
     // calculate the bar height(s)
