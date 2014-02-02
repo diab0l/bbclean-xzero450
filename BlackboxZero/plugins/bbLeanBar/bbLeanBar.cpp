@@ -3,7 +3,7 @@
   This file is part of the bbLeanBar source code.
 
   bbLeanBar is a plugin for BlackBox for Windows
-  Copyright © 2003-2009 grischka
+  Copyright ï¿½ 2003-2009 grischka
 
   http://bb4win.sourceforge.net/bblean/
 
@@ -150,10 +150,12 @@ struct barinfo : plugin_info
 
     // configuration
     int  widthPercent           ;
+    int  minHeight              ;
     bool reverseTasks           ;
     int  saturationValue        ;
     int  hueIntensity           ;
-    bool smallIcons             ;
+    int  maxIconSize            ;
+    
     char strftimeFormat[60]     ;
     bool taskSysmenu            ;
     int TaskStyle               ;
@@ -211,7 +213,7 @@ struct barinfo : plugin_info
 
     void about_box()
     {
-        BBP_messagebox(this, MB_OK, "%s - © %s %s\n", szVersion, szCopyright, szInfoEmail);
+        BBP_messagebox(this, MB_OK, "%s - ï¿½ %s %s\n", szVersion, szCopyright, szInfoEmail);
     }
 
     // --------------------------------------------------------------
@@ -638,6 +640,7 @@ void barinfo::make_cfg()
 {
     struct config c [] = {
     {  "widthPercent" ,     R_INT, (void*)72,             &widthPercent },
+    {  "minHeight" ,        R_INT, (void*)12,             &minHeight },
     {  "tasks.style" ,      R_INT, (void*)2,              &TaskStyle },
     {  "tasks.reverse" ,    R_BOL, (void*)false,          &reverseTasks },
     {  "tasks.current" ,    R_BOL, (void*)false,          &currentOnly },
@@ -650,7 +653,7 @@ void barinfo::make_cfg()
 
     {  "strftimeFormat" ,   R_STR, (void*)"%a %d %H:%M",  &strftimeFormat },
 
-    {  "smallIcons" ,       R_BOL, (void*)true,           &smallIcons },
+    {  "maxIconSize" ,      R_INT, (void*)16,             &maxIconSize },
     {  "autoFullscreenHide",R_BOL, (void*)true,           &autoFullscreenHide },
     {  "setDesktopMargin"  ,R_BOL, (void*)true,           &setDesktopMargin },
     {  "sendToSwitchTo"    ,R_BOL, (void*)true,           &sendToSwitchTo },
@@ -661,6 +664,7 @@ void barinfo::make_cfg()
 
     struct pmenu m [] = {
     { "Width Percent",          "widthPercent",     CFG_INT, &widthPercent  },
+    { "Min. Height",            "minHeight",        CFG_INT, &minHeight },
     { "",                       "",                 CFG_WIN, NULL },
     { "",                       "",                 0, &nobool  },
     { "Tasks",                  "", CFG_SUB, NULL },
@@ -677,7 +681,7 @@ void barinfo::make_cfg()
 
     { "Icons",                  "", CFG_SUB, NULL },
     //--------
-    { "Small Size",             "smallIcons",       0, &smallIcons  },
+    { "Max. Icon Size",         "maxIconSize",      CFG_INT, &maxIconSize },
     { "Saturation",             "iconSaturation",   CFG_INT|CFG_255, &saturationValue  },
     { "Hue",                    "iconHue",          CFG_INT|CFG_255, &hueIntensity  },
 
@@ -1365,24 +1369,26 @@ void barinfo::GetStyleSettings()
     int margin = 2*T->marginWidth;
 
     int lbl_max = labelH - iconMargin;
-
-    if (false == smallIcons || lbl_max >= 16) {
+    lbl_max = imax(lbl_max, minHeight);
+    
+    if (maxIconSize >= 16 || lbl_max >= 16) {
         // with icons>=16 we give up button symmetrie
         // for the sake of icon symmetrie
         lbl_max = imax(lbl_max & ~1, 16);
     }
-
-    TASK_ICON_SIZE = imin(lbl_max, 16);
+    lbl_max = imax(lbl_max, minHeight);
+    
+    TASK_ICON_SIZE = imin(lbl_max, maxIconSize);
 
     lbl_max += iconMargin;;
     labelH = lbl_max;
     buttonH = labelH + 2*(B->marginWidth-L->marginWidth);
     lbl_max += margin;
 
-    int bar_max = imax(labelH, buttonH) + margin;
+    int bar_max = imax(imax(labelH, buttonH), minHeight) + margin;
     int tray_max = bar_max - margin;
 
-    TRAY_ICON_SIZE = imin(tray_max, 16);
+    TRAY_ICON_SIZE = imin(tray_max, maxIconSize);
 
     // calculate the bar height(s)
     BarLines = 0;
