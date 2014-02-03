@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 2.8.9)
 set(CMAKE_VERBOSE_MAKEFILE on)
 
 # use this for develoment, if you do not pass it from command line:
-#set(CMAKE_INSTALL_PREFIX "c:/bbLean_devel")
+set(CMAKE_INSTALL_PREFIX "c:/bbLean_devel")
 
 include(build/compiler.cmake)
 include(ExternalProject)
@@ -70,6 +70,7 @@ if( buildbits EQUAL 64 )
 		CMAKE_ARGS -DCMAKE_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX}
 		SOURCE_DIR  ${bbLeanSkinEng32_PATH}
 		DOWNLOAD_COMMAND ""
+		INSTALL_DIR ${CMAKE_BINARY_DIR}/grr
 	)
 	set_property(TARGET bbLeanSkinEng32 PROPERTY FOLDER "plugins/bbLeanSkinEng")
 endif( buildbits EQUAL 64 )
