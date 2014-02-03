@@ -62,20 +62,16 @@ if( buildbits EQUAL 64 )
 	if (MINGW)
 		# TODO
 	endif (MINGW)
-	if(NOT PRON)
-		message("Warning: failed to guess 32bit genererator")
-		set(PROJECT_VERSION UNKNOWN)
-	endif()
 	message("bbLeanSkin on 64bit... 32bit generator=${GENERATOR_FOR_32}")
 
 	ExternalProject_Add (
 		bbLeanSkinEng32
-		URL ${bbLeanSkinEng32_PATH}
 		CMAKE_GENERATOR ${GENERATOR_FOR_32}
-		INSTALL_COMMAND ""
-		#INSTALL_DIR ""
-		SOURCE_DIR  ${CMAKE_SOURCE_DIR}/plugins/bbLeanSkin
+		CMAKE_ARGS -DCMAKE_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX}
+		SOURCE_DIR  ${bbLeanSkinEng32_PATH}
+		DOWNLOAD_COMMAND ""
 	)
+	set_property(TARGET bbLeanSkinEng32 PROPERTY FOLDER "plugins/bbLeanSkinEng")
 endif( buildbits EQUAL 64 )
 
 add_subdirectory(plugins/bbSlit)
@@ -151,7 +147,7 @@ set (CLEAN_FILES
 
 ###############################################################################
 # debug stuff
-#message("Debug variable dump:")
+message("Debug variable dump:")
 #get_cmake_property(_variableNames VARIABLES)
 #foreach (_variableName ${_variableNames})
 #   message(STATUS "${_variableName}=${${_variableName}}")
