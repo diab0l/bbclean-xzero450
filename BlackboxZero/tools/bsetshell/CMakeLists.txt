@@ -4,10 +4,13 @@ set(bsetshell_SOURCES
 	bsetshell.cpp
 )
 set(bsetshell_RESOURCES
-	resource.res
+	resource.rc
 )
 
-add_executable(bsetshell WIN32 ${bsetshell_SOURCES}) 
+set(CMAKE_RC_COMPILER_INIT windres)
+ENABLE_LANGUAGE(RC)
+
+add_executable(bsetshell WIN32 ${bsetshell_SOURCES} ${bsetshell_RESOURCES}) 
 target_link_libraries(bsetshell bblib)
 target_link_libraries(bsetshell version comctl32)
 

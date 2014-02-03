@@ -381,8 +381,18 @@ int WINAPI WinMain(
     int nShowCmd
     )
 {
-    switch (DialogBoxParam(hInstance, MAKEINTRESOURCE(IDD_DLG1),
-                NULL, (DLGPROC)dlgfunc, (LONG_PTR)hInstance)) {
+    INT_PTR const result = DialogBoxParam(hInstance, MAKEINTRESOURCE(IDD_DLG1),
+                NULL, (DLGPROC)dlgfunc, (LONG_PTR)hInstance);
+    if (result == -1)
+    {
+      DWORD r = GetLastError();
+      //char buff[1024];
+      //win_error(buff, sizeof buff);
+      return 1;
+    }
+
+    switch (result)
+    {
     case 0:
         return 1;
     case 1:

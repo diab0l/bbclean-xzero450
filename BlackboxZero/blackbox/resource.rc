@@ -50,7 +50,7 @@ END
 // remains consistent on all systems.
 
 #ifndef BBTINY
-IDI_BLACKBOX ICON DISCARDABLE "Blackbox.ico"
+IDI_BLACKBOX ICON DISCARDABLE "Blackbox_m.ico"
 #endif
 
 /////////////////////////////////////////////////////////////////////////////
