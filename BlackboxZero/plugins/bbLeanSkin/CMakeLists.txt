@@ -1,4 +1,3 @@
-#IF(NOT ${CMAKE_SYSTEM_NAME} MATCHES "Linux")
 
 function(install_if_absent)
 	foreach(f ${ARGN})
@@ -15,8 +14,8 @@ function(installdir_if_absent arg1)
 	endforeach()
 endfunction()
 
+# bbLeanSkin.dll
 
-#ifeq "$(PROG)" "dll"
 include_directories(${CMAKE_SOURCE_DIR}/blackbox)
 include_directories(${CMAKE_SOURCE_DIR}/lib)
 include_directories(${CMAKE_SOURCE_DIR}/plugins/bbPlugin)
@@ -29,19 +28,13 @@ install(TARGETS bbLeanSkin RUNTIME DESTINATION plugins/bbLeanSkin)
 install_if_absent(bbLeanSkin.rc bbLeanSkinMenu.rc exclusions.rc)
 installdir_if_absent(buttons)
 
-  #INSTALL_FILES = $(BIN) readme.txt
-  #INSTALL_IF_NEW = bbLeanSkin.rc bbLeanSkinMenu.rc exclusions.rc -subdir buttons buttons_11x11.bmp
-#endif
+#TODO:
+#INSTALL_FILES = $(BIN) readme.txt
+#INSTALL_IF_NEW = bbLeanSkin.rc bbLeanSkinMenu.rc exclusions.rc -subdir buttons buttons_11x11.bmp
 
-if( CMAKE_SIZEOF_VOID_P EQUAL 8 )
-	set(buildbits 64)
-	set(target_name "bbLeanSkinEng")
-else( CMAKE_SIZEOF_VOID_P EQUAL 8 )
-	set(buildbits 32)
-	set(target_name "bbLeanSkinEng")
-endif( CMAKE_SIZEOF_VOID_P EQUAL 8 )
+# bbLeanSkinEng.dll
 
-#ifeq "$(PROG)" "eng"
+set(target_name "bbLeanSkinEng")
 add_library(${target_name}
 	SHARED
 	engine/hookctl.cpp
@@ -50,80 +43,5 @@ add_library(${target_name}
 target_link_libraries(${target_name} blackbox bblib bbPlugin)
 target_link_libraries(${target_name} version comctl32)
 install(TARGETS ${target_name} RUNTIME DESTINATION plugins/bbLeanSkin)
-
 set_property(TARGET ${target_name} PROPERTY FOLDER "plugins/${target_name}")
-
-
-#	ifeq "$(PROG)" "eng32"
-#	  BIN = bbLeanSkinEng32.dll
-#	  OBJ = hookctl32.obj subclass32.obj BImage32.obj drawico32.obj
-#	  NO_BBLIB = 1
-#	  IMPLIB = 1
-#	  ALWAYS_32 = 1
-#	  INSTALL_FILES = $(BIN)
-#	  DEFINES += -D BBLEANSKIN_ENG32
-#	  LFLAGS += $(EXTRA_LFLAGS)
-#	endif
-#
-#	ifeq "$(PROG)" "run32"
-#	  BIN = bbLeanSkinRun32.exe
-#	  OBJ = bbLeanSkinRun32.obj
-#	  NO_BBLIB = 1
-#	  ALWAYS_32 = 1
-#	  LIBS = $(call LIBNAME,bbLeanSkinEng32)
-#	  INSTALL_FILES = $(BIN)
-#	endif
-#
-#	include $(TOP)/build/makefile.inc
-#
-#	VPATH += engine
-#	vpath %.cpp $(BBAPI)
-#	ENG_H = hookinfo.h subclass.h
-#
-#	bbLeanSkin.obj bbLeanSkinRun32.obj : $(ENG_H)
-#	subclass.obj subclass32.obj : $(ENG_H) $(BBAPI)/bImage.cpp
-#	hookctl.obj hookctl32.obj : $(ENG_H)
-#	readstyle.obj : $(BBAPI)/settings.cpp
-#
-#	%32.obj: %.cpp
-#		$(COMPILE.cpp)
-#
-## For some reason the gcc 3.4 (rt 3.7) hangs in it's _DllMainCRTStartup
-## That's why it is bypassed here by starting with DllMain directly
-#	ifeq "$(USING_MINGW)" "1"
-#	EXTRA_LFLAGS = -Wl,-e,_DllMain@12
-#	endif
-#
-#  message("f='${f}' arg1='${arg1}' arg2='${arg2}' ARGV2='${ARGV2}'")
-#endfunction()
-## --------------------------------------------------------------------
-#ifndef PROG
-## --------------------------------------------------------------------
-#
-#	include $(TOP)/build/makefile.inc
-#
-#	all.progs :
-#		$(MAKE) $* PROG=dll
-#		$(MAKE) $* PROG=eng
-#	ifeq "$(BB64)" "1"
-#		$(MAKE) $* PROG=eng32
-#		$(MAKE) $* PROG=run32
-#	endif
-#
-#	clean.progs :
-#		$(MAKE) $* PROG=dll
-#		$(MAKE) $* PROG=eng
-#		$(MAKE) $* PROG=eng32
-#		$(MAKE) $* PROG=run32
-#
-## --------------------------------------------------------------------
-#else
-## --------------------------------------------------------------------
-#
-#
-## --------------------------------------------------------------------
-#endif
-## --------------------------------------------------------------------
-#
-
 

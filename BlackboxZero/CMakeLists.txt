@@ -3,9 +3,17 @@ cmake_minimum_required(VERSION 2.8.9)
 set(CMAKE_VERBOSE_MAKEFILE on)
 
 # use this for develoment, if you do not pass it from command line:
-#set(CMAKE_INSTALL_PREFIX "c:/bbLean_devel32")
+#set(CMAKE_INSTALL_PREFIX "c:/bbLean_devel")
 
 include(build/compiler.cmake)
+include(ExternalProject)
+
+# detect 32 / 64bit environment
+if( CMAKE_SIZEOF_VOID_P EQUAL 8 )
+	set(buildbits 64)
+else( CMAKE_SIZEOF_VOID_P EQUAL 8 )
+	set(buildbits 32)
+endif( CMAKE_SIZEOF_VOID_P EQUAL 8 )
 
 # font tools and conversion
 add_subdirectory(build/bdf2fon)
@@ -42,6 +50,34 @@ add_subdirectory(plugins/bbPlugin)
 add_subdirectory(plugins/bbLeanBar)
 add_subdirectory(plugins/bbFoomp)
 add_subdirectory(plugins/bbLeanSkin)
+# 32b for 64b build
+if( buildbits EQUAL 64 )
+	set(bbLeanSkinEng32_SOURCE_DIR  ${CMAKE_SOURCE_DIR}/plugins/bbLeanSkin)
+	set(bbLeanSkinEng32_PATH ${bbLeanSkinEng32_SOURCE_DIR}/bbLeanSkinEng32)
+	message("bbLeanSkin on 64bit... path=${bbLeanSkinEng32_PATH}")
+
+	if (MSVC)
+		string(REGEX REPLACE " Win64" "" GENERATOR_FOR_32 ${CMAKE_GENERATOR})
+	endif (MSVC)
+	if (MINGW)
+		# TODO
+	endif (MINGW)
+	if(NOT PRON)
+		message("Warning: failed to guess 32bit genererator")
+		set(PROJECT_VERSION UNKNOWN)
+	endif()
+	message("bbLeanSkin on 64bit... 32bit generator=${GENERATOR_FOR_32}")
+
+	ExternalProject_Add (
+		bbLeanSkinEng32
+		URL ${bbLeanSkinEng32_PATH}
+		CMAKE_GENERATOR ${GENERATOR_FOR_32}
+		INSTALL_COMMAND ""
+		#INSTALL_DIR ""
+		SOURCE_DIR  ${CMAKE_SOURCE_DIR}/plugins/bbLeanSkin
+	)
+endif( buildbits EQUAL 64 )
+
 add_subdirectory(plugins/bbSlit)
 add_subdirectory(plugins/bbAnalog)
 add_subdirectory(plugins/bbIconBox)
