@@ -37,10 +37,6 @@
 #define LWA_ALPHA		0x00000002
 #endif 
 
-#ifndef ULONG_PTR
-#define ULONG_PTR DWORD
-#endif
-
 #include <windows.h>
 #include <shlwapi.h>
 //#include <wingdi.h>
@@ -51,13 +47,6 @@
 #include "AggressiveOptimize.h"
 #include "gdi/gdiplus.h"
 
-#pragma comment(lib, "Blackbox.lib")
-#pragma comment(lib, "Shlwapi.lib")
-#pragma comment(lib, "MessageBox.lib")
-#pragma comment(lib, "comdlg32.lib")
-#pragma comment(lib, "winmm.lib")
-#pragma comment(lib, "gdi/gdiplus.lib")
-//#pragma comment(lib, "gdi32.lib")
 #define IDT_TIMER 1
 #define IDT_ALARMTIMER 2
 #define IDT_MTIMER 3
