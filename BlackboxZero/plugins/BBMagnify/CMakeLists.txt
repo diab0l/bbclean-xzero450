@@ -4,7 +4,7 @@ set(BBMagnify_SOURCES
   getStats.cpp
 )
 
-set(BBMagnify_RESOURCES Resource.rc)
+#set(BBMagnify_RESOURCES Resource.rc) #FIXME: missing include in file
 #set(blackbox_RESOURCES resource.rc)
 #set(CMAKE_RC_COMPILER_INIT windres)
 #ENABLE_LANGUAGE(RC)
@@ -19,7 +19,7 @@ include_directories(${CMAKE_SOURCE_DIR}/lib)
 include_directories(${CMAKE_SOURCE_DIR}/plugins/bbPlugin)
 add_library(BBMagnify SHARED ${BBMagnify_SOURCES} ${BBMagnify_RESOURCES})
 target_link_libraries(BBMagnify blackbox bblib bbPlugin)
-target_link_libraries(BBMagnify version comctl32 gdiplus winmm msimg32)
+target_link_libraries(BBMagnify version comctl32 gdiplus winmm msimg32 shlwapi comdlg32)
 
 set_property(TARGET BBMagnify PROPERTY FOLDER "plugins/BBMagnify")
 
