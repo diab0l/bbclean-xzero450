@@ -18,7 +18,7 @@ include_directories(${CMAKE_SOURCE_DIR}/lib)
 include_directories(${CMAKE_SOURCE_DIR}/plugins/bbPlugin)
 add_library(BBSysMeter SHARED ${BBSysMeter_SOURCES})
 target_link_libraries(BBSysMeter blackbox bblib bbPlugin)
-target_link_libraries(BBSysMeter version comctl32 gdiplus winmm msimg32)
+target_link_libraries(BBSysMeter version comctl32 gdiplus winmm msimg32 shlwapi comdlg32 iphlpapi user32)
 
 set_property(TARGET BBSysMeter PROPERTY FOLDER "plugins/BBSysMeter")
 

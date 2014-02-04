@@ -131,8 +131,14 @@ int beginPlugin(HINSTANCE hPluginInstance)
 	setStatus();	
 	// Register to receive Blackbox messages...
 	SendMessage(hwndBlackbox, BB_REGISTERMESSAGE, (WPARAM)hwndBBSysMeter, (LPARAM)msgs);
+	const long magicDWord = 0x49474541;
+#if !defined _WIN64
 	// Set magicDWord to make the window sticky (same magicDWord that is used by LiteStep)...
 	SetWindowLong(hwndBBSysMeter, GWL_USERDATA, magicDWord);
+#else
+	SetWindowLongPtr(hwndBBSysMeter, GWLP_USERDATA, magicDWord);
+#endif
+
 	// Make the window AlwaysOnTop?
 	if(alwaysOnTop) SetWindowPos(hwndBBSysMeter, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOACTIVATE | SWP_NOSIZE | SWP_NOMOVE);
 	// Show the window and force it to update...
@@ -495,8 +501,8 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 				int ii;
 				for(ii=0;ii<(r.right-r.left-2);ii++)
 			
-			    if (fill)	graphics->DrawLine(p,r.left+1+ii,r.bottom - 1,r.left+1+ii,r.bottom-1-mon[div(ii+c_cpu,r.right-r.left-2).rem]);
-				else        graphics->DrawLine(p,r.left+1+ii-1,r.bottom-1-mon[div(ii-1+c_cpu,r.right-r.left-2).rem],r.left+1+ii,r.bottom-1-mon[div(ii+c_cpu,r.right-r.left-2).rem]);
+        if (fill) graphics->DrawLine(p,r.left+1+ii,r.bottom - 1,r.left+1+ii,r.bottom-1-mon[div(static_cast<LONG>(ii+c_cpu),r.right-r.left-2).rem]);
+        else        graphics->DrawLine(p,r.left+1+ii-1,r.bottom-1-mon[div(static_cast<LONG>(ii-1+c_cpu),r.right-r.left-2).rem],r.left+1+ii,r.bottom-1-mon[div(static_cast<LONG>(ii+c_cpu),r.right-r.left-2).rem]);
 				break;
 			
 			case RECTLR:
@@ -1734,24 +1740,24 @@ switch(id)
 	{
 	case CPU:
 	    m_pStatsObj->GetData(stat);
-		itoa(stat,stemp,10);
+		_itoa(stat,stemp,10);
 		return stemp;
 	case RAM:
 		GlobalMemoryStatus(&memstat);
 		stat = (DWORD)(100.0 - ((memstat.dwAvailPhys * 100.0) / memstat.dwTotalPhys));
-		itoa(stat,stemp,10);
+		_itoa(stat,stemp,10);
 		return stemp;
 	case SWAP:
 		GlobalMemoryStatus(&memstat);
 		stat = (DWORD)(100.0 - ((memstat.dwAvailPageFile * 100.0) / memstat.dwTotalPageFile));
-		itoa(stat,stemp,10);
+		_itoa(stat,stemp,10);
 		return stemp;
 	case HDD:
 		sprintf(s, "%s:\\",drive_letter);
 		GetDiskFreeSpaceEx((LPCTSTR)s, &fba, &tnob, &tnofb);
 		stat = (int)(fba.QuadPart / (DWORD)1024 / (DWORD)1024);
 		//help_stat = (int)(tnob.QuadPart / (DWORD)1024 / (DWORD)1024);
-		itoa(stat,stemp,10);
+		_itoa(stat,stemp,10);
 		return stemp;
 	case COMPUTER_NAME:
 		GetComputerName(stemp, &len);

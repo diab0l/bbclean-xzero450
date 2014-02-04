@@ -69,16 +69,6 @@
 #include "AggressiveOptimize.h"
 #include <Iphlpapi.h>
 
-#pragma comment(lib, "Blackbox.lib")
-#pragma comment(lib, "gdi/gdiplus.lib")
-//#pragma comment(lib, "winmm.lib")
-#pragma comment(lib, "Shlwapi.lib")
-#pragma comment(lib, "MessageBox.lib")
-#pragma comment(lib, "comdlg32.lib")
-#pragma comment(lib, "c:/Program Files/Microsoft SDK/lib/Iphlpapi.lib")
-#pragma comment(lib, "user32.lib")
-
-
 //#include "StdAfx.h"
 
 #define IDT_TIMER 1
