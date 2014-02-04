@@ -104,8 +104,14 @@ int beginPlugin(HINSTANCE hPluginInstance)
 
 	// Register to receive Blackbox messages...
 	SendMessage(hwndBlackbox, BB_REGISTERMESSAGE, (WPARAM)hwndBBMessageBox, (LPARAM)msgs);
-	// Set magicDWord to make the window sticky (same magicDWord that is used by LiteStep)...
-	SetWindowLong(hwndBBMessageBox, GWL_USERDATA, magicDWord);
+
+  const long magicDWord = 0x49474541;
+#if !defined _WIN64
+  // Set magicDWord to make the window sticky (same magicDWord that is used by LiteStep)...
+  SetWindowLong(hwndBBMessageBox, GWL_USERDATA, magicDWord);
+#else
+  SetWindowLongPtr(hwndBBMessageBox, GWLP_USERDATA, magicDWord);
+#endif
 	// Make the window AlwaysOnTop?
 	SetWindowPos(hwndBBMessageBox, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOACTIVATE | SWP_NOSIZE | SWP_NOMOVE);
 	// Show the window and force it to update...
