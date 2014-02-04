@@ -45,9 +45,9 @@
 #endif
 //end of temp fix
 
-#ifndef ULONG_PTR
-#define ULONG_PTR DWORD
-#endif
+//#ifndef ULONG_PTR
+//#define ULONG_PTR DWORD
+//#endif
 
 #ifndef WS_EX_LAYERED
 #define WS_EX_LAYERED	0x00080000
@@ -65,9 +65,9 @@
 #include "BBApi.h"
 #include "MessageBox.h"
 #include "getStats.h"
-#include "c:\Program Files\Microsoft SDK\include\gdiplus.h"
+#include "gdi/gdiplus.h"
 #include "AggressiveOptimize.h"
-#include "c:\Program Files\Microsoft SDK\include\Iphlpapi.h"
+#include <Iphlpapi.h>
 
 #pragma comment(lib, "Blackbox.lib")
 #pragma comment(lib, "gdi/gdiplus.lib")

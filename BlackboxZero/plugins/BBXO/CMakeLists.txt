@@ -1,7 +1,6 @@
 project(BBXO)
 set(BBXO_SOURCES
   BBXO.cpp
-  MessageBox.cpp
 )
 
 set(BBXO_RESOURCES Resource.rc)

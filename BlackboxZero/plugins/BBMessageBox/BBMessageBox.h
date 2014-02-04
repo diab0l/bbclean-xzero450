@@ -54,10 +54,6 @@
 #endif
 //end of temp fix
 
-#ifndef ULONG_PTR
-#define ULONG_PTR DWORD
-#endif
-
 #ifndef WS_EX_LAYERED
 #define WS_EX_LAYERED	0x00080000
 #define LWA_COLORKEY	0x00000001
