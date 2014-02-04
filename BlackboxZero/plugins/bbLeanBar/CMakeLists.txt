@@ -5,7 +5,7 @@ include_directories(${CMAKE_SOURCE_DIR}/blackbox)
 include_directories(${CMAKE_SOURCE_DIR}/lib)
 include_directories(${CMAKE_SOURCE_DIR}/plugins/bbPlugin)
 
-set(bbLeanBar_RESOURCES bbLeanBar.rc)
+set(bbLeanBar_CONFIGS bbLeanBar.rc)
 set(bbLeanBar_SOURCES
 	bbLeanBar.cpp
 )
@@ -18,7 +18,7 @@ set_property(TARGET bbLeanBar PROPERTY FOLDER "plugins/bbLeanBar")
 
 install(FILES readme.txt DESTINATION plugins/bbLeanBar)
 install(TARGETS bbLeanBar RUNTIME DESTINATION plugins/bbLeanBar)
-if(NOT EXISTS "${CMAKE_INSTALL_PREFIX}/plugins/bbLeanBar/${bbLeanBar_RESOURCES}")
-	install(FILES ${bbLeanBar_RESOURCES} DESTINATION plugins/bbLeanBar)
+if(NOT EXISTS "${CMAKE_INSTALL_PREFIX}/plugins/bbLeanBar/${bbLeanBar_CONFIGS}")
+	install(FILES ${bbLeanBar_CONFIGS} DESTINATION plugins/bbLeanBar)
 endif()
 
