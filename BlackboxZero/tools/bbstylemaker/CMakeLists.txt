@@ -1,3 +1,8 @@
+project(bbstylemaker)
+
+set(CMAKE_RC_COMPILER_INIT windres)
+ENABLE_LANGUAGE(RC)
+
 set(bbstylemaker_SOURCES
 	main.cpp
 	writestyle.cpp
@@ -22,15 +27,11 @@ add_definitions(-DBBLIB_COMPILING)
 add_definitions(-D__BBSM__) #used by Settings.cpp
 include_directories(${CMAKE_SOURCE_DIR}/lib)
 include_directories(${CMAKE_SOURCE_DIR}/blackbox)
-add_executable(bbstylemaker WIN32 ${bbstylemaker_SOURCES}) 
+add_executable(bbstylemaker WIN32 ${bbstylemaker_SOURCES} ${bbstylemaker_RESOURCES}) 
 target_link_libraries(bbstylemaker bblib)
 target_link_libraries(bbstylemaker version comctl32)
 
 set_property(TARGET bbstylemaker PROPERTY FOLDER "tools/bbstylemaker")
-
-if(NOT EXISTS "${CMAKE_INSTALL_PREFIX}/${bbstylemaker_RESOURCES}")
-	install(FILES ${bbstylemaker_RESOURCES} DESTINATION .)
-endif()
 
 install(TARGETS bbstylemaker
 		RUNTIME DESTINATION .
@@ -38,7 +39,7 @@ install(TARGETS bbstylemaker
 		ARCHIVE DESTINATION lib/static)
 
 	#install(FILES bbstylemaker.txt DESTINATION docs)
-install(FILES readme.txt bbstylemaker.ico DESTINATION .)
+install(FILES readme.txt DESTINATION .)
 
 #TODO: where is bbstylemaker.txt?
 #INSTALL_FILES = $(BIN) -as docs/bbstylemaker.txt readme.txt
