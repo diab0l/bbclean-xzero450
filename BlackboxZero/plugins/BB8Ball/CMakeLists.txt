@@ -19,7 +19,7 @@ include_directories(${CMAKE_SOURCE_DIR}/lib)
 include_directories(${CMAKE_SOURCE_DIR}/plugins/bbPlugin)
 add_library(BB8Ball SHARED ${BB8Ball_SOURCES})
 target_link_libraries(BB8Ball blackbox bblib bbPlugin)
-target_link_libraries(BB8Ball version comctl32 gdiplus winmm msimg32)
+target_link_libraries(BB8Ball version comctl32 gdiplus winmm msimg32 shlwapi comdlg32)
 
 set_property(TARGET BB8Ball PROPERTY FOLDER "plugins/BB8Ball")
 

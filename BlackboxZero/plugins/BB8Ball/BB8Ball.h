@@ -54,10 +54,6 @@
 #endif
 //end of temp fix
 
-#ifndef ULONG_PTR
-#define ULONG_PTR DWORD
-#endif
-
 #ifndef WS_EX_LAYERED
 #define WS_EX_LAYERED	0x00080000
 #define LWA_COLORKEY	0x00000001
@@ -72,14 +68,6 @@
 #include "BBApi.h"
 #include "MessageBox.h"
 #include "AggressiveOptimize.h"
-
-
-#pragma comment(lib, "Blackbox.lib")
-#pragma comment(lib, "winmm.lib")
-#pragma comment(lib, "Shlwapi.lib")
-#pragma comment(lib, "MessageBox.lib")
-#pragma comment(lib, "comdlg32.lib")
-#pragma comment(lib, "msimg32.lib")
 
 
 //typedef float REAL;
