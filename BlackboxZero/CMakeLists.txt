@@ -77,6 +77,7 @@ endif( buildbits EQUAL 64 )
 
 add_subdirectory(plugins/bbSlit)
 add_subdirectory(plugins/bbAnalog)
+add_subdirectory(plugins/bbAnalogEx)
 add_subdirectory(plugins/bbIconBox)
 add_subdirectory(plugins/bbColor3dc)
 add_subdirectory(plugins/bbWorkspaceWheel)
@@ -93,6 +94,7 @@ add_subdirectory(plugins/BBStyle)
 add_subdirectory(plugins/bbRecycleBin)
 add_subdirectory(plugins/bbInterface)
 add_subdirectory(plugins/BBCalendar)
+#add_subdirectory(plugins/BB8Ball)
 
 # NOTE: mingw 64 bit does not work yet!
 if (MSVC)
