@@ -102,8 +102,14 @@ int beginPlugin(HINSTANCE hPluginInstance)
 	setStatus();	
 	// Register to receive Blackbox messages...
 	SendMessage(hwndBlackbox, BB_REGISTERMESSAGE, (WPARAM)hwndBBXO, (LPARAM)msgs);
-	// Set magicDWord to make the window sticky (same magicDWord that is used by LiteStep)...
-	SetWindowLong(hwndBBXO, GWL_USERDATA, magicDWord);
+
+  const long magicDWord = 0x49474541;
+#if !defined _WIN64
+  // Set magicDWord to make the window sticky (same magicDWord that is used by LiteStep)...
+  SetWindowLong(hwndBBXO, GWL_USERDATA, magicDWord);
+#else
+  SetWindowLongPtr(hwndBBXO, GWLP_USERDATA, magicDWord);
+#endif
 	// Make the window AlwaysOnTop?
 	if(alwaysOnTop) SetWindowPos(hwndBBXO, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOACTIVATE | SWP_NOSIZE | SWP_NOMOVE);
 	// Show the window and force it to update...
@@ -2099,7 +2105,7 @@ int getMove()
 		/*trying to block user by using Player A's symbol and calculating result if user A is winning 
 										   then put computer symbol in that place*/
 
-		for (i = 1; i < 10; i++)
+		for (int i = 1; i < 10; i++)
 		{
 				if (part[i]==0)/*if cell is empty*/
 				{

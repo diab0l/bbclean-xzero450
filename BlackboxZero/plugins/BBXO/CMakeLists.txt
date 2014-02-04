@@ -17,7 +17,7 @@ include_directories(${CMAKE_SOURCE_DIR}/lib)
 include_directories(${CMAKE_SOURCE_DIR}/plugins/bbPlugin)
 add_library(BBXO SHARED ${BBXO_SOURCES})
 target_link_libraries(BBXO blackbox bblib bbPlugin)
-target_link_libraries(BBXO version comctl32 gdiplus winmm msimg32)
+target_link_libraries(BBXO version comctl32 gdiplus winmm msimg32 shlwapi comdlg32)
 
 set_property(TARGET BBXO PROPERTY FOLDER "plugins/BBXO")
 
