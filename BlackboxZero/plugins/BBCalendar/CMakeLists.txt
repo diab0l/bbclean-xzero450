@@ -1,11 +1,10 @@
-
+project(bbCalendar)
 set(bbCalendar_SOURCES
   bbcalendar.cpp
   MessageBox.cpp
 )
 
 set(bbCalendar_RESOURCES Resource.rc)
-#set(blackbox_RESOURCES resource.rc)
 #set(CMAKE_RC_COMPILER_INIT windres)
 #ENABLE_LANGUAGE(RC)
 
