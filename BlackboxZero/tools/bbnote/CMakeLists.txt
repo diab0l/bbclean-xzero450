@@ -1,3 +1,4 @@
+project(bbnote)
 
 set(bbnote_exe_SOURCES
     bbnote.cpp
@@ -15,9 +16,16 @@ set(bbnote_exe_SOURCES
 
 #INSTALL_FILES = $(BIN) -to docs bbnote.txt bbnote.htm
 
+set(bbnote_exe_RESOURCES
+  resource.rc
+)
+
+set(CMAKE_RC_COMPILER_INIT windres)
+ENABLE_LANGUAGE(RC)
+
 include_directories(${CMAKE_SOURCE_DIR}/lib)
 include_directories(${CMAKE_SOURCE_DIR}/blackbox)
-add_executable(bbnote WIN32 ${bbnote_exe_SOURCES}) 
+add_executable(bbnote WIN32 ${bbnote_exe_SOURCES} ${bbnote_exe_RESOURCES}) 
 target_link_libraries(bbnote bblib blackbox)
 target_link_libraries(bbnote version comctl32)
 
