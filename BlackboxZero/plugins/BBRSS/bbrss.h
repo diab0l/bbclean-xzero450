@@ -45,13 +45,6 @@
 #include "MessageBox.h"
 #include "AggressiveOptimize.h"
 
-#pragma comment(lib, "Blackbox.lib")
-#pragma comment(lib, "Shlwapi.lib")
-#pragma comment(lib, "MessageBox.lib")
-#pragma comment(lib, "comdlg32.lib")
-#pragma comment(lib, "winmm.lib")
-#pragma comment(lib, "Urlmon.lib")
-
 //#define WM_MOUSELEAVE                   0x02A3
 //#pragma comment(lib, "gdi32.lib")
 #define IDT_TIMER 1

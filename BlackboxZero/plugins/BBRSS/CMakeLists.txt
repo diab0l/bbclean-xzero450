@@ -18,7 +18,7 @@ include_directories(${CMAKE_SOURCE_DIR}/lib)
 include_directories(${CMAKE_SOURCE_DIR}/plugins/bbPlugin)
 add_library(BBRSS SHARED ${BBRSS_SOURCES})
 target_link_libraries(BBRSS blackbox bblib bbPlugin)
-target_link_libraries(BBRSS version comctl32 gdiplus winmm msimg32)
+target_link_libraries(BBRSS version comctl32 winmm urlmon comdlg32 shlwapi msimg32)
 
 set_property(TARGET BBRSS PROPERTY FOLDER "plugins/BBRSS")
 

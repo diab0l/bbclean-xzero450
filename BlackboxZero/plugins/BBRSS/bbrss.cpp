@@ -104,8 +104,14 @@ int beginPlugin(HINSTANCE hPluginInstance)
 	setStatus();	
 	// Register to receive Blackbox messages...
 	SendMessage(hwndBlackbox, BB_REGISTERMESSAGE, (WPARAM)hwndBBRSS, (LPARAM)msgs);
+
+	const long magicDWord = 0x49474541;
+#if !defined _WIN64
 	// Set magicDWord to make the window sticky (same magicDWord that is used by LiteStep)...
 	SetWindowLong(hwndBBRSS, GWL_USERDATA, magicDWord);
+#else
+	SetWindowLongPtr(hwndBBRSS, GWLP_USERDATA, magicDWord);
+#endif
 	// Make the window AlwaysOnTop?
 	setPos();
 	//if(alwaysOnTop) SetWindowPos(hwndBBRSS, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOACTIVATE | SWP_NOSIZE | SWP_NOMOVE);
@@ -1915,7 +1921,7 @@ void createMenu()
 	//	int i=1;
 			strcpy(lin, "bbrss.fav");
 			char num[3];
-			itoa(i,num,10);
+			_itoa(i,num,10);
 			strcat(lin, num);
 			strcat(lin, ":");
 			strcpy(fav, ReadString(alarmpath, lin, "sss"));
@@ -2030,7 +2036,7 @@ int getMove()
 		/*trying to block user by using Player A's symbol and calculating result if user A is winning 
 										   then put computer symbol in that place*/
 
-		for (i = 1; i < 10; i++)
+		for (int i = 1; i < 10; i++)
 		{
 				if (part[i]==0)/*if cell is empty*/
 				{
