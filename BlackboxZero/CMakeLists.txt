@@ -1,9 +1,13 @@
 project(BlackboxZero)
+message("Welcome to BlackBox!")
 cmake_minimum_required(VERSION 2.8.9)
 set(CMAKE_VERBOSE_MAKEFILE on)
 
 # use this for develoment, if you do not pass it from command line:
 #set(CMAKE_INSTALL_PREFIX "c:/bbLean_devel")
+
+message("bb generator=${CMAKE_GENERATOR}")
+message("bb install path=${CMAKE_INSTALL_PREFIX}")
 
 include(build/compiler.cmake)
 include(ExternalProject)
@@ -11,8 +15,10 @@ include(ExternalProject)
 # detect 32 / 64bit environment
 if( CMAKE_SIZEOF_VOID_P EQUAL 8 )
 	set(buildbits 64)
+  message("bb build=64bit")
 else( CMAKE_SIZEOF_VOID_P EQUAL 8 )
 	set(buildbits 32)
+  message("bb build=32bit")
 endif( CMAKE_SIZEOF_VOID_P EQUAL 8 )
 
 # font tools and conversion
@@ -52,10 +58,6 @@ add_subdirectory(plugins/bbFoomp)
 add_subdirectory(plugins/bbLeanSkin)
 # 32b for 64b build
 if( buildbits EQUAL 64 )
-	set(bbLeanSkinEng32_SOURCE_DIR  ${CMAKE_SOURCE_DIR}/plugins/bbLeanSkin)
-	set(bbLeanSkinEng32_PATH ${bbLeanSkinEng32_SOURCE_DIR}/bbLeanSkinEng32)
-	message("bbLeanSkin on 64bit... path=${bbLeanSkinEng32_PATH}")
-
 	if (MSVC)
 		string(REGEX REPLACE " Win64" "" GENERATOR_FOR_32 ${CMAKE_GENERATOR})
 	endif (MSVC)
@@ -64,6 +66,10 @@ if( buildbits EQUAL 64 )
 	endif (MINGW)
 	message("bbLeanSkin on 64bit... 32bit generator=${GENERATOR_FOR_32}")
 
+	set(bbLeanSkin_SOURCE_DIR  ${CMAKE_SOURCE_DIR}/plugins/bbLeanSkin)
+
+	set(bbLeanSkinEng32_PATH ${bbLeanSkin_SOURCE_DIR}/bbLeanSkinEng32)
+	message("bbLeanSkin on 64bit... path=${bbLeanSkinEng32_PATH}")
 	ExternalProject_Add (
 		bbLeanSkinEng32
 		CMAKE_GENERATOR ${GENERATOR_FOR_32}
@@ -72,7 +78,19 @@ if( buildbits EQUAL 64 )
 		DOWNLOAD_COMMAND ""
 		INSTALL_DIR ${CMAKE_BINARY_DIR}/grr
 	)
-	set_property(TARGET bbLeanSkinEng32 PROPERTY FOLDER "plugins/bbLeanSkinEng")
+	set_property(TARGET bbLeanSkinEng32 PROPERTY FOLDER "plugins/bbLeanSkin")
+
+  set(bbLeanSkinRun32_PATH ${bbLeanSkin_SOURCE_DIR}/bbLeanSkinRun32)
+  message("bbLeanSkin on 64bit... path=${bbLeanSkinRun32_PATH}")
+	ExternalProject_Add (
+		bbLeanSkinRun32
+		CMAKE_GENERATOR ${GENERATOR_FOR_32}
+		CMAKE_ARGS -DCMAKE_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX}
+		SOURCE_DIR  ${bbLeanSkinRun32_PATH}
+		DOWNLOAD_COMMAND ""
+		INSTALL_DIR ${CMAKE_BINARY_DIR}/grr
+	)
+	set_property(TARGET bbLeanSkinRun32 PROPERTY FOLDER "plugins/bbLeanSkin")
 endif( buildbits EQUAL 64 )
 
 add_subdirectory(plugins/bbSlit)
@@ -127,7 +145,7 @@ function(install_if_absent)
 	endforeach()
 endfunction()
 
-set(main_RESOURCES
+set(main_CONFIGS
   menu.rc 
   blackbox.rc
   extensions.rc
@@ -136,7 +154,7 @@ set(main_RESOURCES
   stickywindows.ini
 )
 
-install_if_absent(${main_RESOURCES})
+install_if_absent(${main_CONFIGS})
 install(DIRECTORY styles backgrounds DESTINATION .)
 
 # not used (yet).. from old makefiles
@@ -156,7 +174,7 @@ set (CLEAN_FILES
 
 ###############################################################################
 # debug stuff
-message("Debug variable dump:")
+#message("Debug variable dump:")
 #get_cmake_property(_variableNames VARIABLES)
 #foreach (_variableName ${_variableNames})
 #   message(STATUS "${_variableName}=${${_variableName}}")
