@@ -45,12 +45,6 @@
 #include "MessageBox.h"
 #include "AggressiveOptimize.h"
 
-#pragma comment(lib, "Blackbox.lib")
-#pragma comment(lib, "Shlwapi.lib")
-#pragma comment(lib, "MessageBox.lib")
-#pragma comment(lib, "comdlg32.lib")
-#pragma comment(lib, "winmm.lib")
-//#pragma comment(lib, "gdi32.lib")
 #define IDT_TIMER 1
 //#define IDT_ALARMTIMER 2
 #define NOTHING 0

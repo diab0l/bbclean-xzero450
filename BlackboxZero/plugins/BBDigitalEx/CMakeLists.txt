@@ -19,7 +19,7 @@ include_directories(${CMAKE_SOURCE_DIR}/lib)
 include_directories(${CMAKE_SOURCE_DIR}/plugins/bbPlugin)
 add_library(BBDigitalEx SHARED ${BBDigitalEx_SOURCES})
 target_link_libraries(BBDigitalEx blackbox bblib bbPlugin)
-target_link_libraries(BBDigitalEx version comctl32 gdiplus winmm msimg32)
+target_link_libraries(BBDigitalEx version comctl32 gdiplus winmm msimg32 shlwapi comdlg32)
 
 set_property(TARGET BBDigitalEx PROPERTY FOLDER "plugins/BBDigitalEx")
 
