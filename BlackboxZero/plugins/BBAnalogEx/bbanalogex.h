@@ -2,7 +2,7 @@
  ============================================================================
  Blackbox for Windows: Plugin BBAnalogEx 1.0 by Miroslav Petrasko [Theo] 
  ============================================================================
- Copyright © 2001-2004 The Blackbox for Windows Development Team
+ Copyright (c) 2001-2004 The Blackbox for Windows Development Team
  http://desktopian.org/bb/ - #bb4win on irc.freenode.net
  ============================================================================
   Blackbox for Windows is free software, released under the
@@ -48,7 +48,7 @@
 #include <time.h>
 #include "BBApi.h"
 #include "MessageBox.h"
-#include "AggressiveOptimize.h"
+//#include "AggressiveOptimize.h"
 #include "gdi/gdiplus.h"
 
 #pragma comment(lib, "Blackbox.lib")
