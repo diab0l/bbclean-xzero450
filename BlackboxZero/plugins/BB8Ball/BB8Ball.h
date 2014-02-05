@@ -74,12 +74,12 @@
 //#include "AggressiveOptimize.h"
 
 
-#pragma comment(lib, "Blackbox.lib")
-#pragma comment(lib, "winmm.lib")
-#pragma comment(lib, "Shlwapi.lib")
-#pragma comment(lib, "MessageBox.lib")
-#pragma comment(lib, "comdlg32.lib")
-#pragma comment(lib, "msimg32.lib")
+//#pragma comment(lib, "Blackbox.lib")
+//#pragma comment(lib, "winmm.lib")
+//#pragma comment(lib, "Shlwapi.lib")
+//#pragma comment(lib, "MessageBox.lib")
+//#pragma comment(lib, "comdlg32.lib")
+//#pragma comment(lib, "msimg32.lib")
 
 
 //typedef float REAL;
