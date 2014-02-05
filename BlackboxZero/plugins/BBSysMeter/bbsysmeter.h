@@ -2,7 +2,7 @@
  ============================================================================
  Blackbox for Windows: Plugin BBSysMeter 1.0 by Miroslav Petrasko [Theo] 
  ============================================================================
- Copyright © 2001-2004 The Blackbox for Windows Development Team
+ Copyright (c) 2001-2004 The Blackbox for Windows Development Team
  http://desktopian.org/bb/ - #bb4win on irc.freenode.net
  ============================================================================
   Blackbox for Windows is free software, released under the
@@ -66,17 +66,17 @@
 #include "MessageBox.h"
 #include "getStats.h"
 #include "c:\Program Files\Microsoft SDK\include\gdiplus.h"
-#include "AggressiveOptimize.h"
+//#include "AggressiveOptimize.h"
 #include "c:\Program Files\Microsoft SDK\include\Iphlpapi.h"
 
-#pragma comment(lib, "Blackbox.lib")
-#pragma comment(lib, "gdi/gdiplus.lib")
+//#pragma comment(lib, "Blackbox.lib")
+//#pragma comment(lib, "gdi/gdiplus.lib")
 //#pragma comment(lib, "winmm.lib")
-#pragma comment(lib, "Shlwapi.lib")
-#pragma comment(lib, "MessageBox.lib")
-#pragma comment(lib, "comdlg32.lib")
-#pragma comment(lib, "c:/Program Files/Microsoft SDK/lib/Iphlpapi.lib")
-#pragma comment(lib, "user32.lib")
+//#pragma comment(lib, "Shlwapi.lib")
+//#pragma comment(lib, "MessageBox.lib")
+//#pragma comment(lib, "comdlg32.lib")
+//#pragma comment(lib, "c:/Program Files/Microsoft SDK/lib/Iphlpapi.lib")
+//#pragma comment(lib, "user32.lib")
 
 
 //#include "StdAfx.h"
