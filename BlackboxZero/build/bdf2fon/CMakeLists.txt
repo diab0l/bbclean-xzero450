@@ -22,6 +22,6 @@ if ( MSVC )
     set_property( TARGET fnt2fon APPEND_STRING PROPERTY COMPILE_FLAGS /W1 )
 endif ( MSVC )
 
-message("bdf2fon in ${CMAKE_BINARY_DIR}")
+#message("bdf2fon in ${CMAKE_BINARY_DIR}")
 
 #ALWAYS_32 = 1

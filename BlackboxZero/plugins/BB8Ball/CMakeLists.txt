@@ -1,7 +1,6 @@
 
 set(BB8Ball_SOURCES
   BB8Ball.cpp
-  BBMessageBox.cpp
 )
 
 set(BB8Ball_RESOURCES Resource.rc)

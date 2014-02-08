@@ -8,6 +8,7 @@ set(bbPlugin_SOURCES
 	drawico.cpp
 	sysmenu.cpp
 	tooltips.cpp
+  MessageBox.cpp
 )
 
 add_library(bbPlugin STATIC ${bbPlugin_SOURCES})

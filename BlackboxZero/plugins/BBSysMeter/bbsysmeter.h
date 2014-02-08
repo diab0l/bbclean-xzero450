@@ -65,7 +65,7 @@
 #include "BBApi.h"
 #include "MessageBox.h"
 #include "getStats.h"
-#include "gdi/gdiplus.h"
+#include <gdiplus.h>
 #include "AggressiveOptimize.h"
 #include <Iphlpapi.h>
 

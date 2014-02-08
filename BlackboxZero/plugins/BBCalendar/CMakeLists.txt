@@ -1,7 +1,6 @@
 project(bbCalendar)
 set(bbCalendar_SOURCES
   bbcalendar.cpp
-  MessageBox.cpp
 )
 
 set(bbCalendar_RESOURCES Resource.rc)

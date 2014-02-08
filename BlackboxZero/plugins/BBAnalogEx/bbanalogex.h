@@ -45,7 +45,7 @@
 #include "BBApi.h"
 #include "MessageBox.h"
 #include "AggressiveOptimize.h"
-#include "gdi/gdiplus.h"
+#include <gdiplus.h>
 
 #define IDT_TIMER 1
 #define IDT_ALARMTIMER 2
