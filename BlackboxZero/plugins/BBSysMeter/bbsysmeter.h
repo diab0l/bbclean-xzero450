@@ -2,7 +2,7 @@
  ============================================================================
  Blackbox for Windows: Plugin BBSysMeter 1.0 by Miroslav Petrasko [Theo] 
  ============================================================================
- Copyright © 2001-2004 The Blackbox for Windows Development Team
+ Copyright (c) 2001-2004 The Blackbox for Windows Development Team
  http://desktopian.org/bb/ - #bb4win on irc.freenode.net
  ============================================================================
   Blackbox for Windows is free software, released under the
@@ -66,7 +66,6 @@
 #include "MessageBox.h"
 #include "getStats.h"
 #include <gdiplus.h>
-#include "AggressiveOptimize.h"
 #include <Iphlpapi.h>
 
 //#include "StdAfx.h"

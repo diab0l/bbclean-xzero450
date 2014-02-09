@@ -2,7 +2,7 @@
  ============================================================================
  Blackbox for Windows: Plugin BBAnalog by Brad Bartolucci made using SDK example
  ============================================================================
- Copyright © 2001-2002 The Blackbox for Windows Development Team
+ Copyright (c) 2001-2002 The Blackbox for Windows Development Team
  http://desktopian.org/bb/ - #bb4win on irc.freenode.net
  ============================================================================
 
@@ -67,7 +67,15 @@
 #include <shlwapi.h>
 #include "BBApi.h"
 #include "MessageBox.h"
-#include "AggressiveOptimize.h"
+//#include "AggressiveOptimize.h"
+
+
+//#pragma comment(lib, "Blackbox.lib")
+//#pragma comment(lib, "winmm.lib")
+//#pragma comment(lib, "Shlwapi.lib")
+//#pragma comment(lib, "MessageBox.lib")
+//#pragma comment(lib, "comdlg32.lib")
+//#pragma comment(lib, "msimg32.lib")
 
 
 //typedef float REAL;
