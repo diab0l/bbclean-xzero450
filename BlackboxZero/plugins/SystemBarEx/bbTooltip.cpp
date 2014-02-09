@@ -332,8 +332,8 @@ void bbTooltip::_Show()
         pos.x = m_ScreenWidth - m_Width;
 
     pos.y =
-        ((m_pInfo->bAbove && ((m_Height + m_pInfo->distance) < parent_rect.top)) ||
-        (!m_pInfo->bAbove && ((m_Height + m_pInfo->distance) > (m_ScreenHeight - parent_rect.bottom)))) ?
+        ((m_pInfo->bAbove && (((signed)m_Height + m_pInfo->distance) < parent_rect.top)) ||
+        (!m_pInfo->bAbove && (((signed)m_Height + m_pInfo->distance) > ((signed)m_ScreenHeight - parent_rect.bottom)))) ?
         parent_rect.top - m_Height - (m_pInfo->bDocked ? -m_BorderWidth: m_pInfo->distance):
         parent_rect.bottom + (m_pInfo->bDocked ? -m_BorderWidth: m_pInfo->distance);
 

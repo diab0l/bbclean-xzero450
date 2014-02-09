@@ -41,6 +41,7 @@ void set_bool(void *v, const char *arg)
 {
     char *p = (char *)v;
     int f = get_false_true(arg);
+
     *p = -1 == f ? 0 == *p : 0 != f;
 }
 

@@ -898,7 +898,7 @@ void write_rc(struct plugin_info *PI, void *v)
         BBP_write_bool      (PI, "clickRaise", PI->clickRaise);
     else
     if (v == &PI->snapWindow)
-        BBP_write_bool      (PI, "snapWindow", PI->snapWindow);
+        BBP_write_int      (PI, "snapWindow", PI->snapWindow);
     else
     if (v == &PI->pluginToggle)
         BBP_write_bool      (PI, "pluginToggle", PI->pluginToggle);
@@ -1127,7 +1127,7 @@ void BBP_reconfigure(plugin_info *PI)
 //===========================================================================
 bool BBP_get_rcpath(char *rcpath, HINSTANCE hInstance, const char *rcfile)
 {
-    return locate_file(hInstance, rcpath, rcfile, "rc");
+    return !!locate_file(hInstance, rcpath, rcfile, "rc");
 }
 
 void BBP_edit_file(const char *path)

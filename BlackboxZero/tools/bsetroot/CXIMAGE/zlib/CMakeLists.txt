@@ -11,7 +11,7 @@ set(ZLIB_SOURCES
 	inftrees.c
 	infutil.c
 	maketree.c
-	minigzip.c
+#	minigzip.c # example program
 	trees.c
 	uncompr.c
 	zutil.c

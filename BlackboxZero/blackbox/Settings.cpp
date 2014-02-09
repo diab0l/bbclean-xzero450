@@ -1077,11 +1077,12 @@ static const struct rccfg bbrc_cfg[] = {
     { ".menu.showHiddenFiles",     C_BOL, (void*)false,    &Settings_menu.showHiddenFiles },
     { ".menu.drawSeparators",      C_BOL, (void*)true,     &Settings_menu.drawSeparators },
     { ".menu.dropShadows",         C_BOL, (void*)false,    &Settings_menu.dropShadows },
+	
+	{ ".menu.bullet.enabled",      C_BOL, (void*)true,     &Settings_menu.bullet_enabled },
 	{ ".menu.icon.size",			C_INT, (void*)16,		&Settings_menu.iconSize },
 	{ ".menu.icon.saturation",		C_INT, (void*)255,		&Settings_menu.iconSaturation },
 	{ ".menu.icon.hue",				C_INT, (void*)0,		&Settings_menu.iconHue },
-
-
+	
     { "#workspaces_wraparound",    C_BOL, (void*)true,      &Settings_workspaces_wraparound },
     { "#workspaces",               C_INT, (void*)3,         &Settings_workspaces },
     { "#workspacesX",              C_INT, (void*)3,         &Settings_workspacesX },

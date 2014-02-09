@@ -22,7 +22,7 @@
 #include "BB.h"
 #include "Settings.h"
 #include "Desk.h"
-#include "PluginManager.h"
+#include "PluginManager/PluginManager.h"
 #include "Workspaces.h"
 #include "Tray.h"
 #include "Toolbar.h"

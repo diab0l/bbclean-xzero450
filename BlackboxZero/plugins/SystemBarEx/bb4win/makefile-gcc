@@ -16,7 +16,7 @@ BBApi.o \
 Utils.o \
 BImage.o \
 Settings.o \
-PluginManager.o \
+PluginManager/PluginManager.o \
 MessageManager.o \
 Workspaces.o \
 Tray.o \

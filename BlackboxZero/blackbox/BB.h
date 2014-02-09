@@ -173,7 +173,7 @@ void set_focus_model(const char *fm_string);
 bool Menu_IsA(HWND hwnd);
 
 // ==============================================================
-/* Some enumeration function, maybe candidates for the API */
+/* Some enumeration function */
 
 typedef BOOL (*TASKENUMPROC)(struct tasklist *, LPARAM);
 void EnumTasks (TASKENUMPROC lpEnumFunc, LPARAM lParam);
@@ -184,8 +184,8 @@ void EnumDesks (DESKENUMPROC lpEnumFunc, LPARAM lParam);
 typedef BOOL (*TRAYENUMPROC)(struct systemTray *, LPARAM);
 void EnumTray (TRAYENUMPROC lpEnumFunc, LPARAM lParam);
 
-struct plugins;
-typedef BOOL (*PLUGINENUMPROC)(struct plugins *, LPARAM);
+struct PluginList;
+typedef BOOL (*PLUGINENUMPROC)(struct PluginList *, LPARAM);
 void EnumPlugins (PLUGINENUMPROC lpEnumFunc, LPARAM lParam);
 
 // ==============================================================

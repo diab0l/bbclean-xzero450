@@ -17,7 +17,6 @@ set(blackbox_SOURCES
 	Desk.cpp
 	DesktopMenu.cpp
 	MessageManager.cpp
-	PluginManager.cpp
 	Settings.cpp
 	Toolbar.cpp
 	Tray.cpp
@@ -34,18 +33,20 @@ set(blackbox_SOURCES
 	Menu/RecentItem.cpp
 	Menu/SpecialFolder.cpp
 	Menu/TitleItem.cpp
+	PluginManager/PluginManager.cpp
+	PluginManager/PluginLoaderNative.cpp
 )
 
 set (blackbox_HEADERS
 	BB.h
 	BBApi.h
+	BBApiPluginLoader.h
 	BBSendData.h
 	bbversion.h
 	BBVWM.h
 	BImage.h
 	Desk.h
 	MessageManager.h
-	PluginManager.h
 	Settings.h
 	Stylestruct.h
 	Toolbar.h
@@ -55,6 +56,9 @@ set (blackbox_HEADERS
 	Menu/Menu.h
 	Menu/MenuMaker.h
 	Menu/RecentItem.h
+	PluginManager/PluginManager.h
+	PluginManager/PluginLoaderNative.h
+	PluginManager/Types.h
 )
 
 set(blackbox_RESOURCES resource.rc)

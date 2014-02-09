@@ -44,7 +44,7 @@ struct plugin_info
     int ypos;
     int width;
     int height;
-    int snapWindow;
+	int snapWindow;
 
     bool useSlit;
     bool alwaysOnTop;

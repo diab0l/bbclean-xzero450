@@ -33,7 +33,8 @@
   wscntfy.dll
   taskeng.exe
   conime.exe:ConsoleIMEClass
-
+  dwm.exe
+  
 # ---------------------------------------
 # programs which come with their own skin:
 

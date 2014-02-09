@@ -291,7 +291,7 @@ LRESULT controltype_button_event(control *c, HWND hwnd, UINT msg, WPARAM wParam,
 				POINT pt;
 				pt.x = (short)LOWORD(lParam);
 				pt.y = (short)HIWORD(lParam);
-				bool over = PtInRect(&r, pt);
+				bool over = !!PtInRect(&r, pt);
 				if (over != details->hilite)
 				{
 					details->hilite = over;

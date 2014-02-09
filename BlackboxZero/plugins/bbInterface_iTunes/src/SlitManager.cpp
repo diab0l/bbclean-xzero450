@@ -23,6 +23,7 @@ void dbg_window (HWND window, char *msg)
 	dbg_printf("%s %s", msg, buffer);
 }
 
+#undef dolist
 #define dolist(_e,_l) for (_e=_l;_e;_e=_e->next)
 
 //=============================================================================
@@ -65,7 +66,7 @@ bool plugin_getset_show_state(PluginInfo *PI, char *module_name, int state)
 {
 	PluginInfo *p = PI;
 	bool result = false;
-	bool show = state;
+	bool show = state > 0;
 	for (;;)
 	{
 		p = get_plugin(p, module_name);

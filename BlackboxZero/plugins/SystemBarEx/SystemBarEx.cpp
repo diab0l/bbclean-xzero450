@@ -1522,7 +1522,7 @@ void HideBar(bool force) {
 void Autohide(unsigned low, unsigned high) {
     if (!bInSlit)
     SetWindowPos(hSystemBarExWnd, HWND_TOPMOST, SystemBarExX,
-        (((2 * SystemBarExY) > ScreenHeight) ? low: high),
+        (((2 * SystemBarExY) > (int)ScreenHeight) ? low: high),
         0, 0, SWP_NOACTIVATE|SWP_NOSIZE|SWP_NOSENDCHANGING);
 }
 
@@ -1905,7 +1905,7 @@ fc:         strcpy(ClockTime, CurrentTime);
 			if (force) {
 upd_clw:        ClockTextWidthOld = ClockTextSize.cx;
 			} else {
-                if (ClockTextWidthOld < ClockTextSize.cx) {
+                if ((signed)ClockTextWidthOld < ClockTextSize.cx) {
                     RefreshAll();
                     goto upd_clw;
 				} else {
@@ -2033,9 +2033,9 @@ void WindowLabelMouseEvent(unsigned message) {
 	switch (message) {
 		case WM_LBUTTONUP:
 			{
-				if (MouseEventPoint.x < (WindowLabelX - D_THRES)) {
+				if (MouseEventPoint.x < ((signed)WindowLabelX - D_THRES)) {
 					PostMessage(hBlackboxWnd, BB_WORKSPACE, 6, (LPARAM)ActiveTaskHwnd);
-				} else if (MouseEventPoint.x > (WindowLabelX + D_THRES)) {
+				} else if (MouseEventPoint.x > (LONG)(WindowLabelX + D_THRES)) {
 					PostMessage(hBlackboxWnd, BB_WORKSPACE, 7, (LPARAM)ActiveTaskHwnd);
 				} else {
 					bSystemBarExHidden = true;
@@ -2050,9 +2050,9 @@ void WindowLabelMouseEvent(unsigned message) {
 				bTaskbarListsUpdated = bIconBuffersUpdated = pWindowLabelItem->bgPainted = false;
 				PostMessage(hBlackboxWnd, BB_WORKSPACE, 5, 0);		// gather tasks in current workspace
 			} else {
-				if (MouseEventPoint.x < (WindowLabelX - D_THRES)) {
+				if (MouseEventPoint.x < ((signed)WindowLabelX - D_THRES)) {
 					PostMessage(hBlackboxWnd, BB_WORKSPACE, 0, 0);
-				} else if (MouseEventPoint.x > (WindowLabelX + D_THRES)) {
+				} else if (MouseEventPoint.x > (LONG)(WindowLabelX + D_THRES)) {
 					PostMessage(hBlackboxWnd, BB_WORKSPACE, 1, 0);
 				} else {
 					bSystemBarExHidden = true;
@@ -2813,7 +2813,7 @@ inline int GetTaskMenuInfo(HWND hwnd, HMENU *p_hMenu, TaskMenuLine **tm2, int *p
 
     ++TBMenuInfo;
     if (TBMenuInfo.test() && TaskbarListIconized->next)
-        max_len = max(max_len, GetItemLength(TBMenuInfo.getText(), &sz)),
+        max_len = max(max_len, (UINT)GetItemLength(TBMenuInfo.getText(), &sz)),
         taskmenu_scaffold[TBMenuInfo.n] = true;
 
     //---------------------------------------
@@ -2821,7 +2821,7 @@ inline int GetTaskMenuInfo(HWND hwnd, HMENU *p_hMenu, TaskMenuLine **tm2, int *p
     if (b > 1) {
         while (++TBMenuInfo < MI_BEGIN_SINGLE_TASK)
             if (TBMenuInfo.test())
-                max_len = max(max_len, GetItemLength(TBMenuInfo.getText(), &sz)),
+                max_len = max(max_len, (UINT)GetItemLength(TBMenuInfo.getText(), &sz)),
                 taskmenu_scaffold[TBMenuInfo.n] = true;
     }
     else ++TBMenuInfo;
@@ -2829,7 +2829,7 @@ inline int GetTaskMenuInfo(HWND hwnd, HMENU *p_hMenu, TaskMenuLine **tm2, int *p
     //---------------------------------------
 
     do if (TBMenuInfo.test())
-        max_len = max(max_len, GetItemLength(TBMenuInfo.getText(), &sz)),
+        max_len = max(max_len, (UINT)GetItemLength(TBMenuInfo.getText(), &sz)),
         taskmenu_scaffold[TBMenuInfo.n] = true;
     while (++TBMenuInfo < MI_BEGIN_SHELL_ITEMS);
 
@@ -2847,7 +2847,7 @@ inline int GetTaskMenuInfo(HWND hwnd, HMENU *p_hMenu, TaskMenuLine **tm2, int *p
 
     SendMessageTimeout(hwnd, WM_INITMENU, (WPARAM)*p_hMenu, 0, SMTO_ABORTIFHUNG|SMTO_BLOCK, 100, 0);
 
-    for (; i < *p_count; ++i) {
+    for (; i < (UINT)*p_count; ++i) {
         tm = &(*tm2)[i];
 
         menuInfo.wID = 0;
@@ -2869,7 +2869,7 @@ inline int GetTaskMenuInfo(HWND hwnd, HMENU *p_hMenu, TaskMenuLine **tm2, int *p
             else if (!strcmp(tm->m_buf, "Close"))       { if (!TBMenuInfo.test(MI_SHELL_CLOSE))     continue; }
             else if (!TBMenuInfo.test(MI_SHELL_SPECIAL))                                            continue;
 
-            max_len = max(max_len, GetItemLength(tm->m_buf, &sz));
+            max_len = max(max_len, (UINT)GetItemLength(tm->m_buf, &sz));
         }
         else if (!is_system) continue;
 
@@ -3013,7 +3013,7 @@ inline void PaintTasks() {
                 ((ToggleInfo.test(TI_COMPRESS_ICONIZED) && bTaskPR) ? (2 * OUTER_SPACING): 0)): 0;
 
             TaskWidth = (TaskRegionWidth - IconizedShift - NumberNotIconized * OUTER_SPACING) / NumberNotIconized;
-			if ( TaskMaxWidth && TaskWidth > TaskMaxWidth ) {
+			if ( TaskMaxWidth && TaskWidth > (unsigned)TaskMaxWidth ) {
 				TaskWidth = (unsigned)TaskMaxWidth;
 			}
             ExtraTaskWidth = TaskWidth + 1;
@@ -3206,7 +3206,7 @@ inline void PaintInscription() {
     int margin,
         spacing,
         letter_size,
-        left = max(TaskbarRect.left, InscriptionLeft),
+        left = max(TaskbarRect.left, (signed)InscriptionLeft),
         width = TaskbarRect.right - left,
         len = strlen(InscriptionText);
 
@@ -3289,20 +3289,20 @@ icon_ht:            detArray[++r] = TaskIconItem.m_size + ICO_HT_SPC;
         while (++r < 5);
         SystemBarExHeight += margin;
     } else if (HeightSizing == HEIGHT_TOOLBAR) {
-        SystemBarExHeight = (pTbInfo->height < (TextHeight + 4)) ? (TextHeight + 4):
-                            (pTbInfo->height < 12) ? 12: pTbInfo->height;
+        SystemBarExHeight = ((unsigned)pTbInfo->height < (TextHeight + 4)) ? (TextHeight + 4):
+                            (pTbInfo->height < 12) ? 12: (unsigned)pTbInfo->height;
 
-        if (TrayIconItem.m_size > SystemBarExHeight)
+        if ((unsigned)TrayIconItem.m_size > SystemBarExHeight)
             TrayIconItem.m_size = ((SystemBarExHeight - margin) < 4) ? 4: (SystemBarExHeight - margin - 2 * OUTER_SPACING);
-        if (TaskIconItem.m_size > SystemBarExHeight)
+        if ((unsigned)TaskIconItem.m_size > SystemBarExHeight)
             TaskIconItem.m_size = ((SystemBarExHeight - margin) < 4) ? 4: (SystemBarExHeight - margin);
     } else {
-        SystemBarExHeight = (CustomHeightSizing < (TextHeight + 4)) ? (TextHeight + 4):
-                            (CustomHeightSizing < 12) ? 12: CustomHeightSizing;
+        SystemBarExHeight = ((unsigned)CustomHeightSizing < (TextHeight + 4)) ? (TextHeight + 4):
+                            (CustomHeightSizing < 12) ? 12: (unsigned)CustomHeightSizing;
 
-        if (TrayIconItem.m_size > SystemBarExHeight)
+        if ((unsigned)TrayIconItem.m_size > SystemBarExHeight)
             TrayIconItem.m_size = ((SystemBarExHeight - 2 * styleBorderWidth) < 4) ? 4: (SystemBarExHeight - 2 * styleBorderWidth);
-        if (TaskIconItem.m_size > SystemBarExHeight)
+        if ((unsigned)TaskIconItem.m_size > SystemBarExHeight)
             TaskIconItem.m_size = ((SystemBarExHeight - 2 * styleBorderWidth) < 4) ? 4: (SystemBarExHeight - 2 * styleBorderWidth);
     }
 
@@ -3472,7 +3472,7 @@ void SetScreenMargin(bool force) {
     if (!bInSlit && ((SystemBarExPlacement == PLACEMENT_LINK_TO_TOOLBAR) ? !pTbInfo->autoHide: !ToggleInfo.test(TI_AUTOHIDE))) {
         h = SystemBarExHeight;
         if (SystemBarExPlacement > PLACEMENT_BOTTOM_CENTER) { // ...if PLACEMENT_LINK_TO_TOOLBAR or PLACEMENT_CUSTOM
-			if (SystemBarExY < (ScreenHeight / 2)) {
+			if (SystemBarExY < (signed)(ScreenHeight / 2)) {
                 edge = BB_DM_TOP, h += SystemBarExY;
 			} else {
                 h = ScreenHeight - SystemBarExY;
@@ -4634,7 +4634,7 @@ bool GestureItem::Process(UINT msg) {
     if ((msg != WM_MOUSEMOVE) && m_hwnd) {
         WPARAM wp1 = 6, wp2 = 7;
         LPARAM lp = (LPARAM)m_hwnd;
-        m_threshold = min(50, min((m_x / 2), ((SystemBarExWidth - m_x) / 2)));
+        m_threshold = min(50, min((m_x / 2), (((signed)SystemBarExWidth - m_x) / 2)));
         m_hwnd = 0;
         switch (msg) {
             case WM_RBUTTONUP:

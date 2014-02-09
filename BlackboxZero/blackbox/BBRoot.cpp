@@ -67,10 +67,9 @@ HBITMAP make_root_bmp(const char *command)
         B0 = SelectObject(buf, bmp);
 
         MakeGradientEx(buf, rect,
-            r->type, r->color1, r->color2, 0 != r->interlaced,
-            r->bevelstyle, r->bevelposition,
-            0, 0, 0, r->color_from, r->color_to
-            );
+            r->type, r->color1, r->color2, r->color_from, r->color_to, 
+			0 != r->interlaced, r->bevelstyle, r->bevelposition,
+            0, 0, 0);
 
         if (r->mod)
             Modula (buf, width, height, r->modx, r->mody, r->modfg);
